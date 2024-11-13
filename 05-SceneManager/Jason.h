@@ -6,32 +6,32 @@
 
 #include "debug.h"
 
-#define JASON_WALKING_SPEED		0.1f
+#define BIG_JASON_WALKING_SPEED		0.1f
 
-#define JASON_STATE_DIE				-10
-#define JASON_STATE_IDLE			0
-#define JASON_STATE_IDLE_LEFT			1
-#define JASON_STATE_IDLE_RIGHT			2
-#define JASON_STATE_IDLE_UP			3
-#define JASON_STATE_IDLE_DOWN			4
-#define JASON_STATE_WALKING_RIGHT	100
-#define JASON_STATE_WALKING_LEFT	200
-#define JASON_STATE_WALKING_UP	201
-#define JASON_STATE_WALKING_DOWN	202
+#define BIG_JASON_STATE_DIE				-10
+#define BIG_JASON_STATE_IDLE			0
+#define BIG_JASON_STATE_IDLE_LEFT			1
+#define BIG_JASON_STATE_IDLE_RIGHT			2
+#define BIG_JASON_STATE_IDLE_UP			3
+#define BIG_JASON_STATE_IDLE_DOWN			4
+#define BIG_JASON_STATE_WALKING_RIGHT	100
+#define BIG_JASON_STATE_WALKING_LEFT	200
+#define BIG_JASON_STATE_WALKING_UP	201
+#define BIG_JASON_STATE_WALKING_DOWN	202
 
 
 
 #pragma region ANIMATION_ID
 
 // jason big
-#define ID_ANI_JASON_IDLE_RIGHT 400
-#define ID_ANI_JASON_IDLE_LEFT 401
-#define ID_ANI_JASON_IDLE_UP 402
-#define ID_ANI_JASON_IDLE_DOWN 403
-#define ID_ANI_JASON_WALKING_RIGHT 500
-#define ID_ANI_JASON_WALKING_LEFT 501
-#define ID_ANI_JASON_WALKING_UP 502
-#define ID_ANI_JASON_WALKING_DOWN 503
+#define ID_ANI_BIG_JASON_IDLE_RIGHT 400
+#define ID_ANI_BIG_JASON_IDLE_LEFT 401
+#define ID_ANI_BIG_JASON_IDLE_UP 402
+#define ID_ANI_BIG_JASON_IDLE_DOWN 403
+#define ID_ANI_BIG_JASON_WALKING_RIGHT 500
+#define ID_ANI_BIG_JASON_WALKING_LEFT 501
+#define ID_ANI_BIG_JASON_WALKING_UP 502
+#define ID_ANI_BIG_JASON_WALKING_DOWN 503
 
 // jason small
 
@@ -73,6 +73,7 @@ class CJason : public CGameObject
 	int coin; 
 
 	int GetAniIdBig();
+	int GetAniIdSmall();
 public:
 	CJason(float x, float y) : CGameObject(x, y)
 	{
@@ -89,7 +90,7 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		// init state is idle right
-		state = JASON_STATE_IDLE_RIGHT;
+		state = BIG_JASON_STATE_IDLE_RIGHT;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
@@ -101,10 +102,10 @@ public:
 
 	int IsCollidable()
 	{ 
-		return (state != JASON_STATE_DIE); 
+		return (state != BIG_JASON_STATE_DIE); 
 	}
 
-	int IsBlocking() { return (state != JASON_STATE_DIE && untouchable==0); }
+	int IsBlocking() { return (state != BIG_JASON_STATE_DIE && untouchable==0); }
 
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
