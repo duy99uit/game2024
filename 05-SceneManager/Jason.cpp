@@ -37,39 +37,35 @@ void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 int CJason::GetAniIdBig()
 {
 	int aniId = -1;
-	if (vy != 0) {
-		if (vy > 0) {
-			aniId = ID_ANI_JASON_WALKING_DOWN;
-		}
-		else {
-			aniId = ID_ANI_JASON_WALKING_UP;
-		}
-	}
-	else if (vx != 0) {
-		if (vx > 0) {
-			aniId = ID_ANI_JASON_WALKING_RIGHT;
-		}
-		else {
-			aniId = ID_ANI_JASON_WALKING_LEFT;
-		}
-	}
-	else {
-		if (!isMovingX) { 
-			if (ny > 0) {
-				aniId = ID_ANI_JASON_IDLE_DOWN;
-			}
-			else if (ny < 0) {
-				aniId = ID_ANI_JASON_IDLE_UP;
-			}
-		}
-		else {
-			if (nx > 0) {
-				aniId = ID_ANI_JASON_IDLE_RIGHT;
-			}
-			else {
-				aniId = ID_ANI_JASON_IDLE_LEFT;
-			}
-		}
+	switch (state)
+	{
+	case JASON_STATE_WALKING_RIGHT:
+		aniId = ID_ANI_JASON_WALKING_RIGHT;
+		break;
+	case JASON_STATE_WALKING_LEFT:
+		aniId = ID_ANI_JASON_WALKING_LEFT;
+		break;
+	case JASON_STATE_WALKING_UP:
+		aniId = ID_ANI_JASON_WALKING_UP;
+		break;
+	case JASON_STATE_WALKING_DOWN:
+		aniId = ID_ANI_JASON_WALKING_DOWN;
+		break;
+	case JASON_STATE_IDLE_LEFT:
+		aniId = ID_ANI_JASON_IDLE_LEFT;
+		break;
+	case JASON_STATE_IDLE_RIGHT:
+		aniId = ID_ANI_JASON_IDLE_RIGHT;
+		break;
+	case JASON_STATE_IDLE_UP:
+		aniId = ID_ANI_JASON_IDLE_UP;
+		break;
+	case JASON_STATE_IDLE_DOWN:
+		aniId = ID_ANI_JASON_IDLE_DOWN;
+		break;
+	default:
+		aniId = ID_ANI_JASON_IDLE_RIGHT;
+		break;
 	}
 	if (aniId == -1) aniId = ID_ANI_JASON_IDLE_RIGHT;
 
@@ -120,24 +116,28 @@ void CJason::SetState(int state)
 		isMovingX = false;
 		break;
 	case JASON_STATE_IDLE_LEFT:
+		nx = -1;
 		ax = 0.0f;
 		vx = 0.0f;
 		ay = 0.0f;
 		vy = 0.0f;
 		break;
 	case JASON_STATE_IDLE_RIGHT:
+		nx = 1;
 		ax = 0.0f;
 		vx = 0.0f;
 		ay = 0.0f;
 		vy = 0.0f;
 		break;
 	case JASON_STATE_IDLE_UP:
+		ny = -1;
 		ax = 0.0f;
 		vx = 0.0f;
 		ay = 0.0f;
 		vy = 0.0f;
 		break;
 	case JASON_STATE_IDLE_DOWN:
+		ny = 1;
 		ax = 0.0f;
 		vx = 0.0f;
 		ay = 0.0f;
@@ -215,24 +215,24 @@ void CJason::HandleKeyState()
 
 void CJason::HandleKeyUp(int KeyCode)
 {
-	int state = getState();
+	
 	switch (KeyCode)
 	{
 	case DIK_UP:
 		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
-		SetState(JASON_STATE_IDLE);
+		SetState(JASON_STATE_IDLE_UP);
 		break;
 	case DIK_DOWN:
 		DebugOut(L"HandleKeyUp down >>>>> %d\n", state);
-		SetState(JASON_STATE_IDLE);
+		SetState(JASON_STATE_IDLE_DOWN);
 		break;
 	case DIK_LEFT:
 		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
-		SetState(JASON_STATE_IDLE);
+		SetState(JASON_STATE_IDLE_LEFT);
 		break;
 	case DIK_RIGHT:
 		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
-		SetState(JASON_STATE_IDLE);
+		SetState(JASON_STATE_IDLE_RIGHT);
 		break;
 	}
 }
