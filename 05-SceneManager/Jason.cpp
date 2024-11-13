@@ -119,6 +119,30 @@ void CJason::SetState(int state)
 		ny = 1;
 		isMovingX = false;
 		break;
+	case JASON_STATE_IDLE_LEFT:
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case JASON_STATE_IDLE_RIGHT:
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case JASON_STATE_IDLE_UP:
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case JASON_STATE_IDLE_DOWN:
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
 
 
 	case JASON_STATE_IDLE:
