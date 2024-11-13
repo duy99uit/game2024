@@ -16,7 +16,7 @@ void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	/*vx += ax * dt;*/
 
 
-vx += ax * dt;
+	vx += ax * dt;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -158,7 +158,7 @@ void CJason::SetLevel(int l)
 
 
 
-void CJason::HandleKeyState(BYTE* states)
+void CJason::HandleKeyState()
 {
 	// remove key state
 	LPGAME game = CGame::GetInstance();
@@ -166,7 +166,7 @@ void CJason::HandleKeyState(BYTE* states)
 	/*player->GetPosition(cx, cy);*/
 
 
-	if (game->IsKeyDown(DIK_RIGHT))
+	/*if (game->IsKeyDown(DIK_RIGHT))
 	{
 		SetState(JASON_STATE_WALKING_RIGHT);
 		
@@ -186,6 +186,53 @@ void CJason::HandleKeyState(BYTE* states)
 	else
 	{
 		SetState(JASON_STATE_IDLE);
+	}*/
+}
+
+void CJason::HandleKeyUp(int KeyCode)
+{
+	int state = getState();
+	switch (KeyCode)
+	{
+	case DIK_UP:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_IDLE);
+		break;
+	case DIK_DOWN:
+		DebugOut(L"HandleKeyUp down >>>>> %d\n", state);
+		SetState(JASON_STATE_IDLE);
+		break;
+	case DIK_LEFT:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_IDLE);
+		break;
+	case DIK_RIGHT:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_IDLE);
+		break;
+	}
+}
+void CJason::HandleKeyDown(int KeyCode)
+{
+	int state = getState();
+	switch (KeyCode)
+	{
+	case DIK_RIGHT:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_WALKING_RIGHT);
+		break;
+	case DIK_LEFT:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_WALKING_LEFT);
+		break;
+	case DIK_UP:
+		DebugOut(L"HandleKeyUp up >>>>> %d\n", state);
+		SetState(JASON_STATE_WALKING_UP);
+		break;
+	case DIK_DOWN:
+		DebugOut(L"HandleKeyUp down >>>>> %d\n", state);
+		SetState(JASON_STATE_WALKING_DOWN);
+		break;
 	}
 }
 

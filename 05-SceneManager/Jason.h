@@ -10,6 +10,10 @@
 
 #define JASON_STATE_DIE				-10
 #define JASON_STATE_IDLE			0
+#define JASON_STATE_IDLE_LEFT			1
+#define JASON_STATE_IDLE_RIGHT			2
+#define JASON_STATE_IDLE_UP			3
+#define JASON_STATE_IDLE_DOWN			4
 #define JASON_STATE_WALKING_RIGHT	100
 #define JASON_STATE_WALKING_LEFT	200
 #define JASON_STATE_WALKING_UP	201
@@ -76,7 +80,7 @@ public:
 		ax = 0.0f;
 		ay = 0.0f; 
 		vy = 0.00f;
-		vx = 0.02f;
+		vx = 0.00f;
 		isMovingX = true;
 		level = JASON_LEVEL_BIG;
 		untouchable = 0;
@@ -87,7 +91,10 @@ public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);
-	void HandleKeyState(BYTE* states);
+	int getState() { return state; };
+	void HandleKeyState();
+	void HandleKeyUp(int KeyCode);
+	void HandleKeyDown(int KeyCode);
 
 	int IsCollidable()
 	{ 
