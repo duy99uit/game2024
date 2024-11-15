@@ -83,23 +83,26 @@ int CJason::GetAniIdSmall()
 	case SMALL_JASON_STATE_WALKING_LEFT:
 		aniId = ID_ANI_SMALL_JASON_WALKING_LEFT;
 		break;
-	case SMALL_JASON_STATE_WALKING_UP:
-		aniId = ID_ANI_SMALL_JASON_WALKING_UP;
-		break;
-	case SMALL_JASON_STATE_WALKING_DOWN:
-		aniId = ID_ANI_SMALL_JASON_WALKING_DOWN;
-		break;
 	case SMALL_JASON_STATE_IDLE_LEFT:
 		aniId = ID_ANI_SMALL_JASON_IDLE_LEFT;
 		break;
 	case SMALL_JASON_STATE_IDLE_RIGHT:
 		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 		break;
-	case SMALL_JASON_STATE_IDLE_UP:
-		aniId = ID_ANI_SMALL_JASON_IDLE_UP;
+	case SMALL_JASON_STATE_CRAWLING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_CRAWLING_RIGHT;
 		break;
-	case SMALL_JASON_STATE_IDLE_DOWN:
-		aniId = ID_ANI_SMALL_JASON_IDLE_DOWN;
+	case SMALL_JASON_STATE_CRAWLING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_CRAWLING_LEFT;
+		break;
+	case SMALL_JASON_STATE_CLIMBING:
+		aniId = ID_ANI_SMALL_JASON_CLIMBING;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_SWMMING_RIGHT;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_SWMMING_LEFT;
 		break;
 	default:
 		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
@@ -114,10 +117,10 @@ void CJason::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
-	aniId = GetAniIdSmall();;
+	aniId = GetAniIdBig();;
 	animations->Get(aniId)->Render(x, y);
 
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 	
 	//DebugOutTitle(L"Coins: %d", coin);
 	DebugOutTitle(L"Blaster Master: %d");
