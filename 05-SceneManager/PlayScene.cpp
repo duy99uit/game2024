@@ -120,7 +120,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
-	/*case OBJECT_TYPE_PLATFORM:
+	case OBJECT_TYPE_PLATFORM:
 	{
 
 		float cell_width = (float)atof(tokens[3].c_str());
@@ -137,7 +137,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		);
 
 		break;
-	}*/
+	}
 
 	/*case OBJECT_TYPE_PORTAL:
 	{
@@ -251,15 +251,21 @@ void CPlayScene::Update(DWORD dt)
 	if (player == NULL) return; 
 
 	// Update camera to follow jason
-	float cx, cy;
-	player->GetPosition(cx, cy);
+	float player_x, player_y;
+	player->GetPosition(player_x, player_y);
 
 	CGame *game = CGame::GetInstance();
-	cx -= game->GetBackBufferWidth() / 2;
-	cy -= game->GetBackBufferHeight() / 2;
+	Camera* camera = CGame::getCamera();
+	camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
+	camera->Update(player_x, player_y);
 
-	if (cx < 0) cx = 0;
+	//CGame* game = CGame::GetInstance();
+	//cx -= game->GetBackBufferWidth() / 2;
+	//cy -= game->GetBackBufferHeight() / 2;
 
+	//if (cx < 0) cx = 0;
+
+//	CGame::GetInstance()->SetCamPos(cx,cy);
 	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 
 	PurgeDeletedObjects();
