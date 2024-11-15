@@ -8,6 +8,8 @@
 
 // big
 #define BIG_JASON_WALKING_SPEED		0.1f
+#define BIG_JASON_CRAWLING_SPEED		0.05f
+#define BIG_JASON_SWIMMING_SPEED		0.05f
 #define BIG_JASON_STATE_DIE				-10
 #define BIG_JASON_STATE_IDLE			0
 #define BIG_JASON_STATE_IDLE_LEFT			1
@@ -28,7 +30,8 @@
 #define SMALL_JASON_STATE_WALKING_LEFT	1200
 #define SMALL_JASON_STATE_CRAWLING_RIGHT	1300
 #define SMALL_JASON_STATE_CRAWLING_LEFT	1301
-#define SMALL_JASON_STATE_CLIMBING	1310
+#define SMALL_JASON_STATE_CLIMBING_UP	1310
+#define SMALL_JASON_STATE_CLIMBING_DOWN	1311
 #define SMALL_JASON_STATE_SWIMMING_RIGHT	1320
 #define SMALL_JASON_STATE_SWIMMING_LEFT	1321
 
@@ -106,13 +109,13 @@ public:
 		vy = 0.00f;
 		vx = 0.00f;
 		isMovingX = true;
-		level = JASON_LEVEL_BIG;
+		level = JASON_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;
 		coin = 0;
 		// init state is idle right
-		state = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		state = SMALL_JASON_STATE_IDLE;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
