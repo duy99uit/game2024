@@ -77,35 +77,35 @@ int CJason::GetAniIdSmall()
 	int aniId = -1;
 	switch (state)
 	{
-	case BIG_JASON_STATE_WALKING_RIGHT:
-		aniId = ID_ANI_BIG_JASON_WALKING_RIGHT;
+	case SMALL_JASON_STATE_WALKING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_WALKING_RIGHT;
 		break;
-	case BIG_JASON_STATE_WALKING_LEFT:
-		aniId = ID_ANI_BIG_JASON_WALKING_LEFT;
+	case SMALL_JASON_STATE_WALKING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_WALKING_LEFT;
 		break;
-	case BIG_JASON_STATE_WALKING_UP:
-		aniId = ID_ANI_BIG_JASON_WALKING_UP;
+	case SMALL_JASON_STATE_WALKING_UP:
+		aniId = ID_ANI_SMALL_JASON_WALKING_UP;
 		break;
-	case BIG_JASON_STATE_WALKING_DOWN:
-		aniId = ID_ANI_BIG_JASON_WALKING_DOWN;
+	case SMALL_JASON_STATE_WALKING_DOWN:
+		aniId = ID_ANI_SMALL_JASON_WALKING_DOWN;
 		break;
-	case BIG_JASON_STATE_IDLE_LEFT:
-		aniId = ID_ANI_BIG_JASON_IDLE_LEFT;
+	case SMALL_JASON_STATE_IDLE_LEFT:
+		aniId = ID_ANI_SMALL_JASON_IDLE_LEFT;
 		break;
-	case BIG_JASON_STATE_IDLE_RIGHT:
-		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+	case SMALL_JASON_STATE_IDLE_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 		break;
-	case BIG_JASON_STATE_IDLE_UP:
-		aniId = ID_ANI_BIG_JASON_IDLE_UP;
+	case SMALL_JASON_STATE_IDLE_UP:
+		aniId = ID_ANI_SMALL_JASON_IDLE_UP;
 		break;
-	case BIG_JASON_STATE_IDLE_DOWN:
-		aniId = ID_ANI_BIG_JASON_IDLE_DOWN;
+	case SMALL_JASON_STATE_IDLE_DOWN:
+		aniId = ID_ANI_SMALL_JASON_IDLE_DOWN;
 		break;
 	default:
-		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 		break;
 	}
-	if (aniId == -1) aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+	if (aniId == -1) aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 
 	return aniId;
 }
@@ -114,7 +114,7 @@ void CJason::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
-	aniId = GetAniIdBig();;
+	aniId = GetAniIdSmall();;
 	animations->Get(aniId)->Render(x, y);
 
 	RenderBoundingBox();

@@ -20,4 +20,5 @@ height	240
 20	textures\misc.png
 30	textures\jasonnormal.png
 31	textures\sophia.png
+32	textures\JasonSmall.png
 50	textures\map11.png
