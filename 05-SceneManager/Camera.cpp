@@ -23,13 +23,14 @@ void Camera::Update(float player_x, float player_y)
 
 
 	CGame* game = CGame::GetInstance();
-	DebugOut(L"[WARNING] cam_x  %f already exists\n", cam_x);
 	if (player_x > width / 2 and player_x < width + 100 ) {
 		cam_x = player_x - width / 2;
 	}
 
-	if (player_y < height and player_y > 30) {
-		cam_y = player_y - height / 2;
+	//DebugOut(L"[WARNING]  playser y  %f already exists\n", player_y);
+
+	if  (player_y < (height - 30) and player_y > 30) {
+		cam_y = player_y + height / 2;
 	}
 
 
@@ -39,7 +40,8 @@ void Camera::Update(float player_x, float player_y)
 void  Camera::TransPosition(float& x, float& y)
 
 {
+	DebugOut(L"[WARNING] trán cam_y  %f already exists\n", cam_y);
 	x = x - cam_x;
-	y = height - y + cam_y;
+	y = height + y - cam_y ;
 
 }

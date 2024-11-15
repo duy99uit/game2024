@@ -38,7 +38,7 @@ int CJason::GetAniIdBig()
 {
 	int aniId = -1;
 	if (vy != 0) {
-		if (vy > 0) {
+		if (vy < 0) {
 			aniId = ID_ANI_JASON_WALKING_DOWN;
 		}
 		else {
@@ -110,13 +110,13 @@ void CJason::SetState(int state)
 		break;
 
 	case JASON_STATE_WALKING_UP:
-		vy = -JASON_WALKING_SPEED;
-		ny = -1;
+		vy = JASON_WALKING_SPEED;
+		ny = 1;
 		isMovingX = false;
 		break;
 	case JASON_STATE_WALKING_DOWN:
-		vy = JASON_WALKING_SPEED;
-		ny = 1;
+		vy = -JASON_WALKING_SPEED;
+		ny = -1;
 		isMovingX = false;
 		break;
 

@@ -228,7 +228,8 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 	// Create the translation matrix
 
 	// check here
-	D3DXMatrixTranslation(&matTranslation, x, (backBufferHeight - y), 0.1f);
+	CGame::GetInstance()->getCamera()->TransPosition(x, y);
+	D3DXMatrixTranslation(&matTranslation, x, y, 0.1f);
 
 	// Scale the sprite to its correct width and height because by default, DirectX draws it with width = height = 1.0f 
 	D3DXMATRIX matScaling;

@@ -13,7 +13,7 @@ enemies.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # JASON
-0	120	160
+0	120	140
 
 #COIN
 4	100	120
@@ -36,7 +36,7 @@ enemies.txt
 4	180	80
 
 #BlackWalker
-2	0	100
+2	0	200
 
 
 

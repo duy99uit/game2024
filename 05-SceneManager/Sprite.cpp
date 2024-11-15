@@ -45,7 +45,7 @@ void CSprite::Draw(float x, float y)
 	
 	x = (FLOAT)floor(x);
 	y = (FLOAT)floor(y);
-	//test
+	
 	g->getCamera()->TransPosition(x, y);
 
 	D3DXMatrixTranslation(&matTranslation, x , y , 0.1f);
