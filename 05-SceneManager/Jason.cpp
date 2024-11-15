@@ -16,7 +16,7 @@ void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	/*vx += ax * dt;*/
 
 
-vx += ax * dt;
+	vx += ax * dt;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -37,54 +37,99 @@ void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 int CJason::GetAniIdBig()
 {
 	int aniId = -1;
-	if (vy != 0) {
-		if (vy > 0) {
-			aniId = ID_ANI_JASON_WALKING_DOWN;
-		}
-		else {
-			aniId = ID_ANI_JASON_WALKING_UP;
-		}
+	switch (state)
+	{
+	case BIG_JASON_STATE_WALKING_RIGHT:
+		aniId = ID_ANI_BIG_JASON_WALKING_RIGHT;
+		break;
+	case BIG_JASON_STATE_WALKING_LEFT:
+		aniId = ID_ANI_BIG_JASON_WALKING_LEFT;
+		break;
+	case BIG_JASON_STATE_WALKING_UP:
+		aniId = ID_ANI_BIG_JASON_WALKING_UP;
+		break;
+	case BIG_JASON_STATE_WALKING_DOWN:
+		aniId = ID_ANI_BIG_JASON_WALKING_DOWN;
+		break;
+	case BIG_JASON_STATE_IDLE_LEFT:
+		aniId = ID_ANI_BIG_JASON_IDLE_LEFT;
+		break;
+	case BIG_JASON_STATE_IDLE_RIGHT:
+		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		break;
+	case BIG_JASON_STATE_IDLE_UP:
+		aniId = ID_ANI_BIG_JASON_IDLE_UP;
+		break;
+	case BIG_JASON_STATE_IDLE_DOWN:
+		aniId = ID_ANI_BIG_JASON_IDLE_DOWN;
+		break;
+	default:
+		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		break;
 	}
-	else if (vx != 0) {
-		if (vx > 0) {
-			aniId = ID_ANI_JASON_WALKING_RIGHT;
-		}
-		else {
-			aniId = ID_ANI_JASON_WALKING_LEFT;
-		}
-	}
-	else {
-		if (!isMovingX) { 
-			if (ny > 0) {
-				aniId = ID_ANI_JASON_IDLE_DOWN;
-			}
-			else if (ny < 0) {
-				aniId = ID_ANI_JASON_IDLE_UP;
-			}
-		}
-		else {
-			if (nx > 0) {
-				aniId = ID_ANI_JASON_IDLE_RIGHT;
-			}
-			else {
-				aniId = ID_ANI_JASON_IDLE_LEFT;
-			}
-		}
-	}
-	if (aniId == -1) aniId = ID_ANI_JASON_IDLE_RIGHT;
+	if (aniId == -1) aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
 
 	return aniId;
 }
 
+int CJason::GetAniIdSmall()
+{
+	int aniId = -1;
+	switch (state)
+	{
+	case SMALL_JASON_STATE_WALKING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_WALKING_RIGHT;
+		break;
+	case SMALL_JASON_STATE_WALKING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_WALKING_LEFT;
+		break;
+	case SMALL_JASON_STATE_IDLE_LEFT:
+		aniId = ID_ANI_SMALL_JASON_IDLE_LEFT;
+		break;
+	case SMALL_JASON_STATE_IDLE_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
+		break;
+	case SMALL_JASON_STATE_CRAWLING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_CRAWLING_RIGHT;
+		break;
+	case SMALL_JASON_STATE_CRAWLING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_CRAWLING_LEFT;
+		break;
+	case SMALL_JASON_STATE_CLIMBING_UP:
+		aniId = ID_ANI_SMALL_JASON_CLIMBING;
+		break;
+	case SMALL_JASON_STATE_CLIMBING_DOWN:
+		aniId = ID_ANI_SMALL_JASON_CLIMBING;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_RIGHT:
+		aniId = ID_ANI_SMALL_JASON_SWMMING_RIGHT;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_LEFT:
+		aniId = ID_ANI_SMALL_JASON_SWMMING_LEFT;
+		break;
+	default:
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
+		break;
+	}
+	if (aniId == -1) aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
+
+	return aniId;
+}
 
 void CJason::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
-	aniId = GetAniIdBig();;
+	if (level == JASON_LEVEL_BIG) {
+		aniId = GetAniIdBig();;
+	}
+	else {
+		aniId = GetAniIdSmall();;
+	}
+	
 	animations->Get(aniId)->Render(x, y);
 
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 	
 	//DebugOutTitle(L"Coins: %d", coin);
 	DebugOutTitle(L"Blaster Master: %d");
@@ -94,34 +139,117 @@ void CJason::Render()
 void CJason::SetState(int state)
 {
 	// DIE is the end state, cannot be changed! 
-	if (this->state == JASON_STATE_DIE) return; 
+	if (this->state == BIG_JASON_STATE_DIE) return; 
 
 	switch (state)
 	{
-	case JASON_STATE_WALKING_RIGHT:
-		vx = JASON_WALKING_SPEED;
+	case BIG_JASON_STATE_WALKING_RIGHT:
+		vx = BIG_JASON_WALKING_SPEED;
 		nx = 1;
 		isMovingX = true;
 		break;
-	case JASON_STATE_WALKING_LEFT:
-		vx = -JASON_WALKING_SPEED;
+	case BIG_JASON_STATE_WALKING_LEFT:
+		vx = -BIG_JASON_WALKING_SPEED;
 		nx = -1;
 		isMovingX = true;
 		break;
 
-	case JASON_STATE_WALKING_UP:
-		vy = -JASON_WALKING_SPEED;
+	case BIG_JASON_STATE_WALKING_UP:
+		vy = -BIG_JASON_WALKING_SPEED;
 		ny = -1;
 		isMovingX = false;
 		break;
-	case JASON_STATE_WALKING_DOWN:
-		vy = JASON_WALKING_SPEED;
+	case BIG_JASON_STATE_WALKING_DOWN:
+		vy = BIG_JASON_WALKING_SPEED;
 		ny = 1;
 		isMovingX = false;
 		break;
+	case BIG_JASON_STATE_IDLE_LEFT:
+		nx = -1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case BIG_JASON_STATE_IDLE_RIGHT:
+		nx = 1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case BIG_JASON_STATE_IDLE_UP:
+		ny = -1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case BIG_JASON_STATE_IDLE_DOWN:
+		ny = 1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	// small
+	case SMALL_JASON_STATE_WALKING_RIGHT:
+		vx = BIG_JASON_WALKING_SPEED;
+		nx = 1;
+		isMovingX = true;
+		break;
+	case SMALL_JASON_STATE_WALKING_LEFT:
+		vx = -BIG_JASON_WALKING_SPEED;
+		nx = -1;
+		isMovingX = true;
+		break;
+	case SMALL_JASON_STATE_CLIMBING_UP:
+		vy = -BIG_JASON_WALKING_SPEED;
+		ny = -1;
+		isMovingX = false;
+		break;
+	case SMALL_JASON_STATE_CLIMBING_DOWN:
+		vy = BIG_JASON_WALKING_SPEED;
+		ny = 1;
+		isMovingX = false;
+		break;
+	case SMALL_JASON_STATE_IDLE_LEFT:
+		nx = -1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case SMALL_JASON_STATE_IDLE_RIGHT:
+		nx = 1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case SMALL_JASON_STATE_CRAWLING_RIGHT:
+		vx = BIG_JASON_CRAWLING_SPEED;
+		nx = 1;
+		isMovingX = true;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_RIGHT:
+		vx = BIG_JASON_CRAWLING_SPEED;
+		nx = 1;
+		isMovingX = true;
+		break;
+	case SMALL_JASON_STATE_CRAWLING_LEFT:
+		vx = -BIG_JASON_CRAWLING_SPEED;
+		nx = -1;
+		isMovingX = true;
+		break;
+	case SMALL_JASON_STATE_SWIMMING_LEFT:
+		vx = -BIG_JASON_CRAWLING_SPEED;
+		nx =-1;
+		isMovingX = true;
+		break;
 
 
-	case JASON_STATE_IDLE:
+	case BIG_JASON_STATE_IDLE:
 		ax = 0.0f;
 		vx = 0.0f;
 		ay = 0.0f;
@@ -158,35 +286,122 @@ void CJason::SetLevel(int l)
 
 
 
-void CJason::HandleKeyState(BYTE* states)
+void CJason::HandleKeyState()
 {
-	// remove key state
 	LPGAME game = CGame::GetInstance();
+}
 
-	/*player->GetPosition(cx, cy);*/
-
-
-	if (game->IsKeyDown(DIK_RIGHT))
-	{
-		SetState(JASON_STATE_WALKING_RIGHT);
+void CJason::HandleKeyUp(int KeyCode)
+{
+	if (level == JASON_LEVEL_BIG) {
+		switch (KeyCode)
+		{
+		case DIK_UP:
+			SetState(BIG_JASON_STATE_IDLE_UP);
+			break;
+		case DIK_DOWN:
+			
+			SetState(BIG_JASON_STATE_IDLE_DOWN);
+			break;
+		case DIK_LEFT:
+			
+			SetState(BIG_JASON_STATE_IDLE_LEFT);
+			break;
+		case DIK_RIGHT:
 		
+			SetState(BIG_JASON_STATE_IDLE_RIGHT);
+			break;
+		}
 	}
-	else if (game->IsKeyDown(DIK_LEFT))
-	{
-		SetState(JASON_STATE_WALKING_LEFT);
+	else {
+		switch (KeyCode)
+		{
+		case DIK_UP:
+			SetState(SMALL_JASON_STATE_IDLE_RIGHT);
+			break;
+		case DIK_DOWN:
+			SetState(SMALL_JASON_STATE_IDLE_RIGHT);
+			break;
+		case DIK_LEFT:
+			SetState(SMALL_JASON_STATE_IDLE_LEFT);
+			break;
+		case DIK_RIGHT:
+			SetState(SMALL_JASON_STATE_IDLE_RIGHT);
+			break;
+		case DIK_A:
+			SetState(SMALL_JASON_STATE_IDLE_LEFT);
+			break;
+		case DIK_S:
+			SetState(SMALL_JASON_STATE_IDLE_RIGHT);
+			break;
+		case DIK_D:
+			SetState(SMALL_JASON_STATE_IDLE_LEFT);
+			break;
+		case DIK_F:
+			SetState(SMALL_JASON_STATE_IDLE_LEFT);
+			break;
+		}
 	}
-	else if (game->IsKeyDown(DIK_UP))
-	{
-		SetState(JASON_STATE_WALKING_UP);
+	
+
+}
+void CJason::HandleKeyDown(int KeyCode)
+
+{
+	int state = getState();
+	if (level == JASON_LEVEL_BIG) {
+		switch (KeyCode)
+		{
+		case DIK_1:
+			SetLevel(JASON_LEVEL_SMALL);
+			break;
+		case DIK_RIGHT:
+			SetState(BIG_JASON_STATE_WALKING_RIGHT);
+			break;
+		case DIK_LEFT:
+			SetState(BIG_JASON_STATE_WALKING_LEFT);
+			break;
+		case DIK_UP:
+			SetState(BIG_JASON_STATE_WALKING_UP);
+			break;
+		case DIK_DOWN:
+			SetState(BIG_JASON_STATE_WALKING_DOWN);
+			break;
+		}
 	}
-	else if (game->IsKeyDown(DIK_DOWN))
-	{
-		SetState(JASON_STATE_WALKING_DOWN);
+	else {
+		switch (KeyCode)
+		{
+		case DIK_1:
+			SetLevel(JASON_LEVEL_BIG);
+			break;
+		case DIK_RIGHT:
+			SetState(SMALL_JASON_STATE_WALKING_RIGHT);
+			break;
+		case DIK_LEFT:
+			SetState(SMALL_JASON_STATE_WALKING_LEFT);
+			break;
+		case DIK_UP:
+			SetState(SMALL_JASON_STATE_CLIMBING_UP);
+			break;
+		case DIK_DOWN:
+			SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
+			break;
+		case DIK_A:
+			SetState(SMALL_JASON_STATE_CRAWLING_LEFT);
+			break;
+		case DIK_S:
+			SetState(SMALL_JASON_STATE_SWIMMING_LEFT);
+			break;
+		case DIK_F:
+			SetState(SMALL_JASON_STATE_CRAWLING_RIGHT);
+			break;
+		case DIK_D:
+			SetState(SMALL_JASON_STATE_SWIMMING_RIGHT);
+			break;
+		}
 	}
-	else
-	{
-		SetState(JASON_STATE_IDLE);
-	}
+	
 }
 
 

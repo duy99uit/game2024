@@ -54,7 +54,7 @@ void CBlackWalker::Render()
 
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	/*RenderBoundingBox();*/
 }
 
 void CBlackWalker::SetState(int state)
