@@ -10,14 +10,7 @@ void Camera::SetSize(float w, float h)
 {
 	width = w; height = h;
 }
-float Camera::getCamPosY()
-{
-	return cam_y;
-}
-float Camera::getCamPosX()
-{
-	return cam_x;
-}
+
 void Camera::Update(float player_x, float player_y)
 {
 

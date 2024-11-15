@@ -8,8 +8,6 @@ class Camera
 public:
 	void SetSize(float w, float h);
 	void SetCamPos(float x, float y);
-	float getCamPosX();
-	float getCamPosY();
 	void Update(float player_x, float player_y);
 	void TransPosition(float& x, float& y);
 };
