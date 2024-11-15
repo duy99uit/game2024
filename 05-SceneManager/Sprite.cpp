@@ -45,8 +45,10 @@ void CSprite::Draw(float x, float y)
 	
 	x = (FLOAT)floor(x);
 	y = (FLOAT)floor(y);
+	//test
+	g->getCamera()->TransPosition(x, y);
 
-	D3DXMatrixTranslation(&matTranslation, x - cx, g->GetBackBufferHeight() - y + cy, 0.1f);
+	D3DXMatrixTranslation(&matTranslation, x , y , 0.1f);
 
 	this->sprite.matWorld = (this->matScaling * matTranslation);
 

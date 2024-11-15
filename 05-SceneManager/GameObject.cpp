@@ -40,11 +40,9 @@ void CGameObject::RenderBoundingBox()
 	DebugOut(L"[WARNING] cam_y  %f already exists\n", cy);
 
 
-	/// width height
 
 
-
-	CGame::GetInstance()->Draw(x - cx, y - cy, bbox, &rect, BBOX_ALPHA);
+	CGame::GetInstance()->Draw(x - cx , y - cy, bbox, &rect, BBOX_ALPHA);
 }
 
 CGameObject::~CGameObject()
