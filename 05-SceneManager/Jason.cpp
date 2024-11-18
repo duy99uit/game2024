@@ -25,7 +25,7 @@ void CJason::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
+//	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
 }
 
 void CJason::OnCollisionWith(LPCOLLISIONEVENT e)

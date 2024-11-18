@@ -35,7 +35,14 @@ void CGameObject::RenderBoundingBox()
 	float cx, cy; 
 	CGame::GetInstance()->GetCamPos(cx, cy);
 
-	CGame::GetInstance()->Draw(x - cx, y - cy, bbox, &rect, BBOX_ALPHA);
+	// TODO:position
+	DebugOut(L"[WARNING] cam_x  %f already exists\n", cx);
+	DebugOut(L"[WARNING] cam_y  %f already exists\n", cy);
+
+
+
+
+	CGame::GetInstance()->Draw(x , y, bbox, &rect, BBOX_ALPHA);
 }
 
 CGameObject::~CGameObject()

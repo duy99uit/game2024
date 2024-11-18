@@ -13,6 +13,7 @@ using namespace std;
 #include "Texture.h"
 #include "KeyEventHandler.h"
 #include "Scene.h"
+#include "Camera.h"
 
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -26,6 +27,7 @@ using namespace std;
 class CGame
 {
 	static CGame* __instance;
+	static Camera* _camera;
 	HWND hWnd;									// Window handle
 
 	int backBufferWidth = 0;					// Backbuffer width & height, will be set during Direct3D initialization
@@ -48,6 +50,8 @@ class CGame
 
 	float cam_x = 0.0f;
 	float cam_y = 0.0f;
+	int screen_width;
+	int screen_height;
 
 	HINSTANCE hInstance;
 
@@ -63,6 +67,9 @@ class CGame
 public:
 	// Init DirectX, Sprite Handler
 	void Init(HWND hWnd, HINSTANCE hInstance);
+	int GetScreenWidth() { return screen_width; }
+	int GetScreenHeight() { return screen_height; }
+
 
 	//
 	// Draw a portion or ALL the texture at position (x,y) on the screen. (x,y) is at the CENTER of the image
@@ -101,6 +108,9 @@ public:
 	int GetBackBufferHeight() { return backBufferHeight; }
 
 	static CGame* GetInstance();
+	static Camera* getCamera();
+
+	//void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
 
 	void SetPointSamplerState();
 

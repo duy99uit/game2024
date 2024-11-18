@@ -9,6 +9,7 @@
 #include "PlayScene.h"
 
 CGame * CGame::__instance = NULL;
+Camera* CGame::_camera = NULL;
 
 /*
 	Initialize DirectX, create a Direct3D device for rendering within the window, initial Sprite library for
@@ -26,6 +27,10 @@ void CGame::Init(HWND hWnd, HINSTANCE hInstance)
 
 	backBufferWidth = r.right + 1;
 	backBufferHeight = r.bottom + 1;
+
+	// Update 
+	screen_height = r.bottom + 1;
+	screen_width = r.right + 1;
 
 	DebugOut(L"[INFO] Window's client area: width= %d, height= %d\n", r.right - 1, r.bottom - 1);
 
@@ -219,8 +224,12 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 	// The translation matrix to be created
 	D3DXMATRIX matTranslation;
 
+
 	// Create the translation matrix
-	D3DXMatrixTranslation(&matTranslation, x, (backBufferHeight - y), 0.1f);
+
+	// check here
+	CGame::GetInstance()->getCamera()->TransPosition(x, y);
+	D3DXMatrixTranslation(&matTranslation, x, y, 0.1f);
 
 	// Scale the sprite to its correct width and height because by default, DirectX draws it with width = height = 1.0f 
 	D3DXMATRIX matScaling;
@@ -557,5 +566,11 @@ CGame* CGame::GetInstance()
 {
 	if (__instance == NULL) __instance = new CGame();
 	return __instance;
+}
+
+Camera* CGame::getCamera()
+{
+	if (_camera == NULL) _camera = new Camera();
+	return _camera;
 }
 
