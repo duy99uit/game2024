@@ -268,6 +268,7 @@ void CJason::HandleKeyDown(int KeyCode)
 		switch (KeyCode)
 		{
 		case DIK_1:
+			SetState(SMALL_JASON_STATE_IDLE_RIGHT);
 			SetLevel(JASON_LEVEL_SMALL);
 			break;
 		case DIK_RIGHT:
@@ -288,6 +289,7 @@ void CJason::HandleKeyDown(int KeyCode)
 		switch (KeyCode)
 		{
 		case DIK_1:
+			SetState(BIG_JASON_STATE_IDLE_RIGHT);
 			SetLevel(JASON_LEVEL_BIG);
 			break;
 		case DIK_RIGHT:
