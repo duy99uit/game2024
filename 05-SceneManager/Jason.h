@@ -90,6 +90,7 @@ class CJason : public CGameObject
 	float ax;				// acceleration on x 
 	float ay;
 	BOOLEAN isMovingX;
+	int aniId;
 
 	int level; 
 	int untouchable; 
@@ -115,7 +116,8 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		// init state is idle right
-		state = SMALL_JASON_STATE_IDLE;
+		state = BIG_JASON_STATE_WALKING_LEFT;
+		aniId = ID_ANI_BIG_JASON_WALKING_LEFT;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();

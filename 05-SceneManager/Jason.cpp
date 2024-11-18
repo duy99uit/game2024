@@ -119,13 +119,6 @@ int CJason::GetAniIdSmall()
 void CJason::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	int aniId = -1;
-	if (level == JASON_LEVEL_BIG) {
-		aniId = GetAniIdBig();;
-	}
-	else {
-		aniId = GetAniIdSmall();;
-	}
 	
 	animations->Get(aniId)->Render(x, y);
 
@@ -144,14 +137,14 @@ void CJason::SetState(int state)
 	switch (state)
 	{
 	case BIG_JASON_STATE_WALKING_RIGHT:
+		// add field aniId
+		aniId = BIG_JASON_STATE_WALKING_RIGHT;
 		vx = BIG_JASON_WALKING_SPEED;
 		nx = 1;
-		isMovingX = true;
 		break;
 	case BIG_JASON_STATE_WALKING_LEFT:
 		vx = -BIG_JASON_WALKING_SPEED;
 		nx = -1;
-		isMovingX = true;
 		break;
 
 	case BIG_JASON_STATE_WALKING_UP:
@@ -258,6 +251,12 @@ void CJason::SetState(int state)
 	}
 
 	CGameObject::SetState(state);
+	/*if (level == JASON_LEVEL_BIG) {
+		aniId = GetAniIdBig();;
+	}
+	else {
+		aniId = GetAniIdSmall();;
+	}*/
 }
 
 void CJason::GetBoundingBox(float &left, float &top, float &right, float &bottom)
