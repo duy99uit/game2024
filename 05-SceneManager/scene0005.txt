@@ -2,6 +2,7 @@
 [ASSETS]
 mario-ref.txt
 jason.txt
+sophia.txt
 coin.txt
 cloud.txt
 brick.txt
@@ -9,11 +10,14 @@ enemies.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = Koopas
+# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = Koopas , 101 = Sophia
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # JASON
 0	120	140
+
+# SOPHIA
+101	100	100
 
 #COIN
 4	100	120
