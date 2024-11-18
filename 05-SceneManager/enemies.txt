@@ -1,8 +1,5 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
-#WALK
-#31001	4	13	22	30	10
-#31002	24	13	42	30	10
 #WARKLEFT
 31001	91	2	103	26	11
 31002	108	2	120	26	11

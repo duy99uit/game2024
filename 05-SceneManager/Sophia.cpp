@@ -4,6 +4,7 @@
 CSophia::CSophia(float x, float y) :CGameObject(x, y)
 {
 	die_start = -1;
+	aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
 	SetState(SOPHIA_STATE_WALKING_RIGHT);
 }
 
@@ -37,7 +38,7 @@ void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CSophia::Render()
 {
-	int aniId = ID_ANI_SOPHIA_WALKING_LEFT;
+	int aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
 	if (state == SOPHIA_STATE_DIE)
 	{
 		aniId = ID_ANI_SOPHIA_DIE;
