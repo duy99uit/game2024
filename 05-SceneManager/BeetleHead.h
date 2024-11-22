@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 #define BEETLEHEAD_GRAVITY 0.002f
-#define BEETLEHEAD_WALKING_SPEED 0.08f
+#define BEETLEHEAD_WALKING_SPEED 0.09f
 #define BEETLEHEAD_WALKING_ACCELERATION 0.05f
 
 
@@ -12,18 +12,22 @@
 
 #define BEETLEHEAD_DIE_TIMEOUT 500
 
-#define BEETLEHEAD_STATE_WALKING 100
 #define BEETLEHEAD_STATE_WALKING_LEFT 102
 #define BEETLEHEAD_STATE_WALKING_RIGHT 103
 #define BEETLEHEAD_STATE_DIE 200
 
-#define ID_ANI_BEETLEHEAD_WALKING 5000
-#define ID_ANI_BEETLEHEAD_DIE 5001
-#define ID_ANI_BEETLEHEAD_WALKING_LEFT 5002
-#define ID_ANI_BEETLEHEAD_WALKING_RIGHT 5003
+#define ID_ANI_BEETLEHEAD_DIE 5201
+#define ID_ANI_BEETLEHEAD_WALKING_LEFT 5202
+#define ID_ANI_BEETLEHEAD_WALKING_RIGHT 5203
 
 class CBeetleHead : public CGameObject
 {
+private:
+	float amplitude;    // Amplitude of the sine wave (height)
+	float frequency;    // Frequency of the sine wave (speed of oscillation)
+	float phase;        // Initial phase offset for the sine wave
+	float baseY;        // Base Y-coordinate for the sine wave
+
 protected:
 	float ax;
 	float ay;

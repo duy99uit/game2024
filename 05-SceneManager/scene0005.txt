@@ -46,7 +46,7 @@ enemies.txt
 3	0	220
 
 #BeetleHead
-4	0	220
+24	0	220
 
 
 
