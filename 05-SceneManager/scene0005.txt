@@ -10,7 +10,7 @@ enemies.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = Koopas , 101 = Sophia
+# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # JASON
@@ -41,6 +41,12 @@ enemies.txt
 
 #BlackWalker
 2	0	200
+
+#Flying Bomb
+3	0	220
+
+#BeetleHead
+4	0	220
 
 
 
