@@ -1,0 +1,43 @@
+# list of object assets to load in this scene
+[ASSETS]
+jason.txt
+coin.txt
+cloud.txt
+brick.txt
+enemies.txt
+sophia.txt
+#
+[OBJECTS]
+# type	x	y	extra_settings per object type
+# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = Koopas , 101 = Sophia
+# See OBJECT_TYPE constants in AssetIDs.h
+
+# JASON
+0	50	140
+
+# SOPHIA
+#101	100	100
+
+#COIN
+
+
+#BlackWalker
+2	30	200
+
+
+
+
+#Platform
+5 	30	120	16	15	32	51000	52000	53000
+#5	140	140	16	15	10	51000	52000	53000
+#5	320	110	16	15	5	51000	52000	53000
+#5	420	130	16	15	5	51000	52000	53000
+5 	30	180	16	15	32	51000	52000	53000
+
+#Portal 
+
+
+[QUADTREE]
+Quadtree.txt
+
+

@@ -121,7 +121,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
-	case OBJECT_TYPE_PLATFORM:
+	/*case OBJECT_TYPE_PLATFORM:
 	{
 
 		float cell_width = (float)atof(tokens[3].c_str());
@@ -138,7 +138,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		);
 
 		break;
-	}
+	}*/
 
 	/*case OBJECT_TYPE_PORTAL:
 	{
@@ -160,6 +160,19 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 
 	objects.push_back(obj);
+}
+
+void CPlayScene::_ParseSection_QUAD(string line)
+{
+	DebugOut(L"READ QUADTREE START, HAVE %d OBJECTS\n");
+	vector<string> tokens = split(line);
+	DebugOut(L"--> %s\n", ToWSTR(line).c_str());
+	LPCWSTR path = ToLPCWSTR(tokens[0]);
+	quadtree = new Quadtree(path);
+	vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
+	objects.insert(objects.end(), quad.begin(), quad.end());
+	DebugOut(L"READ QUADTREE SUCCESS, HAVE %d %d OBJECTS\n", objects.size(), quad);
+	quadtree->Split();
 }
 
 void CPlayScene::LoadAssets(LPCWSTR assetFile)
@@ -215,6 +228,10 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		if (line == "[QUADTREE]") {
+			DebugOut(L"[INFO] vo day parse quad \n");
+			section = SCENE_SECTION_QUAD; continue;
+		}
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
 
 		//
@@ -224,6 +241,7 @@ void CPlayScene::Load()
 		{ 
 			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+			case SCENE_SECTION_QUAD: _ParseSection_QUAD(line); break;
 		}
 	}
 
@@ -234,18 +252,17 @@ void CPlayScene::Load()
 
 void CPlayScene::Update(DWORD dt)
 {
-	// We know that Jason is the first object in the list hence we won't add him into the colliable object list
-	// TO-DO: This is a "dirty" way, need a more organized way 
-
+	
+	/*vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();*/
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 1; i < objects.size(); i++)
 	{
-		coObjects.push_back(objects[i]);
+		 coObjects.push_back(objects[i]);
 	}
 
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		objects[i]->Update(dt, &coObjects);
+		 objects[i]->Update(dt, &coObjects);
 	}
 
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
