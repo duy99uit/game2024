@@ -17,7 +17,7 @@ enemies.txt
 0	120	140
 
 # SOPHIA
-101	100	100
+#101	100	100
 
 #COIN
 4	100	120
@@ -40,7 +40,7 @@ enemies.txt
 4	180	80
 
 #BlackWalker
-2	0	200
+#2	0	200
 
 
 

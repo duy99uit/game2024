@@ -253,18 +253,20 @@ void CPlayScene::Load()
 void CPlayScene::Update(DWORD dt)
 {
 	
-	/*vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();*/
+	vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
 	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
-	{
-		 coObjects.push_back(objects[i]);
-	}
 
-	for (size_t i = 0; i < objects.size(); i++)
-	{
-		 objects[i]->Update(dt, &coObjects);
-	}
+	//for (size_t i = 1; i < objects.size(); i++)
+	//{
+	//	 coObjects.push_back(objects[i]);
+	//}
 
+	//for (size_t i = 0; i < objects.size(); i++)
+	//{
+	//	 objects[i]->Update(dt, &coObjects);
+	//}
+	objects.insert(objects.end(), quad.begin(), quad.end());
+	coObjects.insert(coObjects.end(), quad.begin(), quad.end());
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
 	if (player == NULL) return; 
 
