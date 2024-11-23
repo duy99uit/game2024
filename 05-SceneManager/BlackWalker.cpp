@@ -5,6 +5,7 @@ CBlackWalker::CBlackWalker(float x, float y) :CGameObject(x, y)
 {
 	die_start = -1;
 	SetState(BLACKWALKER_STATE_WALKING_RIGHT);
+	aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
 }
 
 void CBlackWalker::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -37,22 +38,7 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CBlackWalker::Render()
 {
-	int aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
-	if (state == BLACKWALKER_STATE_DIE)
-	{
-		aniId = ID_ANI_BLACKWARKER_DIE;
-	}
-	if (vx < 0)
-	{
-		aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
-	}
-	if (vx >= 0)
-	{
-		aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
-	}
-
-
-
+	
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	/*RenderBoundingBox();*/
 }
@@ -64,16 +50,19 @@ void CBlackWalker::SetState(int state)
 	{
 	case BLACKWALKER_STATE_DIE:
 		die_start = GetTickCount64();
+		aniId = ID_ANI_BLACKWARKER_DIE;
 		vx = 0;
 		vy = 0;
 		ay = 0;
 		break;
 	case BLACKWALKER_STATE_WALKING_LEFT:
+		aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
 		vx = -BLACKWALKER_WALKING_SPEED;
 		nx = -1;
 		ax = -BLACKWALKER_WALKING_ACCELERATION;
 		break;
 	case BLACKWALKER_STATE_WALKING_RIGHT:
+		aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
 		vx = BLACKWALKER_WALKING_SPEED;
 		nx = 1;
 		ax = BLACKWALKER_WALKING_ACCELERATION;

@@ -6,6 +6,8 @@
 #include "Brick.h"
 #include "Jason.h"
 #include "BlackWalker.h"
+#include "FlyingBomb.h"
+#include "BeetleHead.h"
 #include "Sophia.h"
 //#include "Koopas.h"
 
