@@ -227,7 +227,7 @@ void CPlayScene::Load()
 
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
-		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		/*if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };*/
 		if (line == "[QUADTREE]") {
 			DebugOut(L"[INFO] vo day parse quad \n");
 			section = SCENE_SECTION_QUAD; continue;
@@ -240,7 +240,7 @@ void CPlayScene::Load()
 		switch (section)
 		{ 
 			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+	/*		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;*/
 			case SCENE_SECTION_QUAD: _ParseSection_QUAD(line); break;
 		}
 	}
