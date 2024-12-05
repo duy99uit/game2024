@@ -34,7 +34,7 @@ void CSophia::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-	isOnPlatform = false;
+	/*isOnPlatform = false;*/
 	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
 }
 
@@ -46,6 +46,7 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 	
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
+		DebugOut(L"CSophia::OnCollisionWith 1111");
 		vy = 0;
 		isOnPlatform = true;
 	}
@@ -53,9 +54,6 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 
 	}
-	/*vy = 0;
-	ay = 0;
-	isOnPlatform = true;*/
 }
 
 
@@ -114,12 +112,13 @@ void CSophia::SetState(int state)
 		vy = 0.0f;
 		break;
 	case SOPHIA_STATE_JUMP:
-		if (!isOnPlatform)
+		DebugOut(L"[WARNING] SOPHIA_STATE_JUMP  %f already exists\n", isOnPlatform);
+		if (isOnPlatform)
 		{
-			if (abs(this->vx) == SOPHIA_WALKING_SPEED)
-				vy = SOPHIA_JUMP_SPEED_Y;
+			if (abs(this->vy) == SOPHIA_WALKING_SPEED)
+				ay = -SOPHIA_GRAVITY;
 			else
-				vy = SOPHIA_JUMP_SPEED_Y;
+				ay = -SOPHIA_GRAVITY;
 		}
 		break;
 	}

@@ -45,7 +45,7 @@ public:
 		maxVx = 0.0f;
 		ax = 0.0f;
 	/*	ay = -SOPHIA_GRAVITY;*/
-		ay = SOPHIA_GRAVITY;
+		ay = -SOPHIA_GRAVITY;
 
 	/*	maxVx = 0.0f;*/
 		maxVy = 0.0f;
