@@ -1,12 +1,130 @@
+
+#include <algorithm>
+#include "debug.h"
+
+#include "Jason.h"
 #include "Sophia.h"
 #include "Game.h"
 
-CSophia::CSophia(float x, float y) :CGameObject(x, y)
+#include "BlackWalker.h"
+#include "Coin.h"
+#include "Portal.h"
+
+#include "Collision.h"
+
+void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	die_start = -1;
-	aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
-	SetState(SOPHIA_STATE_WALKING_RIGHT);
+	
+	vy += ay * dt;
+	vx += ax * dt;
+
+	if (abs(vx) > abs(maxVx)) vx = maxVx;
+
+	// reset untouchable timer if untouchable time has passed
+	if (GetTickCount64() - untouchable_start > SOPHIA_UNTOUCHABLE_TIME)
+	{
+		untouchable_start = 0;
+		untouchable = 0;
+	}
+
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
+
+void CSophia::OnNoCollision(DWORD dt)
+{
+	x += vx * dt;
+	y += vy * dt;
+	isOnPlatform = false;
+	//	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
+}
+
+void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	DebugOut(L"CSophia::OnCollisionWith");
+	ay = 0;
+	vy = 0;
+	
+	if (e->ny != 0 && e->obj->IsBlocking())
+	{
+		vy = 0;
+		isOnPlatform = true;
+	}
+	else
+	{
+
+	}
+	/*vy = 0;
+	ay = 0;
+	isOnPlatform = true;*/
+}
+
+
+
+void CSophia::Render()
+{
+	CAnimations* animations = CAnimations::GetInstance();
+
+	animations->Get(aniId)->Render(x, y);
+
+	/*RenderBoundingBox();*/
+
+	//DebugOutTitle(L"Coins: %d", coin);
+	DebugOutTitle(L"Blaster Master: %d");
+}
+
+
+void CSophia::SetState(int state)
+{
+	CGameObject::SetState(state);
+	switch (state)
+	{
+	case SOPHIA_STATE_DIE:
+		vx = 0;
+		vy = 0;
+		ay = 0;
+		break;
+	case SOPHIA_STATE_WALKING_LEFT:
+		aniId = ID_ANI_SOPHIA_WALKING_LEFT;
+		maxVx = -SOPHIA_WALKING_SPEED;
+		vx = -SOPHIA_WALKING_SPEED;
+		ax = -SOPHIA_WALKING_ACCELERATION;
+		nx = -1;
+		break;
+	case SOPHIA_STATE_WALKING_RIGHT:
+		maxVx = SOPHIA_WALKING_SPEED;
+		aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
+		vx = SOPHIA_WALKING_SPEED;
+		ax = SOPHIA_WALKING_ACCELERATION;
+		nx = 1;
+		break;
+	case SOPHIA_STATE_IDLE_LEFT:
+		aniId = ID_ANI_SOPHIA_WALKING_LEFT;
+		nx = -1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case SOPHIA_STATE_IDLE_RIGHT:
+		aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
+		nx = 1;
+		ax = 0.0f;
+		vx = 0.0f;
+		ay = 0.0f;
+		vy = 0.0f;
+		break;
+	case SOPHIA_STATE_JUMP:
+		if (!isOnPlatform)
+		{
+			if (abs(this->vx) == SOPHIA_WALKING_SPEED)
+				vy = SOPHIA_JUMP_SPEED_Y;
+			else
+				vy = SOPHIA_JUMP_SPEED_Y;
+		}
+		break;
+	}
+}
+
 
 void CSophia::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -16,68 +134,51 @@ void CSophia::GetBoundingBox(float& left, float& top, float& right, float& botto
 	bottom = top + SOPHIA_BBOX_HEIGHT;
 }
 
-void CSophia::OnNoCollision(DWORD dt)
+void CSophia::SetLevel(int l)
 {
-};
+	level = l;
+}
 
-void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+
+
+
+void CSophia::HandleKeyState()
 {
-	CGame* game = CGame::GetInstance();
-	float vW = game->GetBackBufferWidth();
-	x += vx * dt;
-	if (x >= vW) {
-		SetState(SOPHIA_STATE_WALKING_LEFT);
+	LPGAME game = CGame::GetInstance();
+}
+
+void CSophia::HandleKeyUp(int KeyCode)
+{
+	switch (KeyCode)
+	{
+	case DIK_LEFT:
+
+		SetState(SOPHIA_STATE_IDLE_LEFT);
+		break;
+	case DIK_RIGHT:
+
+		SetState(SOPHIA_STATE_IDLE_RIGHT);
+		break;
 	}
-	else if (x <= 0) {
+
+
+}
+void CSophia::HandleKeyDown(int KeyCode)
+
+{
+	switch (KeyCode)
+	{
+	case DIK_RIGHT:
 		SetState(SOPHIA_STATE_WALKING_RIGHT);
+		break;
+	case DIK_LEFT:
+		SetState(SOPHIA_STATE_WALKING_LEFT);
+		break;
+	case DIK_S:
+		SetState(SOPHIA_STATE_JUMP);
+		break;
 	}
 
-	CGameObject::Update(dt, coObjects);
 }
 
 
-void CSophia::Render()
-{
-	int aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
-	if (state == SOPHIA_STATE_DIE)
-	{
-		aniId = ID_ANI_SOPHIA_DIE;
-	}
-	if (vx < 0)
-	{
-		aniId = ID_ANI_SOPHIA_WALKING_LEFT;
-	}
-	if (vx >= 0)
-	{
-		aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
-	}
-
-
-
-	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	/*RenderBoundingBox();*/
-}
-
-void CSophia::SetState(int state)
-{
-	CGameObject::SetState(state);
-	switch (state)
-	{
-	case SOPHIA_STATE_DIE:
-		die_start = GetTickCount64();
-		vx = 0;
-		vy = 0;
-		ay = 0;
-		break;
-	case SOPHIA_STATE_WALKING_LEFT:
-		vx = -SOPHIA_WALKING_SPEED;
-		nx = -1;
-		ax = -SOPHIA_WALKING_ACCELERATION;
-		break;
-	case SOPHIA_STATE_WALKING_RIGHT:
-		vx = SOPHIA_WALKING_SPEED;
-		nx = 1;
-		ax = SOPHIA_WALKING_ACCELERATION;
-		break;
-	}
-}

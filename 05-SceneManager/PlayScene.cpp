@@ -111,15 +111,17 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] JASON object was created before!\n");
 			return;
 		}
-		obj = new CJason(x,y); 
-		player = (CJason*)obj;  
+		/*obj = new CJason(x,y); 
+		player = (CJason*)obj;  */
+		obj = new CSophia(x, y);
+		player = (CSophia*)obj;
 
 		DebugOut(L"[INFO] Player object has been created! %d\n",x,y);
 		break;
 	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
 	case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
 	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;
-	case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;
+	/*case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
