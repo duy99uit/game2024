@@ -121,7 +121,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
-	/*case OBJECT_TYPE_PLATFORM:
+	case OBJECT_TYPE_PLATFORM:
 	{
 
 		float cell_width = (float)atof(tokens[3].c_str());
@@ -138,7 +138,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		);
 
 		break;
-	}*/
+	}
 
 	/*case OBJECT_TYPE_PORTAL:
 	{
