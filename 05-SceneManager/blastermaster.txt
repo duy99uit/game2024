@@ -22,3 +22,4 @@ height	240
 31	textures\sophia.png
 32	textures\JasonSmall.png
 50	textures\map11.png
+500	textures\area1.png
