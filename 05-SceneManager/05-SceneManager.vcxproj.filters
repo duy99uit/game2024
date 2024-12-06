@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{d76c4fa0-bb66-4850-b01b-194d26532239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Quadtree">
+      <UniqueIdentifier>{c301acaf-be9f-4ec1-91e2-cccd76c79d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Quadtree">
+      <UniqueIdentifier>{c9ae9f02-6487-451c-a317-98058333f54d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -131,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="BeetleHead.cpp">
       <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Source Files\Quadtree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,5 +227,16 @@
     <ClInclude Include="PlatformWalker.h">
       <Filter>Header Files\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Header Files\GameResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Header Files\Quadtree</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="scene0005.txt" />
+    <Text Include="quadtree.txt" />
+    <Text Include="blastermaster.txt" />
   </ItemGroup>
 </Project>
