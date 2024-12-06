@@ -13,16 +13,7 @@ sophia.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # JASON
-0	50	140
-
-# SOPHIA
-#101	100	100
-
-#COIN
-
-
-#BlackWalker
-2	30	200
+0	100	100
 
 
 

@@ -77,7 +77,7 @@ void Quadtree::_ParseSection_OBJECTS_QT(string line)
 	switch (object_type)
 	{
 	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
-	//case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;
+	case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;
     case OBJECT_TYPE_PLATFORM:
     {
 
