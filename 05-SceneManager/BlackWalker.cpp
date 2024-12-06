@@ -47,7 +47,7 @@ void CBlackWalker::Render()
 {
 	
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	/*RenderBoundingBox();*/
+	RenderBoundingBox();
 }
 
 void CBlackWalker::SetState(int state)
@@ -75,4 +75,9 @@ void CBlackWalker::SetState(int state)
 		ax = BLACKWALKER_WALKING_ACCELERATION;
 		break;
 	}
+}
+
+int CBlackWalker::IsDirectionColliable(float nx, float ny)
+{
+	return 1;
 }

@@ -82,7 +82,7 @@ void CSophia::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	/*RenderBoundingBox();*/
+	RenderBoundingBox();
 
 	//DebugOutTitle(L"Coins: %d", coin);
 	DebugOutTitle(L"Blaster Master: %d");

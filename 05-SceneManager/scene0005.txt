@@ -14,7 +14,7 @@ enemies.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # JASON
-0	120	100
+0	20	100
 
 # SOPHIA
 101	100	100
@@ -40,7 +40,7 @@ enemies.txt
 4	180	80
 
 #BlackWalker
-2	200	46
+2	100	46
 
 #Flying Bomb
 #3	0	220
