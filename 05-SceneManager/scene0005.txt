@@ -97,10 +97,10 @@ enemies.txt
 2	200	110
 
 #Flying Bomb
-#3	0	220
+3	0	220
 
 #BeetleHead
-#24	0	220
+24	0	220
 
 
 
