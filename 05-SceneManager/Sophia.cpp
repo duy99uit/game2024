@@ -39,7 +39,7 @@ void CSophia::OnNoCollision(DWORD dt)
 
 void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	DebugOut(L"CSophia::OnCollisionWith");
+	DebugOut(L"CSophia::OnCollisionWith 11111");
 	
 	
 	//if (e->ny != 0 && e->obj->IsBlocking())
@@ -61,15 +61,11 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 {
 	CBlackWalker* blackWalker = dynamic_cast<CBlackWalker*>(e->obj);
-
+	DebugOut(L"CSophia::OnCollisionWith 22223");
 	// jump on top >> kill Goomba and deflect a bit 
-	if (e->nx > 0)
+	if (e->nx != 0)
 	{
-		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
-		{
-			blackWalker->SetState(BLACKWALKER_STATE_DIE);
-			
-		}
+		blackWalker->SetState(BLACKWALKER_STATE_DIE);
 	}
 }
 

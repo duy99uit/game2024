@@ -37,7 +37,8 @@ protected:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
-	int IsDirectionColliable(float nx, float ny);
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
+	
 
 public:
 	CBlackWalker(float x, float y);

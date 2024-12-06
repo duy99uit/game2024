@@ -18,6 +18,8 @@ void CBlackWalker::GetBoundingBox(float& left, float& top, float& right, float& 
 
 void CBlackWalker::OnNoCollision(DWORD dt)
 {
+	//x += vx * dt;
+	//y += vy * dt;
 };
 
 void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -32,14 +34,29 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(BLACKWALKER_STATE_WALKING_RIGHT);
 	}*/
 
-	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
+	/*if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
 	{
 		isDeleted = true;
 		return;
-	}
+	}*/
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
+}
+
+void CBlackWalker::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (!e->obj->IsBlocking()) return;
+	if (dynamic_cast<CBlackWalker*>(e->obj)) return;
+
+	/*if (e->ny != 0)
+	{
+		vy = 0;
+	}
+	else if (e->nx != 0)
+	{
+		vx = -vx;
+	}*/
 }
 
 
@@ -75,9 +92,4 @@ void CBlackWalker::SetState(int state)
 		ax = BLACKWALKER_WALKING_ACCELERATION;
 		break;
 	}
-}
-
-int CBlackWalker::IsDirectionColliable(float nx, float ny)
-{
-	return 1;
 }
