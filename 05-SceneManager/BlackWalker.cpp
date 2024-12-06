@@ -24,15 +24,22 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	CGame* game = CGame::GetInstance();
 	float vW = game->GetBackBufferWidth();
-	x += vx * dt;
+	/*x += vx * dt;
 	if (x >= vW) {
 		SetState(BLACKWALKER_STATE_WALKING_LEFT);
 	}
 	else if (x <= 0) {
 		SetState(BLACKWALKER_STATE_WALKING_RIGHT);
+	}*/
+
+	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
+	{
+		isDeleted = true;
+		return;
 	}
 
 	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 
@@ -50,7 +57,7 @@ void CBlackWalker::SetState(int state)
 	{
 	case BLACKWALKER_STATE_DIE:
 		die_start = GetTickCount64();
-		aniId = ID_ANI_BLACKWARKER_DIE;
+		aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
 		vx = 0;
 		vy = 0;
 		ay = 0;

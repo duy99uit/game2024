@@ -38,21 +38,17 @@ class CSophia : public CGameObject
 	int untouchable;
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
+	void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
 
 public:
 	CSophia(float x, float y) : CGameObject(x, y)
 	{
 		maxVx = 0.0f;
 		ax = 0.0f;
-	/*	ay = -SOPHIA_GRAVITY;*/
-		ay = -SOPHIA_GRAVITY;
-
-	/*	maxVx = 0.0f;*/
+		ay = SOPHIA_GRAVITY;
 		maxVy = 0.0f;
-	/*	ax = 0.0f;
-		ay = 0.0f;*/
-		vy = 0.00f;
-		vx = 0.00f;
+		vy = -SOPHIA_JUMP_SPEED_Y;
+		vx = 0.08f;
 		level = 1;
 		untouchable = 0;
 		untouchable_start = -1;
@@ -60,6 +56,7 @@ public:
 		// init state is idle right
 		state = SOPHIA_STATE_IDLE_RIGHT;
 		aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
+		
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();

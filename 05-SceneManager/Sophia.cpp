@@ -11,21 +11,20 @@
 #include "Portal.h"
 
 #include "Collision.h"
+#include "BlackWalker.h"
 
 void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
-	vy += ay * dt;
-	vx += ax * dt;
+	/*vy += ay * dt;
+	vx += ax * dt;*/
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
-
-	// reset untouchable timer if untouchable time has passed
-	if (GetTickCount64() - untouchable_start > SOPHIA_UNTOUCHABLE_TIME)
-	{
-		untouchable_start = 0;
-		untouchable = 0;
+	if (vy > 0) {
+		/*vy -= SOPHIA_JUMP_SPEED_Y/3;*/
 	}
+
+
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -41,20 +40,39 @@ void CSophia::OnNoCollision(DWORD dt)
 void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	DebugOut(L"CSophia::OnCollisionWith");
-	ay = 0;
-	vy = 0;
 	
-	if (e->ny != 0 && e->obj->IsBlocking())
-	{
-		DebugOut(L"CSophia::OnCollisionWith 1111");
-		vy = 0;
-		isOnPlatform = true;
-	}
-	else
-	{
+	
+	//if (e->ny != 0 && e->obj->IsBlocking())
+	//{
+	//	DebugOut(L"CSophia::OnCollisionWith 1111");
+	//	/*vy = 0;*/
+	//	/*isOnPlatform = true;*/
+	//}
+	//else
+	//{
 
+	//}
+
+	if (dynamic_cast<CBlackWalker*>(e->obj)) {
+		OnCollisionWithBlackWalker(e);
+	}
+		
+}
+void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
+{
+	CBlackWalker* blackWalker = dynamic_cast<CBlackWalker*>(e->obj);
+
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->nx > 0)
+	{
+		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
+		{
+			blackWalker->SetState(BLACKWALKER_STATE_DIE);
+			
+		}
 	}
 }
+
 
 
 
@@ -112,14 +130,14 @@ void CSophia::SetState(int state)
 		vy = 0.0f;
 		break;
 	case SOPHIA_STATE_JUMP:
-		DebugOut(L"[WARNING] SOPHIA_STATE_JUMP  %f already exists\n", isOnPlatform);
+		/*DebugOut(L"[WARNING] SOPHIA_STATE_JUMP  %f already exists\n", isOnPlatform);
 		if (isOnPlatform)
 		{
 			if (abs(this->vy) == SOPHIA_WALKING_SPEED)
 				ay = -SOPHIA_GRAVITY;
 			else
-				ay = -SOPHIA_GRAVITY;
-		}
+				vy = SOPHIA_JUMP_SPEED_Y;
+		}*/
 		break;
 	}
 }
