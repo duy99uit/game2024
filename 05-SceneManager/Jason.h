@@ -13,7 +13,7 @@
 #define BIG_JASON_STATE_DIE				-10
 #define BIG_JASON_STATE_IDLE			0
 #define BIG_JASON_STATE_IDLE_LEFT			1
-#define BIG_JASON_STATE_IDLE_RIGHT			2
+#define BIG_JASON_STATE_IDLE_RIGHT		2
 #define BIG_JASON_STATE_IDLE_UP			3
 #define BIG_JASON_STATE_IDLE_DOWN			4
 #define BIG_JASON_STATE_WALKING_RIGHT	100
@@ -112,11 +112,12 @@ public:
 		// init state is idle right
 		state = BIG_JASON_STATE_IDLE_RIGHT;
 		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		DebugOut(L"Jason create >>>>> " );
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);
-	int getState() { return state; };
+	int  getState() { return state; };
 	void HandleKeyState();
 	void HandleKeyUp(int KeyCode);
 	void HandleKeyDown(int KeyCode);

@@ -171,4 +171,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Quadtree.txt" />
+    <Text Include="sophia.txt" />
+    <Text Include="blastermaster.txt" />
+    <Text Include="sceneQuadtree.txt" />
+  </ItemGroup>
 </Project>

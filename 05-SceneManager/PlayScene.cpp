@@ -116,12 +116,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created! %d\n",x,y);
 		break;
-	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
-	case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;
+	/*case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
+	case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
 
-	case OBJECT_TYPE_PLATFORM:
+	/*case OBJECT_TYPE_PLATFORM:
 	{
 
 		float cell_width = (float)atof(tokens[3].c_str());
@@ -138,7 +138,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		);
 
 		break;
-	}
+	}*/
 
 	/*case OBJECT_TYPE_PORTAL:
 	{
@@ -227,7 +227,7 @@ void CPlayScene::Load()
 
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
-		/*if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };*/
+		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
 		if (line == "[QUADTREE]") {
 			DebugOut(L"[INFO] vo day parse quad \n");
 			section = SCENE_SECTION_QUAD; continue;
@@ -240,7 +240,7 @@ void CPlayScene::Load()
 		switch (section)
 		{ 
 			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
-	/*		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;*/
+			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 			case SCENE_SECTION_QUAD: _ParseSection_QUAD(line); break;
 		}
 	}
@@ -256,15 +256,15 @@ void CPlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
 	vector<LPGAMEOBJECT> coObjects;
 
-	//for (size_t i = 1; i < objects.size(); i++)
-	//{
-	//	 coObjects.push_back(objects[i]);
-	//}
+	for (size_t i = 1; i < objects.size(); i++)
+	{
+		 coObjects.push_back(objects[i]);
+	}
 
-	//for (size_t i = 0; i < objects.size(); i++)
-	//{
-	//	 objects[i]->Update(dt, &coObjects);
-	//}
+	for (size_t i = 0; i < objects.size(); i++)
+	{
+		 objects[i]->Update(dt, &coObjects);
+	}
 	objects.insert(objects.end(), quad.begin(), quad.end());
 	coObjects.insert(coObjects.end(), quad.begin(), quad.end());
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
