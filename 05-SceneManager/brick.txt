@@ -1,6 +1,20 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
-20001	17	0	32	15	50
+// da co
+20001	20	0	35	16	500
+20002	20	0	37	16	500
+20003	60	0	77	16	500
+// da vs dat 1
+20004	0	20	17	35	500
+20005	19	20	38	37	500
+20006	41	20	56	35	500
+// da vs dat  2
+20007	60	21	77	35	500
+20008	60	41	77	56	500
+// co vang
+20009	81	141	96	156	500
+// da be 1
+20010	81	0	96	16	500
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]

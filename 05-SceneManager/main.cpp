@@ -51,7 +51,7 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 
 
 #define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 280
 // max my screen
 //#define SCREEN_WIDTH 1400
 //#define SCREEN_HEIGHT 700
