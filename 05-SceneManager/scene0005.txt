@@ -22,7 +22,7 @@ enemies.txt
 
 
 # JASON
-0	100	200
+0	100	300
 
 # SOPHIA
 101	100	100
