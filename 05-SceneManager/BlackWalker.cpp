@@ -4,8 +4,8 @@
 CBlackWalker::CBlackWalker(float x, float y) :CGameObject(x, y)
 {
 	die_start = -1;
-	SetState(BLACKWALKER_STATE_WALKING_RIGHT);
-	aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
+	SetState(BLACKWALKER_STATE_WALKING_LEFT);
+	aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
 }
 
 void CBlackWalker::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -18,8 +18,8 @@ void CBlackWalker::GetBoundingBox(float& left, float& top, float& right, float& 
 
 void CBlackWalker::OnNoCollision(DWORD dt)
 {
-	//x += vx * dt;
-	//y += vy * dt;
+	x += vx * dt;
+	y += vy * dt;
 };
 
 void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -34,13 +34,13 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(BLACKWALKER_STATE_WALKING_RIGHT);
 	}*/
 
-	/*if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
+	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
 	{
 		isDeleted = true;
 		return;
-	}*/
+	}
 
-	CGameObject::Update(dt, coObjects);
+	/*CGameObject::Update(dt, coObjects);*/
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -48,15 +48,6 @@ void CBlackWalker::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CBlackWalker*>(e->obj)) return;
-
-	/*if (e->ny != 0)
-	{
-		vy = 0;
-	}
-	else if (e->nx != 0)
-	{
-		vx = -vx;
-	}*/
 }
 
 
@@ -74,7 +65,7 @@ void CBlackWalker::SetState(int state)
 	{
 	case BLACKWALKER_STATE_DIE:
 		die_start = GetTickCount64();
-		aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
+	/*	aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;*/
 		vx = 0;
 		vy = 0;
 		ay = 0;
@@ -83,11 +74,11 @@ void CBlackWalker::SetState(int state)
 		aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;
 		vx = -BLACKWALKER_WALKING_SPEED;
 		nx = -1;
-		ax = -BLACKWALKER_WALKING_ACCELERATION;
+		ax = -0.05f;
 		break;
 	case BLACKWALKER_STATE_WALKING_RIGHT:
 		aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
-		vx = BLACKWALKER_WALKING_SPEED;
+		vx = BLACKWALKER_WALKING_SPEED/10;
 		nx = 1;
 		ax = BLACKWALKER_WALKING_ACCELERATION;
 		break;

@@ -16,8 +16,8 @@
 void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
-	/*vy += ay * dt;
-	vx += ax * dt;*/
+	vy += -ay * dt;
+	vx += ax * dt;
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
 	if (vy > 0) {
@@ -65,7 +65,11 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->nx != 0)
 	{
-		blackWalker->SetState(BLACKWALKER_STATE_DIE);
+		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
+		{
+			blackWalker->SetState(BLACKWALKER_STATE_DIE);
+
+		}
 	}
 }
 
@@ -126,14 +130,14 @@ void CSophia::SetState(int state)
 		vy = 0.0f;
 		break;
 	case SOPHIA_STATE_JUMP:
-		/*DebugOut(L"[WARNING] SOPHIA_STATE_JUMP  %f already exists\n", isOnPlatform);
+		DebugOut(L"[WARNING] SOPHIA_STATE_JUMP  %f already exists\n", isOnPlatform);
 		if (isOnPlatform)
 		{
 			if (abs(this->vy) == SOPHIA_WALKING_SPEED)
 				ay = -SOPHIA_GRAVITY;
 			else
 				vy = SOPHIA_JUMP_SPEED_Y;
-		}*/
+		}
 		break;
 	}
 }
