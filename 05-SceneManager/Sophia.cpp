@@ -100,6 +100,20 @@ void CSophia::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
+	case SOPHIA_STATE_OPEN_LEFT:
+		aniId = ID_ANI_SOPHIA_OPEN_LEFT;
+		vx = 0;
+		vy = 0;
+		ay = 0;
+		nx = -1;
+		break;
+	case SOPHIA_STATE_OPEN_RIGHT:
+		aniId = ID_ANI_SOPHIA_OPEN_RIGHT;
+		vx = 0;
+		vy = 0;
+		ay = 0;
+		nx = 1;
+		break;
 	case SOPHIA_STATE_WALKING_LEFT:
 		aniId = ID_ANI_SOPHIA_WALKING_LEFT;
 		maxVx = -SOPHIA_WALKING_SPEED;
@@ -146,6 +160,18 @@ void CSophia::SetState(int state)
 		ay = 0.0025f;
 		vy = 0.001f;
 		break;
+	case SOPHIA_STATE_SHOOT_TOP_LEFT:
+		aniId = ID_ANI_SOPHIA_SHOOT_TOP_LEFT;
+		break;
+	case SOPHIA_STATE_SHOOT_TOP_RIGHT:
+		aniId = ID_ANI_SOPHIA_SHOOT_TOP_RIGHT;
+		break;
+	case SOPHIA_STATE_SHOOT_DIAGONAL_LEFT:
+		aniId = ID_ANI_SOPHIA_SHOOT_DIAGONAL_LEFT;
+		break;
+	case SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT:
+		aniId = ID_ANI_SOPHIA_SHOOT_DIAGONAL_RIGHT;
+		break;
 	}
 }
 
@@ -173,6 +199,7 @@ void CSophia::HandleKeyState()
 
 void CSophia::HandleKeyUp(int KeyCode)
 {
+	boolean isLeftDirection = state == SOPHIA_STATE_WALKING_LEFT || state == SOPHIA_STATE_IDLE_LEFT || state == SOPHIA_STATE_FALLING_LEFT;
 	switch (KeyCode)
 	{
 	case DIK_LEFT:
@@ -201,6 +228,7 @@ void CSophia::HandleKeyUp(int KeyCode)
 void CSophia::HandleKeyDown(int KeyCode)
 
 {
+	boolean isLeftDirection = state == SOPHIA_STATE_WALKING_LEFT || state == SOPHIA_STATE_IDLE_LEFT || state == SOPHIA_STATE_FALLING_LEFT;
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
@@ -213,15 +241,40 @@ void CSophia::HandleKeyDown(int KeyCode)
 		break;
 	case DIK_S:
 		if (isOnPlatform) {
-			if (state == SOPHIA_STATE_WALKING_RIGHT || state == SOPHIA_STATE_IDLE_RIGHT || state == SOPHIA_STATE_FALLING_RIGHT) {
-				SetState(SOPHIA_STATE_JUMP_RIGHT);
+			if (isLeftDirection) {
+				SetState(SOPHIA_STATE_JUMP_LEFT);
 			}
 			else {
-				SetState(SOPHIA_STATE_JUMP_LEFT);
+				SetState(SOPHIA_STATE_JUMP_RIGHT);
 			}
 			
 		}
 		
+		break;
+	case DIK_Z:
+
+		if (isLeftDirection) {
+			SetState(SOPHIA_STATE_OPEN_LEFT);
+		}
+		else {
+			SetState(SOPHIA_STATE_OPEN_RIGHT);
+		}
+		break;
+	case DIK_X:
+		if (isLeftDirection) {
+			SetState(SOPHIA_STATE_SHOOT_TOP_LEFT);
+		}
+		else {
+			SetState(SOPHIA_STATE_SHOOT_TOP_RIGHT);
+		}
+		break;
+	case DIK_C:
+		if (isLeftDirection) {
+			SetState(SOPHIA_STATE_SHOOT_DIAGONAL_LEFT);
+		}
+		else {
+			SetState(SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT);
+		}
 		break;
 	}
 
