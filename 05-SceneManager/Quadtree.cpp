@@ -9,6 +9,7 @@
 #include "Textures.h"
 #include "Sprites.h"
 #include "Platform.h"
+#include "Background.h"
 
 #include "SampleKeyEventHandler.h"
 Quadtree::Quadtree()
@@ -98,13 +99,20 @@ void Quadtree::_ParseSection_OBJECTS_QT(string line)
     }
     break;
 
+    case OBJECT_TYPE_BACKGROUD:
+
+        obj = new CBackground(x, y);
+
+        DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
+        break;
+
 
     default:
         DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
         return;
     }
 
-    obj->SetPosition(x, y);;
+    obj->SetPosition(x, y);
 
     this->object.push_back(obj);
 

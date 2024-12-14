@@ -9,6 +9,7 @@
 #include "Portal.h"
 #include "Coin.h"
 #include "Platform.h"
+#include "Background.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -116,7 +117,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
 		break;
-		break;
+
+
 
 
 	default:

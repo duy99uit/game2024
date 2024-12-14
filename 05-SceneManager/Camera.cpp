@@ -16,15 +16,17 @@ void Camera::Update(float player_x, float player_y)
 
 
 	CGame* game = CGame::GetInstance();
-	if (player_x > width / 2 and player_x < width + 100 ) {
-		cam_x = player_x - width / 2;
-	}
+	cam_x = player_x - width / 2;
+	cam_y = player_y + height / 2;
+	//if (player_x > width / 2 and player_x < width + 100 ) {
+	//	cam_x = player_x - width / 2;
+	//}
 
-	//DebugOut(L"[WARNING]  playser y  %f already exists\n", player_y);
+	////DebugOut(L"[WARNING]  playser y  %f already exists\n", player_y);
 
-	if  (player_y < (height - 30) and player_y > 30) {
-		cam_y = player_y + height / 2;
-	}
+	//if  (player_y < (height - 30) and player_y > 30) {
+	//	cam_y = player_y + height / 2;
+	//}
 
 
 	CGame::GetInstance()->SetCamPos(cam_x, cam_y);
