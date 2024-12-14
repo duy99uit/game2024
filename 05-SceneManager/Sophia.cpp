@@ -126,11 +126,23 @@ void CSophia::SetState(int state)
 		ax = 0.0f;
 		vx = 0.0f;
 		break;
-	case SOPHIA_STATE_JUMP:
+	case SOPHIA_STATE_JUMP_RIGHT:
+		aniId = ID_ANI_SOPHIA_JUMP_RIGHT;
 		ay = -0.0025f;
 		vy = -0.001f;
 		break;
-	case SOPHIA_STATE_FALLING:
+	case SOPHIA_STATE_JUMP_LEFT:
+		aniId = ID_ANI_SOPHIA_JUMP_LEFT;
+		ay = -0.0025f;
+		vy = -0.001f;
+		break;
+	case SOPHIA_STATE_FALLING_LEFT:
+		aniId = ID_ANI_SOPHIA_FALLING_LEFT;
+		ay = 0.0025f;
+		vy = 0.001f;
+		break;
+	case SOPHIA_STATE_FALLING_RIGHT:
+		aniId = ID_ANI_SOPHIA_FALLING_RIGHT;
 		ay = 0.0025f;
 		vy = 0.001f;
 		break;
@@ -172,8 +184,13 @@ void CSophia::HandleKeyUp(int KeyCode)
 		SetState(SOPHIA_STATE_IDLE_RIGHT);
 		break;
 	case DIK_S:
-
-		SetState(SOPHIA_STATE_FALLING);
+		if (state == SOPHIA_STATE_JUMP_RIGHT) {
+			SetState(SOPHIA_STATE_FALLING_RIGHT);
+		}
+		else {
+			SetState(SOPHIA_STATE_FALLING_LEFT);
+		}
+		
 		isOnPlatform = false;
 		break;
 	}
@@ -196,7 +213,13 @@ void CSophia::HandleKeyDown(int KeyCode)
 		break;
 	case DIK_S:
 		if (isOnPlatform) {
-			SetState(SOPHIA_STATE_JUMP);
+			if (state == SOPHIA_STATE_WALKING_RIGHT || state == SOPHIA_STATE_IDLE_RIGHT || state == SOPHIA_STATE_FALLING_RIGHT) {
+				SetState(SOPHIA_STATE_JUMP_RIGHT);
+			}
+			else {
+				SetState(SOPHIA_STATE_JUMP_LEFT);
+			}
+			
 		}
 		
 		break;
