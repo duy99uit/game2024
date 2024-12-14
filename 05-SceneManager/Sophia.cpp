@@ -152,12 +152,12 @@ void CSophia::SetState(int state)
 		break;
 	case SOPHIA_STATE_FALLING_LEFT:
 		aniId = ID_ANI_SOPHIA_FALLING_LEFT;
-		ay = 0.0025f;
+		ay = 0.0025f/3;
 		vy = 0.001f;
 		break;
 	case SOPHIA_STATE_FALLING_RIGHT:
 		aniId = ID_ANI_SOPHIA_FALLING_RIGHT;
-		ay = 0.0025f;
+		ay = 0.0025f/3;
 		vy = 0.001f;
 		break;
 	case SOPHIA_STATE_SHOOT_TOP_LEFT:
