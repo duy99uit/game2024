@@ -7,6 +7,7 @@ coin.txt
 cloud.txt
 brick.txt
 enemies.txt
+bullet.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -26,6 +27,9 @@ enemies.txt
 
 # SOPHIA
 101	100	100
+
+# CHARACTER BULLET
+#102	100	100
 
 #COIN
 4	100	120

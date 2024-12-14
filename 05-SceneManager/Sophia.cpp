@@ -12,6 +12,7 @@
 
 #include "Collision.h"
 #include "BlackWalker.h"
+#include "PlayScene.h"
 
 void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -276,8 +277,19 @@ void CSophia::HandleKeyDown(int KeyCode)
 			SetState(SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT);
 		}
 		break;
+	case DIK_V:
+
+		Shoot();
+		break;
 	}
 
 }
+
+void CSophia::Shoot() {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	this->bullet = new SophiaBullet(x + SOPHIA_BBOX_WIDTH/2, y+ SOPHIA_BBOX_HEIGHT/4);
+	currentScene->AddObject(bullet);
+}
+
 
 

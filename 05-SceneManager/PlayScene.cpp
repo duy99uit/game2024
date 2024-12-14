@@ -121,6 +121,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
 	case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
 	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;
+	case OBJECT_TYPE_CHARACTER_BULLET: obj = new SophiaBullet (x, y); break;
 	/*case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/

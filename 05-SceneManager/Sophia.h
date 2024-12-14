@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "SophiaBullet.h"
 
 #define SOPHIA_GRAVITY 0.002f
 #define SOPHIA_WALKING_SPEED 0.08f
@@ -59,6 +60,7 @@ class CSophia : public CGameObject
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
 	void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+	SophiaBullet* bullet = NULL;
 
 public:
 	CSophia(float x, float y) : CGameObject(x, y)
@@ -100,4 +102,5 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void Shoot();
 };
