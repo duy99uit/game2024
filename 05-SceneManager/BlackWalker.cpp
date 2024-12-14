@@ -34,7 +34,7 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		SetState(BLACKWALKER_STATE_WALKING_RIGHT);
 	}*/
 
-	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT))
+	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT/3))
 	{
 		isDeleted = true;
 		return;

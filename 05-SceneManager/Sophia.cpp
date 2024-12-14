@@ -18,6 +18,7 @@ void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	vy += -ay * dt;
 	vx += ax * dt;
+	/*isOnPlatform = true;*/
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
 	if (vy > 0) {
@@ -42,12 +43,12 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 	DebugOut(L"CSophia::OnCollisionWith 11111");
 	
 	
-	//if (e->ny != 0 && e->obj->IsBlocking())
-	//{
-	//	DebugOut(L"CSophia::OnCollisionWith 1111");
-	//	/*vy = 0;*/
-	//	/*isOnPlatform = true;*/
-	//}
+	if (e->ny != 0 && e->obj->IsBlocking())
+	{
+		DebugOut(L"CSophia::OnCollisionWith 1111");
+		vy = 0;
+		isOnPlatform = true;
+	}
 	//else
 	//{
 
@@ -62,7 +63,7 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 {
 	CBlackWalker* blackWalker = dynamic_cast<CBlackWalker*>(e->obj);
 	DebugOut(L"CSophia::OnCollisionWith 22223");
-	if (e->nx != 0)
+	if (e->nx != 0 || e-> ny !=0)
 	{
 		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
 		{
@@ -70,6 +71,7 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 
 		}
 	}
+	isOnPlatform = true;
 }
 
 
@@ -117,18 +119,20 @@ void CSophia::SetState(int state)
 		nx = -1;
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = 0.0f;
-		vy = 0.0f;
 		break;
 	case SOPHIA_STATE_IDLE_RIGHT:
 		aniId = ID_ANI_SOPHIA_WALKING_RIGHT;
 		nx = 1;
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = 0.0f;
-		vy = 0.0f;
 		break;
 	case SOPHIA_STATE_JUMP:
+		ay = -0.0025f;
+		vy = -0.001f;
+		break;
+	case SOPHIA_STATE_FALLING:
+		ay = 0.0025f;
+		vy = 0.001f;
 		break;
 	}
 }
@@ -167,7 +171,13 @@ void CSophia::HandleKeyUp(int KeyCode)
 
 		SetState(SOPHIA_STATE_IDLE_RIGHT);
 		break;
+	case DIK_S:
+
+		SetState(SOPHIA_STATE_FALLING);
+		isOnPlatform = false;
+		break;
 	}
+	
 
 
 }
@@ -177,13 +187,18 @@ void CSophia::HandleKeyDown(int KeyCode)
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
+		
 		SetState(SOPHIA_STATE_WALKING_RIGHT);
 		break;
 	case DIK_LEFT:
+		
 		SetState(SOPHIA_STATE_WALKING_LEFT);
 		break;
 	case DIK_S:
-		SetState(SOPHIA_STATE_JUMP);
+		if (isOnPlatform) {
+			SetState(SOPHIA_STATE_JUMP);
+		}
+		
 		break;
 	}
 
