@@ -2,15 +2,15 @@
 #include "Sophia.h"
 #include "PlayScene.h"
 
-SophiaBullet::SophiaBullet(float bx, float by, bool up, bool right) {
 
-}
-SophiaBullet::SophiaBullet(float x, float y) :CGameObject(x, y)
+SophiaBullet::SophiaBullet(float x, float y, float vx, float vy) :CGameObject(x, y, vx, vy)
 {
 	/*SetState(BLACKWALKER_STATE_WALKING_LEFT);*/
-	aniId = BULLET_ANI_SET_ID;
-	vx = 0.05f;
+	aniId = BULLET_MOVING_ANI;
+	/*vx = BULLET_SPEED_X;*/
 	/*vy = 0.09f;*/
+	vx = vx;
+	vy = vy;
 }
 
 void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)

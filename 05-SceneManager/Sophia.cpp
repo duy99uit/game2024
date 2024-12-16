@@ -200,7 +200,7 @@ void CSophia::HandleKeyState()
 
 void CSophia::HandleKeyUp(int KeyCode)
 {
-	boolean isLeftDirection = state == SOPHIA_STATE_WALKING_LEFT || state == SOPHIA_STATE_IDLE_LEFT || state == SOPHIA_STATE_FALLING_LEFT;
+	boolean isLeftDirection = nx < 0;
 	switch (KeyCode)
 	{
 	case DIK_LEFT:
@@ -229,7 +229,7 @@ void CSophia::HandleKeyUp(int KeyCode)
 void CSophia::HandleKeyDown(int KeyCode)
 
 {
-	boolean isLeftDirection = state == SOPHIA_STATE_WALKING_LEFT || state == SOPHIA_STATE_IDLE_LEFT || state == SOPHIA_STATE_FALLING_LEFT;
+	boolean isLeftDirection = nx < 0;
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
@@ -277,7 +277,7 @@ void CSophia::HandleKeyDown(int KeyCode)
 			SetState(SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT);
 		}
 		break;
-	case DIK_V:
+	case DIK_SPACE:
 
 		Shoot();
 		break;
@@ -287,7 +287,12 @@ void CSophia::HandleKeyDown(int KeyCode)
 
 void CSophia::Shoot() {
 	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
-	this->bullet = new SophiaBullet(x + SOPHIA_BBOX_WIDTH/2, y+ SOPHIA_BBOX_HEIGHT/4);
+	boolean isLeftDirection = nx < 0;
+	float xbullet = isLeftDirection ? x - SOPHIA_BBOX_WIDTH / 2 : x + SOPHIA_BBOX_WIDTH / 2;
+	float ybullet = y + SOPHIA_BBOX_HEIGHT / 4;
+	float vxBullet = isLeftDirection ? -BULLET_SPEED_X : BULLET_SPEED_X;
+	float vyBullett = 0.0f;
+	this->bullet = new SophiaBullet(xbullet, ybullet, vxBullet, vyBullett);
 	currentScene->AddObject(bullet);
 }
 

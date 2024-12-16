@@ -5,13 +5,13 @@
 
 #define BULLET_EXTRA_RANGE  5
 
-#define BULLET_SPEED_X	0.05f
-#define BULLET_SPEED_Y	0.05f
+#define BULLET_SPEED_X	0.1f
+#define BULLET_SPEED_Y	0.1f
 
 #define BULLET_ANI_RIGHT		0
 #define BULLET_ANI_LEFT			1	
 
-#define BULLET_ANI_SET_ID		6000
+#define BULLET_MOVING_ANI		6000
 class SophiaBullet :
     public CGameObject
 {
@@ -20,8 +20,7 @@ class SophiaBullet :
     void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
 public:
     SophiaBullet();
-    SophiaBullet(float x, float y);
-    SophiaBullet(float bx, float by, bool up, bool right);
+    SophiaBullet(float x, float y, float vx, float vy); 
     virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
     virtual int IsCollidable() { return 1; };
     virtual int IsBlocking() { return 0; }
