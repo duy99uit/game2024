@@ -28,6 +28,7 @@ void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
 		{
 			blackWalker->SetState(BLACKWALKER_STATE_DIE);
+			SetState(BULLET_EXPLODE);
 
 		}
 	}
@@ -41,6 +42,13 @@ void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	x += vx * dt;
 	y += vy * dt;
+
+	if ((state == BULLET_EXPLODE) && (GetTickCount64() - die_start > BULLET_DIE_TIMEOUT / 3))
+	{
+		isDeleted = true;
+		return;
+	}
+
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -57,4 +65,15 @@ void SophiaBullet::GetBoundingBox(float& l, float& t, float& r, float& b)
 	t = y;
 	r = x + BULLET_BBOX_WIDTH;
 	b = y + BULLET_BBOX_HEIGHT;
+}
+void SophiaBullet::SetState(int state)
+{
+	CGameObject::SetState(state);
+	switch (state)
+	{
+	case BULLET_EXPLODE:
+		vx = 0;
+		vy = 0;
+		break;
+	}
 }

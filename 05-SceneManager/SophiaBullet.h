@@ -7,23 +7,27 @@
 
 #define BULLET_SPEED_X	0.1f
 #define BULLET_SPEED_Y	0.1f
+#define BULLET_DIE_TIMEOUT 160
 
-#define BULLET_ANI_RIGHT		0
-#define BULLET_ANI_LEFT			1	
+	
 
 #define BULLET_MOVING_ANI		6000
+#define BULLET_COLLISION_BRICK		6001
+#define BULLET_EXPLODE		6002
 class SophiaBullet :
     public CGameObject
 {
     virtual void Render();
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
     void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+    ULONGLONG die_start;
 public:
     SophiaBullet();
     SophiaBullet(float x, float y, float vx, float vy); 
     virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
     virtual int IsCollidable() { return 1; };
     virtual int IsBlocking() { return 0; }
+    void SetState(int state);
 
  /*   void OnNoCollision(DWORD dt);*/
     void OnCollisionWith(LPCOLLISIONEVENT e);
