@@ -12,6 +12,7 @@
 #include "SophiaBullet.h"
 #include "Power.h"
 #include "BouncingBomb.h"
+#include "PlatformWalker.h"
 
 
 class CPlayScene: public CScene

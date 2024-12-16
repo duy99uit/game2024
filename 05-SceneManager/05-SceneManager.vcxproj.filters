@@ -141,6 +141,9 @@
     <ClCompile Include="BouncingBomb.cpp">
       <Filter>Source Files\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="PlatformWalker.cpp">
+      <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
