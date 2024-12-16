@@ -10,7 +10,7 @@
 #include "BeetleHead.h"
 #include "Sophia.h"
 #include "SophiaBullet.h"
-//#include "Koopas.h"
+#include "Power.h"
 
 
 class CPlayScene: public CScene

@@ -26,6 +26,13 @@ void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		/*vy -= SOPHIA_JUMP_SPEED_Y/3;*/
 	}
 
+	if (state == SOPHIA_STATE_FALLING_LEFT && isOnPlatform) {
+		SetState(SOPHIA_STATE_IDLE_LEFT);
+	}
+	if (state == SOPHIA_STATE_FALLING_RIGHT && isOnPlatform) {
+		SetState(SOPHIA_STATE_IDLE_RIGHT);
+	}
+
 
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
