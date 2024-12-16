@@ -2,7 +2,7 @@
 [SPRITES]
 ## BLACK WALKER #################################################################
 # JASON BULLET BIG
-70000	359	112	366	120	33
+70000	255	109	270	124	33
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]

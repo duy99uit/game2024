@@ -138,6 +138,9 @@
     <ClCompile Include="Power.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="BouncingBomb.cpp">
+      <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Power.h">
       <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BouncingBomb.h">
+      <Filter>Header Files\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
