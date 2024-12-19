@@ -28,7 +28,7 @@ quadtree.txt
 
 
 # JASON
-0	100	300
+
 
 # SOPHIA
 101	100	100
@@ -57,7 +57,7 @@ quadtree.txt
 4	180	80
 
 #BlackWalker
-2	200	50
+2	350	1133
 
 #Flying Bomb
 #3	0	100

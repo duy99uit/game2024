@@ -120,8 +120,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
 		break;
 	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
-	case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
-	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;
+	/*case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
+	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;*/
 	case OBJECT_TYPE_POWER_P: obj = new CPower(x, y); break;
 	case OBJECT_TYPE_BOUCINGBOMB: obj = new CBouncingBomb(x, y); break;
 	case OBJECT_TYPE_PLATFORM_WALKER: obj = new CPlatformWalker(x, y); break;
