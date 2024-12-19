@@ -24,3 +24,4 @@ height	240
 33	textures\items.png
 50	textures\map11.png
 500	textures\area1.png
+60	textures\level1-side.png

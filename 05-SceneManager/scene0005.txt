@@ -1,15 +1,17 @@
 # list of object assets to load in this scene
 [ASSETS]
-mario-ref.txt
 jason.txt
-sophia.txt
 coin.txt
 cloud.txt
 brick.txt
 enemies.txt
 bullet.txt
 power.txt
+sophia.txt
 #
+[QUADTREE]
+quadtree.txt
+
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia, 150 = Power P
@@ -71,6 +73,13 @@ power.txt
 
 #Platform Walker
 14	200	100
+# JASON
+0	315	1133
+// start x = 315
+
+
+
+
 
 
 
@@ -78,6 +87,4 @@ power.txt
 5 	30	30	16	15	10	51000	52000	53000
 5 	230	20	16	15	5	51000	52000	53000
 
-#Portal 
-50	200	160	216	180	1
 

@@ -58,15 +58,24 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{d76c4fa0-bb66-4850-b01b-194d26532239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Quadtree">
+      <UniqueIdentifier>{c301acaf-be9f-4ec1-91e2-cccd76c79d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Quadtree">
+      <UniqueIdentifier>{c9ae9f02-6487-451c-a317-98058333f54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background">
+      <UniqueIdentifier>{9b82a975-f836-4a2d-b028-25dabe589a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Background">
+      <UniqueIdentifier>{2efbd474-c918-4afd-a033-b39552416f6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
@@ -143,6 +152,14 @@
     </ClCompile>
     <ClCompile Include="PlatformWalker.cpp">
       <Filter>Source Files\Enemies</Filter>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Source Files\Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,5 +256,26 @@
     <ClInclude Include="BouncingBomb.h">
       <Filter>Header Files\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Header Files\GameResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Header Files\Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files\Background</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="scene0005.txt" />
+    <Text Include="quadtree.txt" />
+    <Text Include="blastermaster.txt" />
+    <Text Include="brick.txt" />
+    <Text Include="jason.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\map11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

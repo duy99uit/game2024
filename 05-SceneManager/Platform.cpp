@@ -21,12 +21,12 @@ void CPlatform::RenderBoundingBox()
 	rect.right = (int)r - (int)l;
 	rect.bottom = (int)b - (int)t;
 
-	float cx, cy;
-	CGame::GetInstance()->GetCamPos(cx, cy);
+	/*float cx, cy;
+	CGame::GetInstance()->GetCamPos(cx, cy);*/
 
 	float xx = x - this->cellWidth / 2 + rect.right / 2;
 
-	CGame::GetInstance()->Draw(xx - cx, y, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
+	CGame::GetInstance()->Draw(xx, y, bbox, nullptr, BBOX_ALPHA, rect.right - 1, rect.bottom - 1);
 }
 
 void CPlatform::Render()
@@ -59,6 +59,5 @@ void CPlatform::GetBoundingBox(float& l, float& t, float& r, float& b)
 
 int CPlatform::IsDirectionColliable(float nx, float ny)
 {
-	if (nx == 0 && ny == -1) return 0;
-	else return 1;
+	return 1;
 }
