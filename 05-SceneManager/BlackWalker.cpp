@@ -1,5 +1,7 @@
 #include "BlackWalker.h"
 #include "Game.h"
+#include "Power.h"
+#include "PlayScene.h"
 
 CBlackWalker::CBlackWalker(float x, float y) :CGameObject(x, y)
 {
@@ -37,6 +39,10 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT/3))
 	{
 		isDeleted = true;
+		CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		CGameObject* obj = NULL;
+		obj = new CPower(x, y);
+		currentScene->AddObject(obj);
 		return;
 	}
 

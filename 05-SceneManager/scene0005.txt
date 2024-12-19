@@ -64,7 +64,7 @@ power.txt
 #24	0	100
 
 #Power P
-150	200	50
+150	200	120
 
 #Bouncing Bomb
 13	250	50
