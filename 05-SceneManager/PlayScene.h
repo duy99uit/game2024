@@ -7,6 +7,10 @@
 #include "Jason.h"
 #include "BlackWalker.h"
 #include "Sophia.h"
+#include "SophiaBullet.h"
+#include "Power.h"
+#include "BouncingBomb.h"
+#include "PlatformWalker.h"
 #include "Quadtree.h"
 #include "Define.h"
 //#include "Koopas.h"
@@ -39,6 +43,7 @@ public:
 	virtual void Unload();
 
 	LPGAMEOBJECT GetPlayer() { return player; }
+	void AddObject(LPGAMEOBJECT obj) { this->objects.push_back(obj); } // add obj to scene
 
 	void Clear();
 	void PurgeDeletedObjects();

@@ -141,6 +141,17 @@
     <ClCompile Include="BeetleHead.cpp">
       <Filter>Source Files\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="SophiaBullet.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Power.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BouncingBomb.cpp">
+      <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformWalker.cpp">
+      <Filter>Source Files\Enemies</Filter>
     <ClCompile Include="Quadtree.cpp">
       <Filter>Source Files\Quadtree</Filter>
     </ClCompile>
@@ -234,6 +245,15 @@
       <Filter>Header Files\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="PlatformWalker.h">
+      <Filter>Header Files\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaBullet.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Power.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BouncingBomb.h">
       <Filter>Header Files\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">

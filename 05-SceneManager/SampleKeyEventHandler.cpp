@@ -4,21 +4,26 @@
 #include "Game.h"
 
 #include "Jason.h"
+#include "Sophia.h"
 #include "PlayScene.h"
 
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-	CJason* jason = (CJason *)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer(); 
-	jason->HandleKeyDown(KeyCode);
+	/*CJason* jason = (CJason *)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer(); 
+	jason->HandleKeyDown(KeyCode);*/
+	CSophia* sophia = (CSophia*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	sophia->HandleKeyDown(KeyCode);
 }
 
 void CSampleKeyHandler::OnKeyUp(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyUp: %d\n", KeyCode);
 
-	CJason* jason = (CJason*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-	jason->HandleKeyUp(KeyCode);
+	/*CJason* jason = (CJason*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	jason->HandleKeyUp(KeyCode);*/
+	CSophia* sophia = (CSophia*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	sophia->HandleKeyUp(KeyCode);
 	
 
 }

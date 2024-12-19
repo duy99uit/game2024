@@ -5,6 +5,8 @@ coin.txt
 cloud.txt
 brick.txt
 enemies.txt
+bullet.txt
+power.txt
 sophia.txt
 #
 [QUADTREE]
@@ -12,9 +14,65 @@ quadtree.txt
 
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia
+# type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia, 150 = Power P
+# type: 13 = Bouncing Bomb, 14 = Platform Walker, 15 = Gun Walker, 16 = Rotating Gun, 17 = BeeHead
+# type: 18 = Jelly Fish, 19 = Water Mine, 20 = Dasher, 21 = Big Head Boss, 22 = Brain Boss
 # See OBJECT_TYPE constants in AssetIDs.h
 
+
+#Platform
+# cot da dau tien
+
+
+
+
+
+# JASON
+
+
+# SOPHIA
+101	100	100
+
+# CHARACTER BULLET
+#102	100	100
+
+#COIN
+4	100	120
+4	120	120
+4	140	120
+4	160	120
+4	180	120
+
+
+4	100	100
+4	120	100
+4	140	100
+4	160	100
+4	180	100
+
+4	100	80
+4	120	80
+4	140	80
+4	160	80
+4	180	80
+
+#BlackWalker
+2	350	1133
+
+#Flying Bomb
+#3	0	100
+
+#BeetleHead
+#24	0	100
+
+#Power P
+150	200	120
+
+#Bouncing Bomb
+13	250	50
+
+#Platform Walker
+14	200	100
 # JASON
 0	315	1133
 // start x = 315
@@ -25,5 +83,8 @@ quadtree.txt
 
 
 
+#Platform
+5 	30	30	16	15	10	51000	52000	53000
+5 	230	20	16	15	5	51000	52000	53000
 
 

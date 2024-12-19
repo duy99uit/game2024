@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 #define BLACKWALKER_GRAVITY 0.002f
-#define BLACKWALKER_WALKING_SPEED 0.08f
+#define BLACKWALKER_WALKING_SPEED 0.01f
 #define BLACKWALKER_WALKING_ACCELERATION 0.05f
 
 
@@ -37,6 +37,8 @@ protected:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
+	
 
 public:
 	CBlackWalker(float x, float y);

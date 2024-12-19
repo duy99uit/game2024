@@ -35,7 +35,7 @@ void Camera::Update(float player_x, float player_y)
 void  Camera::TransPosition(float& x, float& y)
 
 {
-	//DebugOut(L"[WARNING] trán cam_y  %f already exists\n", cam_y);
+	//DebugOut(L"[WARNING] trï¿½n cam_y  %f already exists\n", cam_y);
 	x = x - cam_x;
 	y = height + y - cam_y ;
 
