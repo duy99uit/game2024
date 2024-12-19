@@ -23,3 +23,4 @@ height	240
 32	textures\JasonSmall.png
 50	textures\map11.png
 500	textures\area1.png
+60	textures\level1-side.png
