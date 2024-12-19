@@ -1,281 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Enemies">
-      <UniqueIdentifier>{b9f789c1-b643-403c-ad51-230c5e8e4e99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Keyboad">
-      <UniqueIdentifier>{149a8066-ae58-4a81-9adc-ddcf5ee4aaaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameResource">
-      <UniqueIdentifier>{30665bd4-ab02-492a-9489-16763544183b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Characters">
-      <UniqueIdentifier>{36ce9dad-250b-43d1-bb89-e18f2c9e1f1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Items">
-      <UniqueIdentifier>{840b4949-145b-4611-af74-88580ccd05e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Camera">
-      <UniqueIdentifier>{51fa1ad0-8b51-4f2f-b0bb-9ebd34a4ca96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Enemies">
-      <UniqueIdentifier>{eca0eb10-386d-40a8-a066-fadb4710b1ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Util">
-      <UniqueIdentifier>{b53b2394-65d3-4bdf-ad77-58be03e904f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Keyboard">
-      <UniqueIdentifier>{a8d3f62f-5aa7-449a-b7e2-2acec23b6f36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameResource">
-      <UniqueIdentifier>{301c3974-eb87-428c-ac89-a618d88411e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Characters">
-      <UniqueIdentifier>{81dd77ac-7d23-40c5-8001-a923e0bed5d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Camera">
-      <UniqueIdentifier>{1e727a38-eb1d-4106-b326-53a559fa9543}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items">
-      <UniqueIdentifier>{18116f45-f033-4499-9ab8-214cc98bb91a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Enemies">
-      <UniqueIdentifier>{d1cd6329-0805-4af3-9308-25cc30579ad6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Util">
-      <UniqueIdentifier>{d76c4fa0-bb66-4850-b01b-194d26532239}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Quadtree">
-      <UniqueIdentifier>{c301acaf-be9f-4ec1-91e2-cccd76c79d3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Quadtree">
-      <UniqueIdentifier>{c9ae9f02-6487-451c-a317-98058333f54d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Background">
-      <UniqueIdentifier>{9b82a975-f836-4a2d-b028-25dabe589a39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Background">
-      <UniqueIdentifier>{2efbd474-c918-4afd-a033-b39552416f6e}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BeetleHead.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWalker.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="BouncingBomb.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingBomb.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformWalker.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="Jason.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleKeyEventHandler.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Power.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaBullet.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sophia.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssetIDs.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="Coin.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Portal.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Textures.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationFrame.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BeetleHead.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWalker.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="BouncingBomb.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingBomb.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformWalker.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="Jason.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleKeyEventHandler.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Power.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Sophia.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaBullet.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\map11.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SampleKeyEventHandler.cpp">
-      <Filter>Source Files\Keyboard</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\GameResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Animations.cpp">
-      <Filter>Source Files\GameResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\GameResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files\GameResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>Source Files\GameResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Jason.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Sophia.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Coin.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BlackWalker.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="debug.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingBomb.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="BeetleHead.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="SophiaBullet.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Power.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BouncingBomb.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformWalker.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    <ClCompile Include="Quadtree.cpp">
-      <Filter>Source Files\Quadtree</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files\Background</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SampleKeyEventHandler.h">
-      <Filter>Header Files\Keyboad</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationFrame.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Animations.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetIDs.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>Header Files\Keyboad</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Sophia.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Jason.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Coin.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="BlackWalker.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="debug.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingBomb.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="BeetleHead.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformWalker.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="SophiaBullet.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Power.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="BouncingBomb.h">
-      <Filter>Header Files\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>Header Files\GameResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Quadtree.h">
-      <Filter>Header Files\Quadtree</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Header Files\Background</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="scene0005.txt" />
-    <Text Include="quadtree.txt" />
     <Text Include="blastermaster.txt" />
     <Text Include="brick.txt" />
     <Text Include="jason.txt" />
+    <Text Include="quadtree.txt" />
+    <Text Include="scene0005.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\map11.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <Filter Include="Player">
+      <UniqueIdentifier>{8dfa0567-6e94-40a9-89b8-ade3712992f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enermies">
+      <UniqueIdentifier>{3d8285b5-9146-4ffa-b740-46014b6c2429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{b3723e78-c125-455d-98a2-52d5eb3e7979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{a06e693a-0718-4f74-8395-ebbebe83b9f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{06a5ff6e-4c0a-4e3d-b3da-dcc7cb84da8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quadtree">
+      <UniqueIdentifier>{4f8b4836-76e6-45b4-905b-799777f5b982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{7810cf8d-0707-4cb3-8777-97d09249138e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{63083376-c13a-4a50-87e8-b06e0114f2db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Keyboard">
+      <UniqueIdentifier>{c1b65256-6c9b-4a8e-b71e-d2d90d726a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{55bb7858-c180-4ee9-b5d0-bc1020be51d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

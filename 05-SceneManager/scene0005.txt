@@ -57,7 +57,7 @@ quadtree.txt
 4	180	80
 
 #BlackWalker
-2	350	1133
+2	450	1120
 
 #Flying Bomb
 #3	0	100
@@ -74,7 +74,7 @@ quadtree.txt
 #Platform Walker
 14	200	100
 # JASON
-0	315	1133
+0	400	1133
 // start x = 315
 
 
