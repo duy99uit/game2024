@@ -7,7 +7,6 @@ CBouncingBomb::CBouncingBomb(float x, float y) :CGameObject(x, y)
 	die_start = -1;
 	SetState(BOUNCING_BOMB_STATE_FALLING);
 	aniId = ID_ANI_BOUNCING_BOMB_FALLING;
-	ay = 0.05f;
 	vy = -0.07f;
 	vx = -0.02f;
 	isOnPlatform = false;
