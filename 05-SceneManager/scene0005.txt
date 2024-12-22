@@ -71,7 +71,7 @@ quadtree.txt
 150	200	120
 
 #Bouncing Bomb
-13	250	50
+#13	250	50
 
 #Platform Walker
 14	200	100

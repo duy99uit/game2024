@@ -62,16 +62,16 @@ void CFlyingBomb::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CGame* game = CGame::GetInstance();
 	float vW = game->GetBackBufferWidth();
 	x += vx * dt;
-	/*x += vx * dt;*/
-	/*if (x >= vW) {
-		SetState(ID_ANI_FLYINGBOMB_FLYING_LEFT);
-	}
-	else if (x <= 0) {
-		SetState(ID_ANI_FLYINGBOMB_FLYING_RIGHT);
-	}*/
+	y += vy * dt;
 	if ((state == FLYINGBOMB_STATE_DIE) && (GetTickCount64() - die_start > FLYINGBOMB_STATE_DIE / 3))
 	{
 		isDeleted = true;
+
+	}
+	if ((state == FLYINGBOMB_STATE_THROWING_LEFT) && (GetTickCount64() - prepareEscape_start > FLYINGBOMB_PREPARE_ESCAP_TIME))
+	{
+		SetState(FLYINGBOMB_STATE_ESCAPING_LEFT);
+
 
 	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -114,6 +114,14 @@ void CFlyingBomb::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ThrowBomb();
+		prepareEscape_start = GetTickCount64();
+		break;
+
+	case  FLYINGBOMB_STATE_ESCAPING_LEFT:
+		aniId = ID_ANI_FLYINGBOMB_ESCAPING_LEFT;
+		vy = FLYINGBOMB_FLYING_SPEED*2;
+		vx = 0;
+		ax = 0;
 		break;
 	}
 }
