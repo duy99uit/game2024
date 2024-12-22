@@ -14,13 +14,22 @@ SophiaBullet::SophiaBullet(float x, float y, float vx, float vy) :CGameObject(x,
 }
 
 void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
+
 {
+	if (e->obj->IsBlocking())
+	{
+		DebugOut(L"CSophia::OnCollisionWith 1111");
+		vx = 0;
+		vy = 0;
+		SetState(BULLET_EXPLODE);
+	}
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);
 	}
 	if (dynamic_cast<CBeetleHead*>(e->obj)) {
 		OnCollisionWithBeetleHead(e);
 	}
+
 
 }
 void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -38,6 +47,20 @@ void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	
 }
 void SophiaBullet::OnCollisionWithBeetleHead(LPCOLLISIONEVENT e)
+{
+	CBeetleHead* beettleHead = dynamic_cast<CBeetleHead*>(e->obj);
+	if (e->nx != 0 || e->ny != 0)
+	{
+		if (beettleHead->GetState() != BEETLEHEAD_STATE_DIE)
+		{
+			beettleHead->SetState(BEETLEHEAD_STATE_DIE);
+			SetState(BULLET_EXPLODE);
+
+		}
+	}
+
+}
+void SophiaBullet::OnCollisionWithWall(LPCOLLISIONEVENT e)
 {
 	CBeetleHead* beettleHead = dynamic_cast<CBeetleHead*>(e->obj);
 	if (e->nx != 0 || e->ny != 0)
@@ -88,6 +111,7 @@ void SophiaBullet::SetState(int state)
 	switch (state)
 	{
 	case BULLET_EXPLODE:
+		aniId = BULLET_EXPLODE;
 		vx = 0;
 		vy = 0;
 		break;
