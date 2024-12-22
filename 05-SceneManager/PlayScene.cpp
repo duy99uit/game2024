@@ -136,6 +136,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_POWER_P: obj = new CPower(x, y); break;
 	case OBJECT_TYPE_BOUCINGBOMB: obj = new CBouncingBomb(x, y); break;
 	case OBJECT_TYPE_PLATFORM_WALKER: obj = new CPlatformWalker(x, y); break;
+	case OBJECT_TYPE_ROTATING_GUN: obj = new CRotatingGun(x, y); break;
 	
 	/*case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;

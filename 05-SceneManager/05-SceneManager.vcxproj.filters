@@ -66,6 +66,9 @@
     <ClCompile Include="Sprites.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="RotatingGun.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h" />
@@ -141,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Sprites.h">
       <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatingGun.h">
+      <Filter>Enermies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
