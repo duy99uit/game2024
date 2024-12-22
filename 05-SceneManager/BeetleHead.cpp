@@ -4,8 +4,8 @@
 CBeetleHead::CBeetleHead(float x, float y) :CGameObject(x, y)
 {
 	die_start = -1;
-	SetState(BEETLEHEAD_STATE_WALKING_RIGHT);
-	aniId = ID_ANI_BEETLEHEAD_WALKING_RIGHT;
+	SetState(BEETLEHEAD_STATE_WALKING_LEFT);
+	aniId = ID_ANI_BEETLEHEAD_WALKING_LEFT;
 
 	// Initialize sinusoidal movement parameters
 	amplitude = 15.0f;   // Height of the wave

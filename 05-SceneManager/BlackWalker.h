@@ -22,6 +22,9 @@
 #define ID_ANI_BLACKWALKER_WALKING_LEFT 5002
 #define ID_ANI_BLACKWALKER_WALKING_RIGHT 5003
 
+// tag detect should create power or not
+#define BLACKWALKER_TYPE_POWER 1
+
 class CBlackWalker : public CGameObject
 {
 protected:
@@ -41,6 +44,6 @@ protected:
 	
 
 public:
-	CBlackWalker(float x, float y);
+	CBlackWalker(float x, float y, int tag);
 	virtual void SetState(int state);
 };

@@ -5,8 +5,8 @@
 
 #define BULLET_EXTRA_RANGE  5
 
-#define BULLET_SPEED_X	0.1f
-#define BULLET_SPEED_Y	0.1f
+#define BULLET_SPEED_X	0.2f
+#define BULLET_SPEED_Y	0.2f
 #define BULLET_DIE_TIMEOUT 160
 
 	

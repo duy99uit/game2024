@@ -101,6 +101,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	int object_type = atoi(tokens[0].c_str());
 	float x = (float)atof(tokens[1].c_str());
 	float y = (float)atof(tokens[2].c_str());
+	int tag = 0;
+	if (tokens.size() > 3) {
+		DebugOut(L"[INFO] CBlackWalker <created>>>>>! %d\n", tag);
+		tag = (int)atof(tokens[3].c_str());
+	}
+		
 
 	CGameObject *obj = NULL;
 
@@ -119,9 +125,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
 		break;
-	case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;
-	/*case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
-	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;*/
+	/*case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x,y); break;*/
+	case OBJECT_TYPE_BLACKWALKER:
+		obj = new CBlackWalker(x, y, tag);
+		obj->SetTag(tag); 
+		DebugOut(L"[INFO] CBlackWalker created! %d\n", tag);
+		break;
+	case OBJECT_TYPE_FLYINGBOMB: obj = new CFlyingBomb(x, y); break;
+	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;
 	case OBJECT_TYPE_POWER_P: obj = new CPower(x, y); break;
 	case OBJECT_TYPE_BOUCINGBOMB: obj = new CBouncingBomb(x, y); break;
 	case OBJECT_TYPE_PLATFORM_WALKER: obj = new CPlatformWalker(x, y); break;

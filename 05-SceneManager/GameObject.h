@@ -27,6 +27,7 @@ protected:
 	int ny;
 
 	int state;
+	int tag = 0; // define for blackwalker tag
 
 	bool isDeleted; 
 
@@ -39,6 +40,7 @@ public:
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float &x, float &y) { x = this->x; y = this->y; }
 	void GetSpeed(float &vx, float &vy) { vx = this->vx; vy = this->vy; }
+	void SetTag(int tag) { this->tag = tag; } // set tag for blackwalker
 
 	int GetState() { return this->state; }
 	virtual void Delete() { isDeleted = true;  }
@@ -48,6 +50,7 @@ public:
 
 	CGameObject();
 	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; }
+	CGameObject(float x, float y, int tag) :CGameObject() { this->x = x; this->y = y; this->tag = tag; }
 	CGameObject(float x, float y, float vx, float vy) :CGameObject() { this->x = x; this->y = y; this->vx = vx, this->vy = vy; }
 
 

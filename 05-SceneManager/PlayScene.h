@@ -11,6 +11,8 @@
 #include "Power.h"
 #include "BouncingBomb.h"
 #include "PlatformWalker.h"
+#include "FlyingBomb.h"
+#include "BeetleHead.h"
 #include "Quadtree.h"
 #include "Define.h"
 //#include "Koopas.h"
