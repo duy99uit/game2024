@@ -186,10 +186,21 @@ void CSophia::SetState(int state)
 
 void CSophia::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - SOPHIA_BBOX_WIDTH / 2;
-	top = y - SOPHIA_BBOX_HEIGHT / 2;
-	right = left + SOPHIA_BBOX_WIDTH;
-	bottom = top + SOPHIA_BBOX_HEIGHT;
+	// case normal
+	boolean isAimingTop = state == SOPHIA_STATE_SHOOT_TOP_LEFT || state == SOPHIA_STATE_SHOOT_TOP_RIGHT;
+	if (isAimingTop) {
+		left = x - SOPHIA_BBOX_WIDTH / 2;
+		top = y - SOPHIA_BBOX_HEIGHT/2;
+		right = left + SOPHIA_BBOX_WIDTH;
+		bottom = top + SOPHIA_BBOX_HEIGHT;
+	}
+	else {
+		left = x - SOPHIA_BBOX_WIDTH / 2;
+		top = y - SOPHIA_BBOX_HEIGHT / 2;
+		right = left + SOPHIA_BBOX_WIDTH;
+		bottom = top + SOPHIA_BBOX_HEIGHT;
+	}
+	
 }
 
 void CSophia::SetLevel(int l)

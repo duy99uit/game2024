@@ -62,7 +62,7 @@ quadtree.txt
 #2	900	1152    0
 
 #Flying Bomb
-3	400	1200
+3	600	1200
 
 #BeetleHead
 24	500	1130
