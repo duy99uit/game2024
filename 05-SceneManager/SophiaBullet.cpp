@@ -35,6 +35,9 @@ void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CRotatingGun*>(e->obj)) {
 		OnCollisionWithRotatingGun(e);
 	}
+	if (dynamic_cast<CPlatformWalker*>(e->obj)) {
+		OnCollisionWithPlatformWalker(e);
+	}
 
 }
 void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -99,6 +102,18 @@ void SophiaBullet::OnCollisionWithRotatingGun(LPCOLLISIONEVENT e)
 			SetState(BULLET_EXPLODE);
 
 		}
+}
+
+void SophiaBullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
+{
+	CPlatformWalker* platformWalker = dynamic_cast<CPlatformWalker*>(e->obj);
+
+	if (platformWalker->GetState() != PLATFORMWALKER_STATE_DIE)
+	{
+		platformWalker->SetState(PLATFORMWALKER_STATE_DIE);
+		SetState(BULLET_EXPLODE);
+
+	}
 }
 
 void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {

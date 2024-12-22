@@ -24,6 +24,7 @@ class SophiaBullet :
     void OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e);
     void OnCollisionWithWall(LPCOLLISIONEVENT e);
     void OnCollisionWithRotatingGun(LPCOLLISIONEVENT e);
+    void OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e);
     ULONGLONG die_start;
 public:
     SophiaBullet();
