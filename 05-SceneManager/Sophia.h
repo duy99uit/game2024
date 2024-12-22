@@ -3,7 +3,7 @@
 #include "SophiaBullet.h"
 
 #define SOPHIA_GRAVITY 0.002f
-#define SOPHIA_WALKING_SPEED 0.08f
+#define SOPHIA_WALKING_SPEED 0.09f
 #define SOPHIA_WALKING_ACCELERATION 0.05f
 #define SOPHIA_JUMP_SPEED_Y		0.5f
 
