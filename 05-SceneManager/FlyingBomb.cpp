@@ -24,13 +24,13 @@ void CFlyingBomb::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	CGame* game = CGame::GetInstance();
 	float vW = game->GetBackBufferWidth();
-	x += vx * dt;
+	/*x += vx * dt;
 	if (x >= vW) {
 		SetState(ID_ANI_FLYINGBOMB_FLYING_LEFT);
 	}
 	else if (x <= 0) {
 		SetState(ID_ANI_FLYINGBOMB_FLYING_RIGHT);
-	}
+	}*/
 
 	CGameObject::Update(dt, coObjects);
 }
