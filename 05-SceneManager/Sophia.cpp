@@ -57,10 +57,6 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 		vy = 0;
 		isOnPlatform = true;
 	}
-	//else
-	//{
-
-	//}
 
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);

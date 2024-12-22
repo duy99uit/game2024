@@ -52,4 +52,5 @@ public:
 	CFlyingBomb(float x, float y);
 	virtual void SetState(int state);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
+	void ThrowBomb();
 };

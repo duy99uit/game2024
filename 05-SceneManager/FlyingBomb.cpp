@@ -113,6 +113,15 @@ void CFlyingBomb::SetState(int state)
 		aniId = ID_ANI_FLYINGBOMB_THROWING_LEFT;
 		vx = 0;
 		vy = 0;
+		ThrowBomb();
 		break;
 	}
+}
+
+void CFlyingBomb::ThrowBomb() {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	CGameObject* obj = NULL;
+	obj = new CBouncingBomb(x, y);
+	currentScene->AddObject(obj);
+	return;
 }
