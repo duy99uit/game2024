@@ -2,8 +2,10 @@
 #include "GameObject.h"
 
 
-#define ROTATINGGUN_BBOX_WIDTH 140
-#define ROTATINGGUN_BBOX_HEIGHT 100
+#define ROTATINGGUN_BBOX_WIDTH 16
+#define ROTATINGGUN_BBOX_HEIGHT 16
+#define ROTATINGGUN_BBOX_WIDTH_IDLE 110
+#define ROTATINGGUN_BBOX_HEIGHT_IDLE 100
 #define ROTATINGGUN_BBOX_HEIGHT_DIE 7
 
 #define ROTATINGGUN_DIE_TIMEOUT 500
@@ -33,6 +35,7 @@ protected:
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
+	void OnCollisionWithSophia(LPCOLLISIONEVENT e);
 
 
 public:
