@@ -31,17 +31,17 @@ void CBeetleHead::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CGame* game = CGame::GetInstance();
 	float vW = game->GetBackBufferWidth();
 	x += vx * dt;
-	if (x >= vW) {
-		SetState(BEETLEHEAD_STATE_WALKING_LEFT);
-	}
-	else if (x <= 0) {
-		SetState(BEETLEHEAD_STATE_WALKING_RIGHT);
-	}
 	// Update vertical position using a sine wave
 	float time = (float)GetTickCount64(); // Get current time in milliseconds
 	y = baseY + amplitude * sin(frequency * time + phase);
 
-	CGameObject::Update(dt, coObjects);
+	if ((state == BEETLEHEAD_STATE_DIE) && (GetTickCount64() - die_start > BEETLEHEAD_DIE_TIMEOUT / 3))
+	{
+		isDeleted = true;
+
+	}
+
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 
@@ -59,7 +59,6 @@ void CBeetleHead::SetState(int state)
 	{
 	case BEETLEHEAD_STATE_DIE:
 		die_start = GetTickCount64();
-		aniId = ID_ANI_BEETLEHEAD_DIE;
 		vx = 0;
 		vy = 0;
 		ay = 0;

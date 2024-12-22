@@ -20,6 +20,7 @@ class SophiaBullet :
     virtual void Render();
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
     void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+    void OnCollisionWithBeetleHead(LPCOLLISIONEVENT e);
     ULONGLONG die_start;
 public:
     SophiaBullet();

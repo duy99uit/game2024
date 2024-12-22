@@ -18,6 +18,9 @@ void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);
 	}
+	if (dynamic_cast<CBeetleHead*>(e->obj)) {
+		OnCollisionWithBeetleHead(e);
+	}
 
 }
 void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -34,7 +37,20 @@ void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	}
 	
 }
+void SophiaBullet::OnCollisionWithBeetleHead(LPCOLLISIONEVENT e)
+{
+	CBeetleHead* beettleHead = dynamic_cast<CBeetleHead*>(e->obj);
+	if (e->nx != 0 || e->ny != 0)
+	{
+		if (beettleHead->GetState() != BEETLEHEAD_STATE_DIE)
+		{
+			beettleHead->SetState(BEETLEHEAD_STATE_DIE);
+			SetState(BULLET_EXPLODE);
 
+		}
+	}
+
+}
 
 void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
