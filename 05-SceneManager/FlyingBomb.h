@@ -7,11 +7,14 @@
 #define FLYINGBOMB_WALKING_ACCELERATION 0.05f
 
 
-#define FLYINGBOMB_BBOX_WIDTH 12
-#define FLYINGBOMB_BBOX_HEIGHT 24
+#define FLYINGBOMB_BBOX_WIDTH 16
+#define FLYINGBOMB_BBOX_HEIGHT 16
+#define FLYINGBOMB_BBOX_WIDTH_IDLE 150
+#define FLYINGBOMB_BBOX_HEIGHT_IDLE 400
 #define FLYINGBOMB_BBOX_HEIGHT_DIE 7
 
 #define FLYINGBOMB_DIE_TIMEOUT 500
+#define FLYINGBOMB_PREPARE_ESCAP_TIME 300
 
 #define FLYINGBOMB_STATE_FLYING_LEFT 102
 #define FLYINGBOMB_STATE_FLYING_RIGHT 103
@@ -36,6 +39,7 @@ protected:
 	float ay;
 
 	ULONGLONG die_start;
+	ULONGLONG prepareEscape_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -44,8 +48,11 @@ protected:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
+	void OnCollisionWithSophia(LPCOLLISIONEVENT e);
 
 public:
 	CFlyingBomb(float x, float y);
 	virtual void SetState(int state);
+	void OnCollisionWith(LPCOLLISIONEVENT e);
+	void ThrowBomb();
 };

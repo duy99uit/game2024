@@ -5,8 +5,8 @@
 
 #define BULLET_EXTRA_RANGE  5
 
-#define BULLET_SPEED_X	0.1f
-#define BULLET_SPEED_Y	0.1f
+#define BULLET_SPEED_X	0.2f
+#define BULLET_SPEED_Y	0.2f
 #define BULLET_DIE_TIMEOUT 160
 
 	
@@ -20,6 +20,9 @@ class SophiaBullet :
     virtual void Render();
     virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
     void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+    void OnCollisionWithBeetleHead(LPCOLLISIONEVENT e);
+    void OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e);
+    void OnCollisionWithWall(LPCOLLISIONEVENT e);
     ULONGLONG die_start;
 public:
     SophiaBullet();

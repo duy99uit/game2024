@@ -22,13 +22,20 @@
 #define ID_ANI_BLACKWALKER_WALKING_LEFT 5002
 #define ID_ANI_BLACKWALKER_WALKING_RIGHT 5003
 
+// tag detect should create power or not
+#define BLACKWALKER_TYPE_POWER 1
+#define BLACKWALKER_JUMPING_STACKS	2
+#define BLACKWALKER_TIME_WALKING			500
+
 class CBlackWalker : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
+	int jumpingStacks = 0;
 
 	ULONGLONG die_start;
+	ULONGLONG walkingTimer = 0;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -41,6 +48,6 @@ protected:
 	
 
 public:
-	CBlackWalker(float x, float y);
+	CBlackWalker(float x, float y, int tag);
 	virtual void SetState(int state);
 };

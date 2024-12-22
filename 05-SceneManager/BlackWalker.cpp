@@ -3,7 +3,7 @@
 #include "Power.h"
 #include "PlayScene.h"
 
-CBlackWalker::CBlackWalker(float x, float y) :CGameObject(x, y)
+CBlackWalker::CBlackWalker(float x, float y, int tag) :CGameObject(x, y, tag)
 {
 	die_start = -1;
 	SetState(BLACKWALKER_STATE_WALKING_LEFT);
@@ -39,11 +39,15 @@ void CBlackWalker::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if ((state == BLACKWALKER_STATE_DIE) && (GetTickCount64() - die_start > BLACKWALKER_DIE_TIMEOUT/3))
 	{
 		isDeleted = true;
-		CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
-		CGameObject* obj = NULL;
-		obj = new CPower(x, y);
-		currentScene->AddObject(obj);
-		return;
+		// only create power if type 1
+		if (tag == BLACKWALKER_TYPE_POWER) {
+			CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+			CGameObject* obj = NULL;
+			obj = new CPower(x, y);
+			currentScene->AddObject(obj);
+			return;
+		}
+		
 	}
 
 	/*CGameObject::Update(dt, coObjects);*/
@@ -54,6 +58,20 @@ void CBlackWalker::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CBlackWalker*>(e->obj)) return;
+	if (e->ny != 0)
+	{
+		vy = 0;
+	}
+	else if (e->nx != 0)
+	{
+		if (state == BLACKWALKER_STATE_WALKING_LEFT) {
+			SetState(BLACKWALKER_STATE_WALKING_RIGHT);
+		}
+		else {
+			SetState(BLACKWALKER_STATE_WALKING_LEFT);
+		}
+		
+	}
 }
 
 
@@ -71,7 +89,6 @@ void CBlackWalker::SetState(int state)
 	{
 	case BLACKWALKER_STATE_DIE:
 		die_start = GetTickCount64();
-	/*	aniId = ID_ANI_BLACKWALKER_WALKING_LEFT;*/
 		vx = 0;
 		vy = 0;
 		ay = 0;
@@ -84,7 +101,7 @@ void CBlackWalker::SetState(int state)
 		break;
 	case BLACKWALKER_STATE_WALKING_RIGHT:
 		aniId = ID_ANI_BLACKWALKER_WALKING_RIGHT;
-		vx = BLACKWALKER_WALKING_SPEED/10;
+		vx = BLACKWALKER_WALKING_SPEED;
 		nx = 1;
 		ax = BLACKWALKER_WALKING_ACCELERATION;
 		break;

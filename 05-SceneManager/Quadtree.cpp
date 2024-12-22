@@ -72,12 +72,16 @@ void Quadtree::_ParseSection_OBJECTS_QT(string line)
     int object_type = atoi(tokens[0].c_str());
     float x = (float)atof(tokens[1].c_str());
     float y = (float)atof(tokens[2].c_str());
+    int tag = 0;
+    if (tokens.size() >= 4)
+        tag = (int)atof(tokens[3].c_str());
+
 
     CGameObject* obj = NULL;
 
     switch (object_type)
     {
-    case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x, y); break;
+    case OBJECT_TYPE_BLACKWALKER: obj = new CBlackWalker(x, y, tag); break;
     case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;
     case OBJECT_TYPE_PLATFORM:
     {

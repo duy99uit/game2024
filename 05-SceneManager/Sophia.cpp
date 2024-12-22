@@ -57,10 +57,6 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 		vy = 0;
 		isOnPlatform = true;
 	}
-	//else
-	//{
-
-	//}
 
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);
@@ -186,10 +182,21 @@ void CSophia::SetState(int state)
 
 void CSophia::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - SOPHIA_BBOX_WIDTH / 2;
-	top = y - SOPHIA_BBOX_HEIGHT / 2;
-	right = left + SOPHIA_BBOX_WIDTH;
-	bottom = top + SOPHIA_BBOX_HEIGHT;
+	// case normal
+	boolean isAimingTop = state == SOPHIA_STATE_SHOOT_TOP_LEFT || state == SOPHIA_STATE_SHOOT_TOP_RIGHT;
+	if (isAimingTop) {
+		left = x - SOPHIA_BBOX_WIDTH / 2;
+		top = y - SOPHIA_BBOX_HEIGHT/2;
+		right = left + SOPHIA_BBOX_WIDTH;
+		bottom = top + SOPHIA_BBOX_HEIGHT;
+	}
+	else {
+		left = x - SOPHIA_BBOX_WIDTH / 2;
+		top = y - SOPHIA_BBOX_HEIGHT / 2;
+		right = left + SOPHIA_BBOX_WIDTH;
+		bottom = top + SOPHIA_BBOX_HEIGHT;
+	}
+	
 }
 
 void CSophia::SetLevel(int l)
@@ -294,11 +301,29 @@ void CSophia::HandleKeyDown(int KeyCode)
 
 void CSophia::Shoot() {
 	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	// moving x
 	boolean isLeftDirection = nx < 0;
 	float xbullet = isLeftDirection ? x - SOPHIA_BBOX_WIDTH / 2 : x + SOPHIA_BBOX_WIDTH / 2;
 	float ybullet = y + SOPHIA_BBOX_HEIGHT / 4;
 	float vxBullet = isLeftDirection ? -BULLET_SPEED_X : BULLET_SPEED_X;
 	float vyBullett = 0.0f;
+	// shoot top
+	boolean isAimingTop = state == SOPHIA_STATE_SHOOT_TOP_LEFT || state == SOPHIA_STATE_SHOOT_TOP_RIGHT;
+	if (isAimingTop) {
+		xbullet = x ;
+		ybullet = y + SOPHIA_BBOX_HEIGHT/2;
+		vyBullett = BULLET_SPEED_Y;
+		vxBullet = 0;
+	}
+	// shoot diagonal left - right
+	boolean isAimingDiagonalLeft = state == SOPHIA_STATE_SHOOT_DIAGONAL_LEFT;
+	boolean isAimingDiagonalRight = state == SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT;
+	if (isAimingDiagonalLeft || isAimingDiagonalRight) {
+		xbullet = isAimingDiagonalLeft ? x - SOPHIA_BBOX_WIDTH / 2 : x + SOPHIA_BBOX_WIDTH / 2;
+		ybullet = y + SOPHIA_BBOX_HEIGHT / 2;
+		vyBullett = BULLET_SPEED_Y;
+		vxBullet = isAimingDiagonalLeft ? -BULLET_SPEED_X : BULLET_SPEED_X;
+	}
 	this->bullet = new SophiaBullet(xbullet, ybullet, vxBullet, vyBullett);
 	currentScene->AddObject(bullet);
 }
