@@ -69,6 +69,15 @@
     <ClCompile Include="RotatingGun.cpp">
       <Filter>Enermies</Filter>
     </ClCompile>
+    <ClCompile Include="GunWalker.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="BeeHead.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
+    <ClCompile Include="JellyFish.cpp">
+      <Filter>Enermies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h" />
@@ -146,6 +155,15 @@
       <Filter>Sprite</Filter>
     </ClInclude>
     <ClInclude Include="RotatingGun.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="GunWalker.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="BeeHead.h">
+      <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="JellyFish.h">
       <Filter>Enermies</Filter>
     </ClInclude>
   </ItemGroup>

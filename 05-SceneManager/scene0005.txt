@@ -15,7 +15,7 @@ quadtree.txt
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia, 150 = Power P
-# type: 13 = Bouncing Bomb, 14 = Platform Walker, 15 = Gun Walker, 16 = Rotating Gun, 17 = BeeHead
+# type: 13 = Bouncing Bomb, 14 = Platform Walker, 25 = Gun Walker, 16 = Rotating Gun, 17 = BeeHead
 # type: 18 = Jelly Fish, 19 = Water Mine, 20 = Dasher, 21 = Big Head Boss, 22 = Brain Boss
 # See OBJECT_TYPE constants in AssetIDs.h
 
@@ -77,10 +77,26 @@ quadtree.txt
 #Rotating Gun
 16	2168	1144
 16	2168	954
+
+#Gun Walker
+25	2460	590
+#BeeHead
+17	2640	740
+#Jelly Fish
+18	2750	320
 # JASON
 #0	350	1200
-0	2100	1200
-#0	2360	1000
+#0	2100	1200
+#ROTATING GUN POSITION
+#0	2100	1200
+#GUN WALKER POSITION
+#0	2360	800
+#LADDER POSITION
+#0	2360	1200
+#BEEHEAD POSITION
+#0	2560	1200
+#WATER POSITION
+0	2790	440
 // start x = 315
 
 

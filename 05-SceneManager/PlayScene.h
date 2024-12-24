@@ -16,6 +16,9 @@
 #include "Quadtree.h"
 #include "Define.h"
 #include "RotatingGun.h"
+#include "GunWalker.h"
+#include "BeeHead.h"
+#include "JellyFish.h"
 
 
 class CPlayScene : public CScene
