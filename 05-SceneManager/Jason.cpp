@@ -7,8 +7,10 @@
 #include "BlackWalker.h"
 #include "Coin.h"
 #include "Portal.h"
+#include "Bullet.h"
 
 #include "Collision.h"
+#include "PlayScene.h"
 
 void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -283,6 +285,10 @@ void CJason::HandleKeyDown(int KeyCode)
 		case DIK_DOWN:
 			SetState(BIG_JASON_STATE_WALKING_DOWN);
 			break;
+		case DIK_SPACE:
+
+			Shoot();
+			break;
 		}
 	}
 	else {
@@ -316,9 +322,40 @@ void CJason::HandleKeyDown(int KeyCode)
 		case DIK_D:
 			SetState(SMALL_JASON_STATE_SWIMMING_RIGHT);
 			break;
+		case DIK_SPACE:
+
+			Shoot();
+			break;
 		}
 	}
 	
 }
 
-
+void CJason::Shoot() {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	// moving x
+	boolean isLeftDirection = nx < 0;
+	float xbullet = isLeftDirection ? x - SOPHIA_BBOX_WIDTH / 2 : x + SOPHIA_BBOX_WIDTH / 2;
+	float ybullet = y + SOPHIA_BBOX_HEIGHT / 4;
+	float vxBullet = isLeftDirection ? -BULLET_SPEED_X : BULLET_SPEED_X;
+	float vyBullett = 0.0f;
+	// shoot top
+	boolean isAimingTop = state == SOPHIA_STATE_SHOOT_TOP_LEFT || state == SOPHIA_STATE_SHOOT_TOP_RIGHT;
+	if (isAimingTop) {
+		xbullet = x;
+		ybullet = y + SOPHIA_BBOX_HEIGHT / 2;
+		vyBullett = BULLET_SPEED_Y;
+		vxBullet = 0;
+	}
+	// shoot diagonal left - right
+	boolean isAimingDiagonalLeft = state == SOPHIA_STATE_SHOOT_DIAGONAL_LEFT;
+	boolean isAimingDiagonalRight = state == SOPHIA_STATE_SHOOT_DIAGONAL_RIGHT;
+	if (isAimingDiagonalLeft || isAimingDiagonalRight) {
+		xbullet = isAimingDiagonalLeft ? x - SOPHIA_BBOX_WIDTH / 2 : x + SOPHIA_BBOX_WIDTH / 2;
+		ybullet = y + SOPHIA_BBOX_HEIGHT / 2;
+		vyBullett = BULLET_SPEED_Y;
+		vxBullet = isAimingDiagonalLeft ? -BULLET_SPEED_X : BULLET_SPEED_X;
+	}
+	this->bullet = new Bullet(xbullet, ybullet, vxBullet, vyBullett);
+	currentScene->AddObject(bullet);
+}

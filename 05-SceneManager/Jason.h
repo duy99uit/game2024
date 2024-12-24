@@ -3,6 +3,7 @@
 
 #include "Animation.h"
 #include "Animations.h"
+#include "Bullet.h"
 
 #include "debug.h"
 
@@ -95,6 +96,7 @@ class CJason : public CGameObject
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
 	int coin; 
+	Bullet* bullet = NULL;
 public:
 	CJason(float x, float y) : CGameObject(x, y)
 	{
@@ -135,4 +137,5 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void Shoot();
 };
