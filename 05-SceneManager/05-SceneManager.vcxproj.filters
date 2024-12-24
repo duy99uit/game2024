@@ -78,6 +78,9 @@
     <ClCompile Include="JellyFish.cpp">
       <Filter>Enermies</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h" />
@@ -165,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="JellyFish.h">
       <Filter>Enermies</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
