@@ -149,6 +149,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="BeeHead.cpp" />
     <ClCompile Include="BeetleHead.cpp" />
     <ClCompile Include="BouncingBomb.cpp" />
     <ClCompile Include="Brick.cpp" />
@@ -160,6 +161,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="BlackWalker.cpp" />
+    <ClCompile Include="GunWalker.cpp" />
+    <ClCompile Include="JellyFish.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jason.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -168,6 +171,7 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Power.cpp" />
     <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="RotatingGun.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Sophia.cpp" />
     <ClCompile Include="SophiaBullet.cpp" />
@@ -182,6 +186,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AssetIDs.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="BeeHead.h" />
     <ClInclude Include="BeetleHead.h" />
     <ClInclude Include="BouncingBomb.h" />
     <ClInclude Include="Brick.h" />
@@ -194,6 +199,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="BlackWalker.h" />
+    <ClInclude Include="GunWalker.h" />
+    <ClInclude Include="JellyFish.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Jason.h" />
     <ClInclude Include="Platform.h" />
@@ -202,6 +209,7 @@
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Power.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="RotatingGun.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sophia.h" />

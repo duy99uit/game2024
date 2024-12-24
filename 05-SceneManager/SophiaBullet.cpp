@@ -32,6 +32,12 @@ void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CFlyingBomb*>(e->obj)) {
 		OnCollisionWithFlyingBomb(e);
 	}
+	if (dynamic_cast<CRotatingGun*>(e->obj)) {
+		OnCollisionWithRotatingGun(e);
+	}
+	if (dynamic_cast<CPlatformWalker*>(e->obj)) {
+		OnCollisionWithPlatformWalker(e);
+	}
 
 }
 void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -78,17 +84,36 @@ void SophiaBullet::OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e)
 }
 void SophiaBullet::OnCollisionWithWall(LPCOLLISIONEVENT e)
 {
-	CBeetleHead* beettleHead = dynamic_cast<CBeetleHead*>(e->obj);
+	
 	if (e->nx != 0 || e->ny != 0)
 	{
-		if (beettleHead->GetState() != BEETLEHEAD_STATE_DIE)
+		SetState(BULLET_EXPLODE);
+	}
+
+}
+
+void SophiaBullet::OnCollisionWithRotatingGun(LPCOLLISIONEVENT e)
+{
+	CRotatingGun* rotatingGun = dynamic_cast<CRotatingGun*>(e->obj);
+	
+		if (rotatingGun->GetState() != ROTATINGGUN_STATE_DIE)
 		{
-			beettleHead->SetState(BEETLEHEAD_STATE_DIE);
+			rotatingGun->SetState(ROTATINGGUN_STATE_DIE);
 			SetState(BULLET_EXPLODE);
 
 		}
-	}
+}
 
+void SophiaBullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
+{
+	CPlatformWalker* platformWalker = dynamic_cast<CPlatformWalker*>(e->obj);
+
+	if (platformWalker->GetState() != PLATFORMWALKER_STATE_DIE)
+	{
+		platformWalker->SetState(PLATFORMWALKER_STATE_DIE);
+		SetState(BULLET_EXPLODE);
+
+	}
 }
 
 void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {

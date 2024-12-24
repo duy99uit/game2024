@@ -15,7 +15,10 @@
 #include "BeetleHead.h"
 #include "Quadtree.h"
 #include "Define.h"
-//#include "Koopas.h"
+#include "RotatingGun.h"
+#include "GunWalker.h"
+#include "BeeHead.h"
+#include "JellyFish.h"
 
 
 class CPlayScene : public CScene
