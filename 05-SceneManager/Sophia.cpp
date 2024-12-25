@@ -11,8 +11,8 @@
 #include "Portal.h"
 
 #include "Collision.h"
-#include "BlackWalker.h"
 #include "PlayScene.h"
+#include "CheckPoint.h"
 
 void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -61,6 +61,9 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);
 	}
+	if (dynamic_cast<CCheckPoint*>(e->obj)) {
+		OnCollisionWithCheckPoint(e);
+	}
 		
 }
 void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -77,7 +80,15 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	}
 	isOnPlatform = true;
 }
-
+void CSophia::OnCollisionWithCheckPoint(LPCOLLISIONEVENT e)
+{
+	CCheckPoint* checkPoint = dynamic_cast<CCheckPoint*>(e->obj);
+	if (checkPoint)
+	{
+		/*SetPosition(checkPoint->GetNewX(), checkPoint->GetNewY());*/
+		SetPosition(checkPoint->GetNewX(), y);
+	}
+}
 
 
 

@@ -32,6 +32,7 @@
 #define OBJECT_TYPE_BACKGROUD	9999
 
 #define OBJECT_TYPE_PORTAL	50
+#define OBJECT_TYPE_CHECKPOINT	30
 
 
 #pragma region JASON 

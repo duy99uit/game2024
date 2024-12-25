@@ -60,6 +60,7 @@ class CSophia : public CGameObject
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
 	void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+	void OnCollisionWithCheckPoint(LPCOLLISIONEVENT e);
 	SophiaBullet* bullet = NULL;
 
 public:

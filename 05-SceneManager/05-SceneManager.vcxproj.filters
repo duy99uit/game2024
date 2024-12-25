@@ -81,6 +81,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h" />
@@ -172,6 +175,9 @@
     <ClInclude Include="Bullet.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="CheckPoint.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\map11.png" />
@@ -216,6 +222,9 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{55bb7858-c180-4ee9-b5d0-bc1020be51d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obstacle">
+      <UniqueIdentifier>{df4debae-bb61-41bf-a3a3-bcd9302f004f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

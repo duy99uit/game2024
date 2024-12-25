@@ -17,6 +17,7 @@ quadtree.txt
 # type: 0 = Jason , 1 = Brick, 2 = BlackWalker, 3 = FlyingBoom, 4 = BeetleHead , 101 = Sophia, 150 = Power P
 # type: 13 = Bouncing Bomb, 14 = Platform Walker, 25 = Gun Walker, 16 = Rotating Gun, 17 = BeeHead
 # type: 18 = Jelly Fish, 19 = Water Mine, 20 = Dasher, 21 = Big Head Boss, 22 = Brain Boss
+# type: 30 = CheckPoint, 31 = Ladder, 32 = Water Surface
 # See OBJECT_TYPE constants in AssetIDs.h
 
 
@@ -84,8 +85,14 @@ quadtree.txt
 17	2640	740
 #Jelly Fish
 18	2750	320
+
+#CHECKPOINT
+30	2010	1136	2100	1136
+30	2250	940	2350	940
+
+
 # JASON
-#0	350	1200
+0	1950	1200
 #0	2100	1200
 #ROTATING GUN POSITION
 #0	2100	1200
@@ -96,7 +103,7 @@ quadtree.txt
 #BEEHEAD POSITION
 #0	2560	1200
 #WATER POSITION
-0	2790	440
+#0	2790	440
 // start x = 315
 
 

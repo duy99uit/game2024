@@ -102,9 +102,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float x = (float)atof(tokens[1].c_str());
 	float y = (float)atof(tokens[2].c_str());
 	int tag = 0;
+	float newX = 0;
+	float newY = 0;
 	if (tokens.size() > 3) {
 		DebugOut(L"[INFO] CBlackWalker <created>>>>>! %d\n", tag);
 		tag = (int)atof(tokens[3].c_str());
+	}
+	if (tokens.size() > 4) {
+		newX = (float)atof(tokens[3].c_str());
+		newY = (float)atof(tokens[4].c_str());
+		DebugOut(L"[INFO] CCheckPointCCheckPoint <created>>>>>! %d\n", tag);
 	}
 		
 
@@ -140,7 +147,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GUN_WALKER: obj = new CGunWalker(x, y); break;
 	case OBJECT_TYPE_BEE_HEAD: obj = new CBeeHead(x, y); break;
 	case OBJECT_TYPE_JELLY_FISH: obj = new CJellyFish(x, y); break;
-	
+	case OBJECT_TYPE_CHECKPOINT: obj = new CCheckPoint(x, y, newX, newY); break;
 	/*case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/

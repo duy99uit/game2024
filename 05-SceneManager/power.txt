@@ -4,6 +4,12 @@
 # JASON BULLET BIG
 70000	255	109	270	124	33
 
+# JASON BULLET BIG
+80000	255	109	270	124	33
+80001	28	0	44	16	33
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 7000	70000	100
+## CheckPoint #################################################################
+8000	80001	100
