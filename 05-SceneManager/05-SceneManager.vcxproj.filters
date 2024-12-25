@@ -84,6 +84,12 @@
     <ClCompile Include="CheckPoint.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
+    <ClCompile Include="Ladder.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterSurface.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetIDs.h" />
@@ -176,6 +182,12 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="CheckPoint.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterSurface.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
   </ItemGroup>

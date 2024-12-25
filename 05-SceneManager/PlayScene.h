@@ -20,6 +20,7 @@
 #include "BeeHead.h"
 #include "JellyFish.h"
 #include "CheckPoint.h"
+#include "Ladder.h"
 
 
 class CPlayScene : public CScene
