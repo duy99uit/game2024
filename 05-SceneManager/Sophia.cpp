@@ -74,7 +74,8 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	{
 		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
 		{
-			blackWalker->SetState(BLACKWALKER_STATE_DIE);
+			/*blackWalker->SetState(BLACKWALKER_STATE_DIE);*/
+			HandleSophiaHealth();
 
 		}
 	}
@@ -100,8 +101,8 @@ void CSophia::Render()
 
 	RenderBoundingBox();
 
-	//DebugOutTitle(L"Coins: %d", coin);
-	DebugOutTitle(L"Blaster Master: %d");
+	DebugOutTitle(L"Blaster Master: %d", health);
+
 }
 
 
@@ -114,6 +115,7 @@ void CSophia::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ay = 0;
+		ax = 0;
 		break;
 	case SOPHIA_STATE_OPEN_LEFT:
 		aniId = ID_ANI_SOPHIA_OPEN_LEFT;
@@ -337,6 +339,18 @@ void CSophia::Shoot() {
 	}
 	this->bullet = new SophiaBullet(xbullet, ybullet, vxBullet, vyBullett);
 	currentScene->AddObject(bullet);
+}
+
+void CSophia::HandleSophiaHealth() {
+	if (health > 0)
+	{
+		health -= 1;
+		
+	}
+	else
+	{
+		SetState(SOPHIA_STATE_DIE);
+	}
 }
 
 
