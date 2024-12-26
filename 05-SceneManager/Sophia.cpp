@@ -257,6 +257,10 @@ void CSophia::HandleKeyDown(int KeyCode)
 
 {
 	boolean isLeftDirection = nx < 0;
+	boolean isDie = state == SOPHIA_STATE_DIE;
+	if (isDie) {
+		return;
+	}
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
@@ -280,13 +284,16 @@ void CSophia::HandleKeyDown(int KeyCode)
 		
 		break;
 	case DIK_Z:
-
-		if (isLeftDirection) {
-			SetState(SOPHIA_STATE_OPEN_LEFT);
+		if (!isOpen) {
+			if (isLeftDirection) {
+				SetState(SOPHIA_STATE_OPEN_LEFT);
+			}
+			else {
+				SetState(SOPHIA_STATE_OPEN_RIGHT);
+			}
+			HandleJasonJumpOffSophia();
 		}
-		else {
-			SetState(SOPHIA_STATE_OPEN_RIGHT);
-		}
+		
 		break;
 	case DIK_X:
 		if (isLeftDirection) {
@@ -342,15 +349,29 @@ void CSophia::Shoot() {
 }
 
 void CSophia::HandleSophiaHealth() {
-	if (health > 0)
-	{
-		health -= 1;
-		
-	}
-	else
+	if (health == 0)
 	{
 		SetState(SOPHIA_STATE_DIE);
 	}
+	else
+	{
+		health -= 1;
+	}
+}
+void CSophia::HandleJasonJumpOffSophia() {
+	// create object jason
+	// switch key for controlling Jason
+
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	isOpen = true;
+	this->jason = new CJason(x, y);
+	currentScene->AddObject(jason);
+	
+}
+void CSophia::HandleJasonJumpInSophia() {
+	// detect jason collsion with sophia\
+	// delete object
+	// switc control key
 }
 
 

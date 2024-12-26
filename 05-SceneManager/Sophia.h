@@ -61,6 +61,7 @@ class CSophia : public CGameObject
 	int untouchable;
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
+	BOOLEAN isOpen = false;
 	void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
 	void OnCollisionWithCheckPoint(LPCOLLISIONEVENT e);
 	SophiaBullet* bullet = NULL;
@@ -109,4 +110,6 @@ public:
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void Shoot();
 	void HandleSophiaHealth();
+	void HandleJasonJumpOffSophia();
+	void HandleJasonJumpInSophia();
 };
