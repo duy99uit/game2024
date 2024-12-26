@@ -112,4 +112,5 @@ public:
 	void HandleSophiaHealth();
 	void HandleJasonJumpOffSophia();
 	void HandleJasonJumpInSophia();
+	void SetOpen(boolean isOpen) { isOpen = isOpen; };
 };

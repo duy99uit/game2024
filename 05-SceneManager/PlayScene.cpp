@@ -357,3 +357,19 @@ void CPlayScene::PurgeDeletedObjects()
 		std::remove_if(objects.begin(), objects.end(), CPlayScene::IsGameObjectDeleted),
 		objects.end());
 }
+void CPlayScene::DeleteObject(LPGAMEOBJECT obj)
+{
+	if (!obj) return; // Safety check
+
+	// Find the object in the vector
+	auto it = std::find(objects.begin(), objects.end(), obj);
+	if (it != objects.end())
+	{
+		// Erase the object from the vector
+		objects.erase(it);
+
+		// Clean up memory
+		delete obj;
+		obj = nullptr;
+	}
+}

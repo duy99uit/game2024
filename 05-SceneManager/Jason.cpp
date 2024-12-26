@@ -289,6 +289,9 @@ void CJason::HandleKeyDown(int KeyCode)
 
 			Shoot();
 			break;
+		case DIK_Z:
+			HandleJasonJumpInSophia();
+			break;
 		}
 	}
 	else {
@@ -323,8 +326,10 @@ void CJason::HandleKeyDown(int KeyCode)
 			SetState(SMALL_JASON_STATE_SWIMMING_RIGHT);
 			break;
 		case DIK_SPACE:
-
 			Shoot();
+			break;
+		case DIK_Z:
+			HandleJasonJumpInSophia();
 			break;
 		}
 	}
@@ -359,3 +364,25 @@ void CJason::Shoot() {
 	this->bullet = new Bullet(xbullet, ybullet, vxBullet, vyBullett);
 	currentScene->AddObject(bullet);
 }
+
+
+void CJason::HandleJasonJumpInSophia() {
+	// Get the current play scene
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+
+	if (!currentScene) return; // Safety check
+
+	// Get the Sophia object
+	CSophia* sophia = dynamic_cast<CSophia*>(currentScene->GetSophia());
+	if (!sophia) return; // Safety check
+
+	// Set the active player to Sophia
+	currentScene->SetActivePlayer(sophia);
+
+	// Delete the Jason object from the scene
+	currentScene->DeleteObject(this);
+
+	// Set Sophia's isOpen state to false
+	sophia->SetOpen(false);
+}
+

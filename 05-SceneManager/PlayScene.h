@@ -68,6 +68,7 @@ public:
 	void SetJason(LPGAMEOBJECT obj) { jason = obj; } // Set Jason object
 
 	void AddObject(LPGAMEOBJECT obj) { this->objects.push_back(obj); } // add obj to scene
+	void DeleteObject(LPGAMEOBJECT obj); // New function to delete an object
 
 	void Clear();
 	void PurgeDeletedObjects();
