@@ -280,13 +280,26 @@ void CPlayScene::Update(DWORD dt)
 	if (player == NULL) return;
 
 	// Update camera to follow jason
-	float player_x, player_y;
+	/*float player_x, player_y;
 	player->GetPosition(player_x, player_y);
 
 	CGame *game = CGame::GetInstance();
 	Camera* camera = CGame::getCamera();
 	camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
-	camera->Update(player_x, player_y);
+	camera->Update(player_x, player_y);*/
+
+	// Update the camera to follow the active player
+	LPGAMEOBJECT activePlayer = GetActivePlayer();
+	if (activePlayer)
+	{
+		float player_x, player_y;
+		activePlayer->GetPosition(player_x, player_y);
+
+		CGame* game = CGame::GetInstance();
+		Camera* camera = CGame::getCamera();
+		camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
+		camera->Update(player_x, player_y);
+	}
 
 	//CGame* game = CGame::GetInstance();
 	//cx -= game->GetBackBufferWidth() / 2;
