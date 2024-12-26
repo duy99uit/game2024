@@ -30,6 +30,12 @@ protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;
 
+	// A play scene has to have a player, right?
+	LPGAMEOBJECT activePlayer; // The currently active player (e.g., Sophia or Jason)
+
+	LPGAMEOBJECT sophia; // Sophia object
+	LPGAMEOBJECT jason;  // Jason object
+
 	vector<LPGAMEOBJECT> objects;
 	Quadtree* quadtree;
 
@@ -51,6 +57,16 @@ public:
 	virtual void Unload();
 
 	LPGAMEOBJECT GetPlayer() { return player; }
+
+	LPGAMEOBJECT GetActivePlayer() { return activePlayer; } // Get the currently active player
+	void SetActivePlayer(LPGAMEOBJECT player) { activePlayer = player; } // Switch active player
+
+	LPGAMEOBJECT GetSophia() { return sophia; } // Get Sophia
+	void SetSophia(LPGAMEOBJECT obj) { sophia = obj; } // Set Sophia object
+
+	LPGAMEOBJECT GetJason() { return jason; } // Get Jason
+	void SetJason(LPGAMEOBJECT obj) { jason = obj; } // Set Jason object
+
 	void AddObject(LPGAMEOBJECT obj) { this->objects.push_back(obj); } // add obj to scene
 
 	void Clear();

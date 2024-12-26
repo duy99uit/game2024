@@ -366,6 +366,8 @@ void CSophia::HandleJasonJumpOffSophia() {
 	isOpen = true;
 	this->jason = new CJason(x, y);
 	currentScene->AddObject(jason);
+	currentScene->SetActivePlayer(jason);
+	
 	
 }
 void CSophia::HandleJasonJumpInSophia() {

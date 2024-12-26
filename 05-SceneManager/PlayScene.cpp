@@ -128,7 +128,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		/*obj = new CJason(x,y); 
 		player = (CJason*)obj;  */
 		obj = new CSophia(x, y);
-		player = (CSophia*)obj;
+		sophia = (CSophia*)obj;
+		player = sophia;
+		SetActivePlayer(sophia);
 
 		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
 		break;
