@@ -21,6 +21,7 @@
 #include "JellyFish.h"
 #include "CheckPoint.h"
 #include "Ladder.h"
+#include "WaterSurface.h"
 
 
 class CPlayScene : public CScene
