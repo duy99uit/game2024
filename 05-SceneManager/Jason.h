@@ -106,14 +106,14 @@ public:
 		ay = 0.0f; 
 		vy = 0.00f;
 		vx = 0.00f;
-		level = JASON_LEVEL_BIG;
+		level = JASON_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;
 		coin = 0;
 		// init state is idle right
-		state = BIG_JASON_STATE_IDLE_RIGHT;
-		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		state = SMALL_JASON_STATE_IDLE_RIGHT;
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();

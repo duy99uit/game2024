@@ -312,9 +312,21 @@ void CSophia::HandleKeyDown(int KeyCode)
 		}
 		break;
 	case DIK_SPACE:
-
 		Shoot();
 		break;
+	case DIK_2:
+		SetNewPositionDebug(1950,1200);
+		break;
+	case DIK_3:
+		SetNewPositionDebug(2100,	1200);
+		break;
+	case DIK_4:
+		SetNewPositionDebug(2360,	800);
+		break;
+	case DIK_5:
+		SetNewPositionDebug(2350,	940);
+		break;
+
 	}
 
 }
@@ -376,5 +388,9 @@ void CSophia::HandleJasonJumpInSophia() {
 	// switc control key
 }
 
-
+void CSophia::SetNewPositionDebug(float x, float y) {
+	this->x = x;
+	this->y = y;
+	DebugOut(L"[INFO] Sophia new position: (%f, %f)\n", x, y);
+}
 
