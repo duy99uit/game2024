@@ -19,6 +19,18 @@ void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	vy += -ay * dt;
 	vx += ax * dt;
+
+	if ( state == SOPHIA_STATE_JUMP_RIGHT || state == SOPHIA_STATE_JUMP_LEFT) {
+
+		/*ay = -0.0025f;
+		vy = -0.001f;*/
+		
+
+		if (vy < ( - 0.0025f  -0.001f*2)) {
+			vy = 0;
+			ay = 0;
+		}
+	}
 	/*isOnPlatform = true;*/
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
@@ -160,21 +172,27 @@ void CSophia::SetState(int state)
 		aniId = ID_ANI_SOPHIA_JUMP_RIGHT;
 		ay = -0.0025f;
 		vy = -0.001f;
+		vx = SOPHIA_WALKING_SPEED;
+		ax = SOPHIA_WALKING_ACCELERATION;
+		nx = 1;
 		break;
 	case SOPHIA_STATE_JUMP_LEFT:
 		aniId = ID_ANI_SOPHIA_JUMP_LEFT;
 		ay = -0.0025f;
 		vy = -0.001f;
+		nx = -1;
 		break;
 	case SOPHIA_STATE_FALLING_LEFT:
 		aniId = ID_ANI_SOPHIA_FALLING_LEFT;
 		ay = 0.0025f/3;
 		vy = 0.001f;
+		nx = -1;
 		break;
 	case SOPHIA_STATE_FALLING_RIGHT:
 		aniId = ID_ANI_SOPHIA_FALLING_RIGHT;
 		ay = 0.0025f/3;
 		vy = 0.001f;
+		nx = 1;
 		break;
 	case SOPHIA_STATE_SHOOT_TOP_LEFT:
 		aniId = ID_ANI_SOPHIA_SHOOT_TOP_LEFT;
@@ -264,12 +282,14 @@ void CSophia::HandleKeyDown(int KeyCode)
 	{
 	case DIK_RIGHT:
 		
-		SetState(SOPHIA_STATE_WALKING_RIGHT);
-		break;
+			SetState(SOPHIA_STATE_WALKING_RIGHT);
+			break;
+		
 	case DIK_LEFT:
 		
-		SetState(SOPHIA_STATE_WALKING_LEFT);
-		break;
+			SetState(SOPHIA_STATE_WALKING_LEFT);
+			break;
+		
 	case DIK_S:
 		if (isOnPlatform) {
 			if (isLeftDirection) {
@@ -392,4 +412,3 @@ void CSophia::SetNewPositionDebug(float x, float y) {
 	this->y = y;
 	DebugOut(L"[INFO] Sophia new position: (%f, %f)\n", x, y);
 }
-

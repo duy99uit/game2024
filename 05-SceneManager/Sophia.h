@@ -114,4 +114,5 @@ public:
 	void HandleJasonJumpInSophia();
 	void SetOpen(boolean isOpen) { isOpen = isOpen; };
 	void SetNewPositionDebug(float newX, float newY);
+	
 };

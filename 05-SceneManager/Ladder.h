@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 #define LADDER_BBOX_WIDTH 6
-#define LADDER_BBOX_HEIGHT 260
+#define LADDER_BBOX_HEIGHT 250
 
 #define ID_ANI_LADDER 8001
 

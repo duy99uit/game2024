@@ -25,11 +25,24 @@ void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (isOnLadder) {
 		isOnPlatform = false;
 	}
-	if (!isOnLadder && ny > 0) {
+	if (isOnLadder && ny > 0 && y >835) {
 		DebugOut(L"Herrerere >>>>> %f %f \n", isOnLadder, isOnPlatform);
 		vy = 0;
 		ay = JASON_GRAVITY;
+		x = x - 20;
+		SetState(SMALL_JASON_STATE_IDLE_RIGHT);
 		isOnPlatform = false;
+		isOnLadder = false;
+	}
+	if (isOnLadder && ny < 0 && y < 610) {
+		DebugOut(L"Herrerere >>>>> %f %f \n", isOnLadder, isOnPlatform);
+		vy = 0;
+		ay = JASON_GRAVITY;
+		x = x+ 16;
+		SetState(SMALL_JASON_STATE_IDLE_RIGHT);
+		isOnPlatform = false;
+		isOnLadder = false;
+		ny > 0;
 	}
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -70,13 +83,17 @@ void CJason::OnCollisionWithLadder(LPCOLLISIONEVENT e)
 	CLadder* ladder = dynamic_cast<CLadder*>(e->obj);
 	if (ladder)
 	{
-		isOnLadder = true; // Set flag to indicate Jason is on a ladder
-		vx = 0.0f;         // Stop horizontal movement
+		isOnLadder = true;
+		vx = 0.0f;        
 		ax = 0.0f;
-		/*ay = JASON_GRAVITY/100;*/
 		vy = 0;
-	
-		SetState(SMALL_JASON_STATE_CLIMBING);
+
+		if (y > 780 && state != SMALL_JASON_STATE_CLIMBING_UP) {
+			SetState(SMALL_JASON_STATE_PREPARE_CLIMBING_DOWN);
+		}
+		if (y < 610) {
+			SetState(SMALL_JASON_STATE_PREPARE_CLIMBING_UP);
+		}	
 			
 	}
 	else {
@@ -181,11 +198,19 @@ void CJason::SetState(int state)
 		isOnPlatform = false;
 		ny = -1;
 		break;
-	case SMALL_JASON_STATE_CLIMBING:
+	case SMALL_JASON_STATE_PREPARE_CLIMBING_DOWN:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
 		ay = 0;
 		isOnPlatform = false;
 		ny = -1;
+		AdjustPositionOnLadder();
+		break;
+	case SMALL_JASON_STATE_PREPARE_CLIMBING_UP:
+		aniId = ID_ANI_SMALL_JASON_CLIMBING;
+		ay = 0;
+		isOnPlatform = false;
+		ny = 1;
+		AdjustPositionOnLadder();
 		break;
 	case SMALL_JASON_STATE_IDLE_LEFT:
 		aniId = ID_ANI_SMALL_JASON_IDLE_LEFT;
@@ -373,12 +398,15 @@ void CJason::HandleKeyDown(int KeyCode)
 			{
 			case DIK_UP: // Climb up the ladder
 				SetState(SMALL_JASON_STATE_CLIMBING_UP);
-			
 				break;
 			case DIK_DOWN: // Climb down the ladder
-				
 				SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
-			
+				break;
+			case DIK_LEFT: 
+				HandleEscapeLadder(false);
+				break;
+			case DIK_RIGHT:
+				HandleEscapeLadder(true);
 				break;
 			}
 		}
@@ -469,5 +497,22 @@ void CJason::HandleJasonJumpInSophia() {
 
 	// Set Sophia's isOpen state to false
 	sophia->SetOpen(false);
+}
+
+void CJason::AdjustPositionOnLadder() {
+	if (nx > 0) {
+		x = x + 4;
+	}
+	else {
+		x = x - 6;
+	}
+}
+void CJason::HandleEscapeLadder(boolean isRight) {
+	vy = 0;
+	ay = JASON_GRAVITY;
+	x = isRight ? x + 10 :x - 10;
+	SetState(isRight ? SMALL_JASON_STATE_IDLE_RIGHT : SMALL_JASON_STATE_IDLE_LEFT);
+	isOnPlatform = false;
+	isOnLadder = false;
 }
 

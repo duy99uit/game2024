@@ -36,7 +36,8 @@
 #define SMALL_JASON_STATE_CLIMBING_DOWN	1311
 #define SMALL_JASON_STATE_SWIMMING_RIGHT	1320
 #define SMALL_JASON_STATE_SWIMMING_LEFT	1321
-#define SMALL_JASON_STATE_CLIMBING	1322
+#define SMALL_JASON_STATE_PREPARE_CLIMBING_DOWN	1322
+#define SMALL_JASON_STATE_PREPARE_CLIMBING_UP	1323
 
 
 
@@ -144,4 +145,6 @@ public:
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void Shoot();
 	void HandleJasonJumpInSophia();
+	void AdjustPositionOnLadder();
+	void HandleEscapeLadder(boolean isRight);
 };
