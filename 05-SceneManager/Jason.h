@@ -6,7 +6,7 @@
 #include "Bullet.h"
 
 #include "debug.h"
-
+#define JASON_GRAVITY 0.002f
 // big
 #define BIG_JASON_WALKING_SPEED		0.1f
 #define BIG_JASON_CRAWLING_SPEED		0.05f
@@ -78,8 +78,8 @@
 #define JASON_BIG_BBOX_WIDTH  10
 #define JASON_BIG_BBOX_HEIGHT 10
 
-#define JASON_SMALL_BBOX_WIDTH  10
-#define JASON_SMALL_BBOX_HEIGHT 10
+#define JASON_SMALL_BBOX_WIDTH  8
+#define JASON_SMALL_BBOX_HEIGHT 8
 
 
 #define JASON_UNTOUCHABLE_TIME 2500
@@ -105,7 +105,7 @@ public:
 		maxVx = 0.0f;
 		maxVy = 0.0f;
 		ax = 0.0f;
-		ay = 0.009f; 
+		ay = JASON_GRAVITY;
 		vy = 0.00f;
 		vx = 0.00f;
 		level = JASON_LEVEL_SMALL;

@@ -2,7 +2,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define LADDER_BBOX_WIDTH 12
+#define LADDER_BBOX_WIDTH 6
 #define LADDER_BBOX_HEIGHT 260
 
 #define ID_ANI_LADDER 8001
