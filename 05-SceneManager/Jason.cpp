@@ -20,8 +20,15 @@ void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	vx += ax * dt;
 	vy += -ay * dt;
+	/*isOnLadder = false;*/
 
 	if (isOnLadder) {
+		isOnPlatform = false;
+	}
+	if (!isOnLadder && ny > 0) {
+		DebugOut(L"Herrerere >>>>> %f %f \n", isOnLadder, isOnPlatform);
+		vy = 0;
+		ay = JASON_GRAVITY;
 		isOnPlatform = false;
 	}
 
@@ -32,6 +39,7 @@ void CJason::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
+	
 	
    DebugOut(L"Dang o dau >>>>> %f %f \n", x, y);
 }
@@ -44,6 +52,14 @@ void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 		vy = 0;
 		isOnPlatform = true;
 	}
+
+	//if (e->ny != 0 && e->obj->IsBlocking() && isOnLadder) {
+	//	/*vy = 0;
+	//	ay = 0.0f;
+	//	isOnPlatform = true;
+	//	isOnLadder = false;
+	//	x = x - 100;*/
+	//}
 	if (dynamic_cast<CLadder*>(e->obj)) {
 		OnCollisionWithLadder(e);
 	}
@@ -57,11 +73,14 @@ void CJason::OnCollisionWithLadder(LPCOLLISIONEVENT e)
 		isOnLadder = true; // Set flag to indicate Jason is on a ladder
 		vx = 0.0f;         // Stop horizontal movement
 		ax = 0.0f;
-		ay = JASON_GRAVITY/10;
-		vy = JASON_GRAVITY/10;
+		/*ay = JASON_GRAVITY/100;*/
+		vy = 0;
 	
-		SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
+		SetState(SMALL_JASON_STATE_CLIMBING);
 			
+	}
+	else {
+		DebugOut(L"Exitssssss %f %f \n", x, y);
 	}
 }
 
@@ -152,17 +171,20 @@ void CJason::SetState(int state)
 		break;
 	case SMALL_JASON_STATE_CLIMBING_UP:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
-		vy = 0;
-		ay = JASON_GRAVITY;
+		ay = - JASON_GRAVITY/2;
 		isOnPlatform = false;
 		ny = 1;
 		break;
 	case SMALL_JASON_STATE_CLIMBING_DOWN:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
-		ay = JASON_GRAVITY;
+		ay = JASON_GRAVITY / 2;
 		isOnPlatform = false;
-		/*vy = -BIG_JASON_WALKING_SPEED;*/
-		/*isOnPlatform = false;*/
+		ny = -1;
+		break;
+	case SMALL_JASON_STATE_CLIMBING:
+		aniId = ID_ANI_SMALL_JASON_CLIMBING;
+		ay = 0;
+		isOnPlatform = false;
 		ny = -1;
 		break;
 	case SMALL_JASON_STATE_IDLE_LEFT:
@@ -287,6 +309,23 @@ void CJason::HandleKeyUp(int KeyCode)
 				break;
 			case DIK_F:
 				SetState(SMALL_JASON_STATE_IDLE_LEFT);
+				break;
+			}
+		}
+		if (isOnLadder)
+		{
+			switch (KeyCode)
+			{
+			case DIK_UP:
+				ay = 0;
+				vy = 0;
+
+				break;
+			case DIK_DOWN:
+
+				ay = 0;
+				vy = 0;
+
 				break;
 			}
 		}
