@@ -42,7 +42,6 @@ void CSophia::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-	/*isOnPlatform = false;*/
 	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
 }
 

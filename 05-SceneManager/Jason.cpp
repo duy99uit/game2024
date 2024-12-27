@@ -19,6 +19,7 @@ void CJason::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 
 	vx += ax * dt;
+	vy += -ay * dt;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -27,14 +28,38 @@ void CJason::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
+	isOnLadder = false;
+	
    DebugOut(L"Dang o dau >>>>> %f %f \n", x, y);
 }
 
 void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	if (e->ny != 0 && e->obj->IsBlocking())
+	{
+		DebugOut(L"CJason::OnCollisionWith 1111");
+	/*	vy = 0;*/
+	/*	isOnPlatform = true;*/
+	}
+	if (dynamic_cast<CLadder*>(e->obj)) {
+		OnCollisionWithLadder(e);
+	}
 }
 
-
+void CJason::OnCollisionWithLadder(LPCOLLISIONEVENT e)
+{
+	CLadder* ladder = dynamic_cast<CLadder*>(e->obj);
+	if (ladder)
+	{
+		isOnLadder = true; // Set flag to indicate Jason is on a ladder
+		vx = 0.0f;         // Stop horizontal movement
+		vy = 0.0f;         // Stop vertical movement
+		ax = 0.0f;
+		ay = 0.0f;
+		SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
+			
+	}
+}
 
 void CJason::Render()
 {
@@ -113,20 +138,24 @@ void CJason::SetState(int state)
 		aniId = ID_ANI_SMALL_JASON_WALKING_RIGHT;
 		vx = BIG_JASON_WALKING_SPEED;
 		nx = 1;
+		isOnPlatform = false;
 		break;
 	case SMALL_JASON_STATE_WALKING_LEFT:
 		aniId = ID_ANI_SMALL_JASON_WALKING_LEFT;
 		vx = -BIG_JASON_WALKING_SPEED;
 		nx = -1;
+		isOnPlatform = false;
 		break;
 	case SMALL_JASON_STATE_CLIMBING_UP:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
 		vy = BIG_JASON_WALKING_SPEED;
+		isOnPlatform = false;
 		ny = 1;
 		break;
 	case SMALL_JASON_STATE_CLIMBING_DOWN:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
 		vy = -BIG_JASON_WALKING_SPEED;
+		isOnPlatform = false;
 		ny = -1;
 		break;
 	case SMALL_JASON_STATE_IDLE_LEFT:
@@ -134,16 +163,12 @@ void CJason::SetState(int state)
 		nx = -1;
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = 0.0f;
-		vy = 0.0f;
 		break;
 	case SMALL_JASON_STATE_IDLE_RIGHT:
 		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 		nx = 1;
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = 0.0f;
-		vy = 0.0f;
 		break;
 	case SMALL_JASON_STATE_CRAWLING_RIGHT:
 		aniId = ID_ANI_SMALL_JASON_CRAWLING_RIGHT;
@@ -169,8 +194,6 @@ void CJason::SetState(int state)
 		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
 		ax = 0.0f;
 		vx = 0.0f;
-		ay = 0.0f;
-		vy = 0.0f;
 		break;
 	}
 
@@ -295,43 +318,56 @@ void CJason::HandleKeyDown(int KeyCode)
 		}
 	}
 	else {
-		switch (KeyCode)
+		if (isOnLadder)
 		{
-		case DIK_1:
-			SetState(BIG_JASON_STATE_IDLE_RIGHT);
-			SetLevel(JASON_LEVEL_BIG);
-			break;
-		case DIK_RIGHT:
-			SetState(SMALL_JASON_STATE_WALKING_RIGHT);
-			break;
-		case DIK_LEFT:
-			SetState(SMALL_JASON_STATE_WALKING_LEFT);
-			break;
-		case DIK_UP:
-			SetState(SMALL_JASON_STATE_CLIMBING_UP);
-			break;
-		case DIK_DOWN:
-			SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
-			break;
-		case DIK_A:
-			SetState(SMALL_JASON_STATE_CRAWLING_LEFT);
-			break;
-		case DIK_S:
-			SetState(SMALL_JASON_STATE_SWIMMING_LEFT);
-			break;
-		case DIK_F:
-			SetState(SMALL_JASON_STATE_CRAWLING_RIGHT);
-			break;
-		case DIK_D:
-			SetState(SMALL_JASON_STATE_SWIMMING_RIGHT);
-			break;
-		case DIK_SPACE:
-			Shoot();
-			break;
-		case DIK_Z:
-			HandleJasonJumpInSophia();
-			break;
+			switch (KeyCode)
+			{
+			case DIK_UP: // Climb up the ladder
+				SetState(SMALL_JASON_STATE_CLIMBING_UP);
+			
+				break;
+			case DIK_DOWN: // Climb down the ladder
+				
+				SetState(SMALL_JASON_STATE_CLIMBING_DOWN);
+			
+				break;
+			}
 		}
+		else
+		{
+			switch (KeyCode)
+			{
+			case DIK_1:
+				SetState(BIG_JASON_STATE_IDLE_RIGHT);
+				SetLevel(JASON_LEVEL_BIG);
+				break;
+			case DIK_RIGHT:
+				SetState(SMALL_JASON_STATE_WALKING_RIGHT);
+				break;
+			case DIK_LEFT:
+				SetState(SMALL_JASON_STATE_WALKING_LEFT);
+				break;
+			case DIK_A:
+				SetState(SMALL_JASON_STATE_CRAWLING_LEFT);
+				break;
+			case DIK_S:
+				SetState(SMALL_JASON_STATE_SWIMMING_LEFT);
+				break;
+			case DIK_F:
+				SetState(SMALL_JASON_STATE_CRAWLING_RIGHT);
+				break;
+			case DIK_D:
+				SetState(SMALL_JASON_STATE_SWIMMING_RIGHT);
+				break;
+			case DIK_SPACE:
+				Shoot();
+				break;
+			case DIK_Z:
+				HandleJasonJumpInSophia();
+				break;
+			}
+		}
+		
 	}
 	
 }
