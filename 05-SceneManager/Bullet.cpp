@@ -136,7 +136,7 @@ void Bullet::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Bullet::GetBoundingBox(float& l, float& t, float& r, float& b)

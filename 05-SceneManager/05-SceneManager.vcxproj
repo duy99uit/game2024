@@ -155,6 +155,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="debug.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="BlackWalker.cpp" />
     <ClCompile Include="GunWalker.cpp" />
     <ClCompile Include="JellyFish.cpp" />
+    <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jason.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WaterSurface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="debug.h" />
@@ -205,6 +209,7 @@
     <ClInclude Include="JellyFish.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Jason.h" />
+    <ClInclude Include="Ladder.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlatformWalker.h" />
     <ClInclude Include="PlayScene.h" />
@@ -221,6 +226,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WaterSurface.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="blastermaster.txt" />

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "SophiaBullet.h"
+#include "Jason.h"
 
 #define SOPHIA_GRAVITY 0.002f
 #define SOPHIA_WALKING_SPEED 0.09f
@@ -56,11 +57,15 @@ class CSophia : public CGameObject
 	float ay;
 
 	int level;
+	int health;
 	int untouchable;
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
+	BOOLEAN isOpen = false;
 	void OnCollisionWithBlackWalker(LPCOLLISIONEVENT e);
+	void OnCollisionWithCheckPoint(LPCOLLISIONEVENT e);
 	SophiaBullet* bullet = NULL;
+	CJason* jason = NULL;
 
 public:
 	CSophia(float x, float y) : CGameObject(x, y)
@@ -72,6 +77,7 @@ public:
 		vy = -SOPHIA_JUMP_SPEED_Y;
 		vx = 0.08f;
 		level = 1;
+		health = 5;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;
@@ -103,4 +109,9 @@ public:
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void Shoot();
+	void HandleSophiaHealth();
+	void HandleJasonJumpOffSophia();
+	void HandleJasonJumpInSophia();
+	void SetOpen(boolean isOpen) { isOpen = isOpen; };
+	void SetNewPositionDebug(float newX, float newY);
 };

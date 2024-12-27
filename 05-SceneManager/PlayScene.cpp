@@ -102,9 +102,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	float x = (float)atof(tokens[1].c_str());
 	float y = (float)atof(tokens[2].c_str());
 	int tag = 0;
+	float newX = 0;
+	float newY = 0;
 	if (tokens.size() > 3) {
 		DebugOut(L"[INFO] CBlackWalker <created>>>>>! %d\n", tag);
 		tag = (int)atof(tokens[3].c_str());
+	}
+	if (tokens.size() > 4) {
+		newX = (float)atof(tokens[3].c_str());
+		newY = (float)atof(tokens[4].c_str());
+		DebugOut(L"[INFO] CCheckPointCCheckPoint <created>>>>>! %d\n", tag);
 	}
 		
 
@@ -121,7 +128,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		/*obj = new CJason(x,y); 
 		player = (CJason*)obj;  */
 		obj = new CSophia(x, y);
-		player = (CSophia*)obj;
+		sophia = (CSophia*)obj;
+		player = sophia;
+		SetActivePlayer(sophia);
 
 		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
 		break;
@@ -140,7 +149,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GUN_WALKER: obj = new CGunWalker(x, y); break;
 	case OBJECT_TYPE_BEE_HEAD: obj = new CBeeHead(x, y); break;
 	case OBJECT_TYPE_JELLY_FISH: obj = new CJellyFish(x, y); break;
-	
+	case OBJECT_TYPE_CHECKPOINT: obj = new CCheckPoint(x, y, newX, newY); break;
+	case OBJECT_TYPE_LADDER: obj = new CLadder(x, y); break;
+	case OBJECT_TYPE_WATERSURFACE: obj = new CWaterSurface(x, y); break;
 	/*case OBJECT_TYPE_SOPHIA: obj = new CSophia(x, y); break;*/
 	/*case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;*/
@@ -269,13 +280,26 @@ void CPlayScene::Update(DWORD dt)
 	if (player == NULL) return;
 
 	// Update camera to follow jason
-	float player_x, player_y;
+	/*float player_x, player_y;
 	player->GetPosition(player_x, player_y);
 
 	CGame *game = CGame::GetInstance();
 	Camera* camera = CGame::getCamera();
 	camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
-	camera->Update(player_x, player_y);
+	camera->Update(player_x, player_y);*/
+
+	// Update the camera to follow the active player
+	LPGAMEOBJECT activePlayer = GetActivePlayer();
+	if (activePlayer)
+	{
+		float player_x, player_y;
+		activePlayer->GetPosition(player_x, player_y);
+
+		CGame* game = CGame::GetInstance();
+		Camera* camera = CGame::getCamera();
+		camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
+		camera->Update(player_x, player_y);
+	}
 
 	//CGame* game = CGame::GetInstance();
 	//cx -= game->GetBackBufferWidth() / 2;
@@ -345,4 +369,20 @@ void CPlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), CPlayScene::IsGameObjectDeleted),
 		objects.end());
+}
+void CPlayScene::DeleteObject(LPGAMEOBJECT obj)
+{
+	if (!obj) return; // Safety check
+
+	// Find the object in the vector
+	auto it = std::find(objects.begin(), objects.end(), obj);
+	if (it != objects.end())
+	{
+		// Erase the object from the vector
+		objects.erase(it);
+
+		// Clean up memory
+		delete obj;
+		obj = nullptr;
+	}
 }

@@ -11,8 +11,8 @@
 #include "Portal.h"
 
 #include "Collision.h"
-#include "BlackWalker.h"
 #include "PlayScene.h"
+#include "CheckPoint.h"
 
 void CSophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -42,7 +42,6 @@ void CSophia::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-	/*isOnPlatform = false;*/
 	DebugOut(L"OnNoCollision >>>>> %d\n", x, vx);
 }
 
@@ -61,6 +60,9 @@ void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBlackWalker*>(e->obj)) {
 		OnCollisionWithBlackWalker(e);
 	}
+	if (dynamic_cast<CCheckPoint*>(e->obj)) {
+		OnCollisionWithCheckPoint(e);
+	}
 		
 }
 void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -71,13 +73,22 @@ void CSophia::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 	{
 		if (blackWalker->GetState() != BLACKWALKER_STATE_DIE)
 		{
-			blackWalker->SetState(BLACKWALKER_STATE_DIE);
+			/*blackWalker->SetState(BLACKWALKER_STATE_DIE);*/
+			HandleSophiaHealth();
 
 		}
 	}
 	isOnPlatform = true;
 }
-
+void CSophia::OnCollisionWithCheckPoint(LPCOLLISIONEVENT e)
+{
+	CCheckPoint* checkPoint = dynamic_cast<CCheckPoint*>(e->obj);
+	if (checkPoint)
+	{
+		/*SetPosition(checkPoint->GetNewX(), checkPoint->GetNewY());*/
+		SetPosition(checkPoint->GetNewX(), y);
+	}
+}
 
 
 
@@ -89,8 +100,8 @@ void CSophia::Render()
 
 	RenderBoundingBox();
 
-	//DebugOutTitle(L"Coins: %d", coin);
-	DebugOutTitle(L"Blaster Master: %d");
+	DebugOutTitle(L"Blaster Master: %d", health);
+
 }
 
 
@@ -103,6 +114,7 @@ void CSophia::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ay = 0;
+		ax = 0;
 		break;
 	case SOPHIA_STATE_OPEN_LEFT:
 		aniId = ID_ANI_SOPHIA_OPEN_LEFT;
@@ -244,6 +256,10 @@ void CSophia::HandleKeyDown(int KeyCode)
 
 {
 	boolean isLeftDirection = nx < 0;
+	boolean isDie = state == SOPHIA_STATE_DIE;
+	if (isDie) {
+		return;
+	}
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
@@ -267,13 +283,16 @@ void CSophia::HandleKeyDown(int KeyCode)
 		
 		break;
 	case DIK_Z:
-
-		if (isLeftDirection) {
-			SetState(SOPHIA_STATE_OPEN_LEFT);
+		if (!isOpen) {
+			if (isLeftDirection) {
+				SetState(SOPHIA_STATE_OPEN_LEFT);
+			}
+			else {
+				SetState(SOPHIA_STATE_OPEN_RIGHT);
+			}
+			HandleJasonJumpOffSophia();
 		}
-		else {
-			SetState(SOPHIA_STATE_OPEN_RIGHT);
-		}
+		
 		break;
 	case DIK_X:
 		if (isLeftDirection) {
@@ -292,9 +311,21 @@ void CSophia::HandleKeyDown(int KeyCode)
 		}
 		break;
 	case DIK_SPACE:
-
 		Shoot();
 		break;
+	case DIK_2:
+		SetNewPositionDebug(1950,1200);
+		break;
+	case DIK_3:
+		SetNewPositionDebug(2100,	1200);
+		break;
+	case DIK_4:
+		SetNewPositionDebug(2360,	800);
+		break;
+	case DIK_5:
+		SetNewPositionDebug(2350,	940);
+		break;
+
 	}
 
 }
@@ -328,5 +359,37 @@ void CSophia::Shoot() {
 	currentScene->AddObject(bullet);
 }
 
+void CSophia::HandleSophiaHealth() {
+	if (health == 0)
+	{
+		SetState(SOPHIA_STATE_DIE);
+	}
+	else
+	{
+		health -= 1;
+	}
+}
+void CSophia::HandleJasonJumpOffSophia() {
+	// create object jason
+	// switch key for controlling Jason
 
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	isOpen = true;
+	this->jason = new CJason(x, y);
+	currentScene->AddObject(jason);
+	currentScene->SetActivePlayer(jason);
+	
+	
+}
+void CSophia::HandleJasonJumpInSophia() {
+	// detect jason collsion with sophia\
+	// delete object
+	// switc control key
+}
+
+void CSophia::SetNewPositionDebug(float x, float y) {
+	this->x = x;
+	this->y = y;
+	DebugOut(L"[INFO] Sophia new position: (%f, %f)\n", x, y);
+}
 

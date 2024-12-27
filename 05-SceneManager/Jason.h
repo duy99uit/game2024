@@ -6,7 +6,8 @@
 #include "Bullet.h"
 
 #include "debug.h"
-
+#define JASON_GRAVITY 0.002f
+#define JASON_MAX_SPEED_Y 0.004f
 // big
 #define BIG_JASON_WALKING_SPEED		0.1f
 #define BIG_JASON_CRAWLING_SPEED		0.05f
@@ -35,6 +36,7 @@
 #define SMALL_JASON_STATE_CLIMBING_DOWN	1311
 #define SMALL_JASON_STATE_SWIMMING_RIGHT	1320
 #define SMALL_JASON_STATE_SWIMMING_LEFT	1321
+#define SMALL_JASON_STATE_CLIMBING	1322
 
 
 
@@ -78,8 +80,8 @@
 #define JASON_BIG_BBOX_WIDTH  10
 #define JASON_BIG_BBOX_HEIGHT 10
 
-#define JASON_SMALL_BBOX_WIDTH  10
-#define JASON_SMALL_BBOX_HEIGHT 10
+#define JASON_SMALL_BBOX_WIDTH  8
+#define JASON_SMALL_BBOX_HEIGHT 8
 
 
 #define JASON_UNTOUCHABLE_TIME 2500
@@ -95,25 +97,28 @@ class CJason : public CGameObject
 	int untouchable; 
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
+	BOOLEAN isOnLadder;
 	int coin; 
 	Bullet* bullet = NULL;
+	void OnCollisionWithLadder(LPCOLLISIONEVENT e);
 public:
 	CJason(float x, float y) : CGameObject(x, y)
 	{
 		maxVx = 0.0f;
 		maxVy = 0.0f;
 		ax = 0.0f;
-		ay = 0.0f; 
+		ay = JASON_GRAVITY;
 		vy = 0.00f;
 		vx = 0.00f;
-		level = JASON_LEVEL_BIG;
+		level = JASON_LEVEL_SMALL;
 		untouchable = 0;
 		untouchable_start = -1;
 		isOnPlatform = false;
+		isOnLadder = false;
 		coin = 0;
 		// init state is idle right
-		state = BIG_JASON_STATE_IDLE_RIGHT;
-		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
+		state = SMALL_JASON_STATE_IDLE_RIGHT;
+		aniId = ID_ANI_SMALL_JASON_IDLE_RIGHT;
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
@@ -138,4 +143,5 @@ public:
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void Shoot();
+	void HandleJasonJumpInSophia();
 };
