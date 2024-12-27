@@ -28,6 +28,7 @@ protected:
 	LPGAMEOBJECT player;
 
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> tree_objects;
 	Quadtree* quadtree;
 
 	void _ParseSection_SPRITES(string line);

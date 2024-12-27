@@ -135,7 +135,45 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BEETLEHEAD: obj = new CBeetleHead(x, y); break;
 	case OBJECT_TYPE_POWER_P: obj = new CPower(x, y); break;
 	case OBJECT_TYPE_BOUCINGBOMB: obj = new CBouncingBomb(x, y); break;
-	case OBJECT_TYPE_PLATFORM_WALKER: obj = new CPlatformWalker(x, y); break;
+	case OBJECT_TYPE_PLATFORM_WALKER:
+	{
+		int init_state = (float)atof(tokens[3].c_str());
+		float px = (float)atof(tokens[4].c_str());
+		float py = (float)atof(tokens[5].c_str());
+		float cell_width = (float)atof(tokens[6].c_str());
+		float cell_height = (float)atof(tokens[7].c_str());
+		int length = atoi(tokens[8].c_str());
+		int sprite_begin = atoi(tokens[9].c_str());
+		int sprite_middle = atoi(tokens[10].c_str());
+		int sprite_end = atoi(tokens[11].c_str());
+		obj = new CPlatformWalker(x, y, init_state, px, py, cell_width, cell_height, length, sprite_begin, sprite_middle, sprite_end); break;
+	}
+	case OBJECT_TYPE_BACKGROUD:
+
+		obj = new CBackground(x, y);
+
+		DebugOut(L"[INFO] Player object has been created! %d\n", x, y);
+		break;
+
+	case OBJECT_TYPE_PLATFORM:
+	{
+
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int length = atoi(tokens[5].c_str());
+		int sprite_begin = atoi(tokens[6].c_str());
+		int sprite_middle = atoi(tokens[7].c_str());
+		int sprite_end = atoi(tokens[8].c_str());
+
+		obj = new CPlatform(
+			x, y,
+			cell_width, cell_height, length,
+			sprite_begin, sprite_middle, sprite_end
+		);
+
+		break;
+	}
+	
 	case OBJECT_TYPE_ROTATING_GUN: obj = new CRotatingGun(x, y); break;
 	case OBJECT_TYPE_GUN_WALKER: obj = new CGunWalker(x, y); break;
 	case OBJECT_TYPE_BEE_HEAD: obj = new CBeeHead(x, y); break;
@@ -166,10 +204,11 @@ void CPlayScene::_ParseSection_QUAD(string line)
 	vector<string> tokens = split(line);
 	DebugOut(L"--> %s\n", ToWSTR(line).c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[0]);
-	quadtree = new Quadtree(path);
-	vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
-	objects.insert(objects.end(), quad.begin(), quad.end());
-	DebugOut(L"READ QUADTREE SUCCESS, HAVE %d %d OBJECTS\n", objects.size(), quad);
+	quadtree = new Quadtree(L"quadtree.txt");
+	//vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
+	//tree_objects.insert(tree_objects.end(), quad.begin(), quad.end());
+	//objects.insert(objects.end(), quad.begin(), quad.end());
+//	DebugOut(L"READ QUADTREE SUCCESS, HAVE %d %d OBJECTS\n", objects.size(), quad);
 	quadtree->Split();
 }
 
@@ -251,8 +290,38 @@ void CPlayScene::Load()
 void CPlayScene::Update(DWORD dt)
 {
 
-	vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
+	float player_x, player_y;
+	player->GetPosition(player_x, player_y);
+	float camX, camY, camWidth, camHeight;
+
+	CGame* game = CGame::GetInstance();
+	Camera* camera = CGame::getCamera();
+	camera->GetCamInfo(camX, camY, camWidth, camHeight);
+
+	//vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
 	vector<LPGAMEOBJECT> coObjects;
+	
+	//insert object from quadtree
+	//vector<LPGAMEOBJECT> quad = quadtree->getAllObjectInQT();
+	vector<LPGAMEOBJECT> quad = quadtree->GetObjectsInCamera(camX,camY,camWidth,camHeight);
+	tree_objects.clear();
+	tree_objects.insert(tree_objects.end(), quad.begin(), quad.end());
+	DebugOut(L"READccc QUADTREE SUCCESS, HAVE %d %d OBJECTS\n", tree_objects.size(), quad);
+
+	/*tree_objects.insert(tree_objects.end(), topLeft.begin(), topLeft.end());
+	tree_objects.insert(tree_objects.end(), topRight.begin(), topRight.end());
+	tree_objects.insert(tree_objects.end(), botLeft.begin(), botLeft.end());
+	tree_objects.insert(tree_objects.end(), botRight.begin(), botRight.end());*/
+
+	for (size_t i = 1; i < tree_objects.size(); i++)
+	{
+		coObjects.push_back(tree_objects[i]);
+	}
+
+	for (size_t i = 0; i < tree_objects.size(); i++)
+	{
+		tree_objects[i]->Update(dt, &coObjects);
+	}
 
 	for (size_t i = 1; i < objects.size(); i++)
 	{
@@ -263,19 +332,19 @@ void CPlayScene::Update(DWORD dt)
 	{
 		objects[i]->Update(dt, &coObjects);
 	}
-	objects.insert(objects.end(), quad.begin(), quad.end());
-	coObjects.insert(coObjects.end(), quad.begin(), quad.end());
+	
+
+	camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
+	camera->Update(player_x, player_y);
+	DebugOut(L"[INFO] player in : %f, %f  \n", player_x, player_y);
+	
+//	objects.insert(objects.end(), quad.begin(), quad.end());
+	//coObjects.insert(coObjects.end(), quad.begin(), quad.end());
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
 	if (player == NULL) return;
 
 	// Update camera to follow jason
-	float player_x, player_y;
-	player->GetPosition(player_x, player_y);
-
-	CGame *game = CGame::GetInstance();
-	Camera* camera = CGame::getCamera();
-	camera->SetSize(game->GetScreenWidth(), game->GetScreenHeight());
-	camera->Update(player_x, player_y);
+	
 
 	//CGame* game = CGame::GetInstance();
 	//cx -= game->GetBackBufferWidth() / 2;
@@ -291,8 +360,11 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
+	for (int i = 0; i < tree_objects.size(); i++)
+		tree_objects[i]->Render();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	
 }
 
 /*
@@ -305,6 +377,11 @@ void CPlayScene::Clear()
 	{
 		delete (*it);
 	}
+	for (it = tree_objects.begin(); it != tree_objects.end(); it++)
+	{
+		delete (*it);
+	}
+	tree_objects.clear();
 	objects.clear();
 }
 
@@ -320,6 +397,7 @@ void CPlayScene::Unload()
 		delete objects[i];
 
 	objects.clear();
+	tree_objects.clear();
 	player = NULL;
 
 	DebugOut(L"[INFO] Scene %d unloaded! \n", id);
@@ -345,4 +423,7 @@ void CPlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), CPlayScene::IsGameObjectDeleted),
 		objects.end());
+	tree_objects.erase(
+		std::remove_if(tree_objects.begin(), tree_objects.end(), CPlayScene::IsGameObjectDeleted),
+		tree_objects.end());
 }
