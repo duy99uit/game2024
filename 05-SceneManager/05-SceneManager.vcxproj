@@ -172,6 +172,7 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Power.cpp" />
     <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="RotatingBullet.cpp" />
     <ClCompile Include="RotatingGun.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="Sophia.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Power.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="RotatingBullet.h" />
     <ClInclude Include="RotatingGun.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />

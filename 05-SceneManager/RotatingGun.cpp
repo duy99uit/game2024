@@ -40,13 +40,13 @@ void CRotatingGun::OnNoCollision(DWORD dt)
 		{
 			if (player_x <= x)
 			{
-				SophiaBullet* bullet = new SophiaBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_NEAR_X, - ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+				RotatingBullet* bullet = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_NEAR_X, - ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
 				currentScene->AddObject(bullet);
 				DebugOut(L"CRotatingGun ban gan ben trai");
 			}
 			else
 			{
-				SophiaBullet* bullet = new SophiaBullet(x, y, ROTATINGGUN_SPEED_SHOOT_NEAR_X, -ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+				RotatingBullet* bullet = new RotatingBullet(x, y, ROTATINGGUN_SPEED_SHOOT_NEAR_X, -ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
 				currentScene->AddObject(bullet);
 				DebugOut(L"CRotatingGun ban gan ben phai");
 			}
@@ -56,13 +56,13 @@ void CRotatingGun::OnNoCollision(DWORD dt)
 		{
 			if (player_x <= x)
 			{
-				SophiaBullet* bullet = new SophiaBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
+				RotatingBullet* bullet = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
 				currentScene->AddObject(bullet);
 				DebugOut(L"CRotatingGun ban xa ben trai");
 			}
 			else
 			{
-				SophiaBullet* bullet = new SophiaBullet(x, y, ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
+				RotatingBullet* bullet = new RotatingBullet(x, y, ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
 				currentScene->AddObject(bullet);
 				DebugOut(L"CRotatingGun ban xa ben phai");
 			}
@@ -91,7 +91,10 @@ void CRotatingGun::OnCollisionWithSophia(LPCOLLISIONEVENT e)
 		if (sophia->GetState() != SOPHIA_STATE_DIE && state != ROTATINGGUN_STATE_SHOOT)
 		{
 			SetState(ROTATINGGUN_STATE_SHOOT);
-
+			CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+			CGameObject* player = currentScene->GetPlayer();
+			RotatingBullet* bullet1 = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_NEAR_X, -ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+			currentScene->AddObject(bullet1);
 		}
 	
 

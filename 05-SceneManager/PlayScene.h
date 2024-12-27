@@ -19,6 +19,7 @@
 #include "GunWalker.h"
 #include "BeeHead.h"
 #include "JellyFish.h"
+#include "RotatingBullet.h"
 
 
 class CPlayScene : public CScene
