@@ -123,7 +123,7 @@ void CPlatformWalker::Render()
 {
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+//	RenderBoundingBox();
 }
 
 void CPlatformWalker::SetState(int state)

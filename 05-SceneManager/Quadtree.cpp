@@ -178,7 +178,7 @@ vector<CGameObject*> Quadtree::GetObjectsInCamera(float camX, float camY, float 
             //if (obj->x >= camX - camWidth && obj->y > camY - camHeight)
             float obj_l, obj_t, obj_r, obj_b;
             obj->GetBoundingBox(obj_l, obj_t, obj_r, obj_b);
-            if (obj->x + obj_r >= camX && obj-> x <= camX + camWidth)
+            if (obj->x + obj_r - obj_l >= camX - camWidth/2 && obj-> x <= camX + camWidth)
 
             {
                 objectsInCamera.push_back(obj);
