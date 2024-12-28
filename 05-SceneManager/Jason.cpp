@@ -59,7 +59,7 @@ void CJason::OnNoCollision(DWORD dt)
 
 void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (e->ny != 0 && e->obj->IsBlocking() && !isOnLadder)
+	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		DebugOut(L"CJason::OnCollisionWith 1111");
 		vy = 0;
@@ -177,14 +177,14 @@ void CJason::SetState(int state)
 	case SMALL_JASON_STATE_WALKING_RIGHT:
 		aniId = ID_ANI_SMALL_JASON_WALKING_RIGHT;
 		vx = BIG_JASON_WALKING_SPEED;
+		isOnPlatform = true;
 		nx = 1;
-		isOnPlatform = false;
 		break;
 	case SMALL_JASON_STATE_WALKING_LEFT:
 		aniId = ID_ANI_SMALL_JASON_WALKING_LEFT;
 		vx = -BIG_JASON_WALKING_SPEED;
+		isOnPlatform = true;
 		nx = -1;
-		isOnPlatform = false;
 		break;
 	case SMALL_JASON_STATE_CLIMBING_UP:
 		aniId = ID_ANI_SMALL_JASON_CLIMBING;
@@ -244,11 +244,32 @@ void CJason::SetState(int state)
 		vx = -BIG_JASON_CRAWLING_SPEED;
 		nx =-1;
 		break;
+	case SMALL_JASON_STATE_JUMPING_RIGHT:
+		ay = -JASON_GRAVITY / 2;
+		vy = -0.001f;
+		nx = 1;
+		break;
+	case SMALL_JASON_STATE_JUMPING_LEFT:
+		ay = -JASON_GRAVITY / 2;
+		vy = -0.001f;
+		nx = -1;
+		break;
+	case SMALL_JASON_STATE_FALLING_LEFT:
+		ay = 0.0025f / 3;
+		vy = 0.001f;
+		nx = -1;
+		break;
+	case SMALL_JASON_STATE_FALLING_RIGHT:
+		ay = 0.0025f / 3;
+		vy = 0.001f;
+		nx = 1;
+		break;
 	case BIG_JASON_STATE_IDLE:
 		aniId = ID_ANI_BIG_JASON_IDLE_RIGHT;
 		ax = 0.0f;
 		vx = 0.0f;
 		break;
+
 	}
 
 	CGameObject::SetState(state);
@@ -335,6 +356,17 @@ void CJason::HandleKeyUp(int KeyCode)
 			case DIK_F:
 				SetState(SMALL_JASON_STATE_IDLE_LEFT);
 				break;
+
+			case DIK_W:
+				if (state == SMALL_JASON_STATE_JUMPING_LEFT) {
+					SetState(SMALL_JASON_STATE_FALLING_LEFT);
+				}
+				if (state == SMALL_JASON_STATE_JUMPING_RIGHT) {
+					SetState(SMALL_JASON_STATE_FALLING_RIGHT);
+				}
+
+				isOnPlatform = false;
+				break;
 			}
 		}
 		if (isOnLadder)
@@ -363,6 +395,7 @@ void CJason::HandleKeyDown(int KeyCode)
 
 {
 	int state = getState();
+	boolean isLeftDirection = nx < 0;
 	if (level == JASON_LEVEL_BIG) {
 		switch (KeyCode)
 		{
@@ -441,6 +474,16 @@ void CJason::HandleKeyDown(int KeyCode)
 				break;
 			case DIK_Z:
 				HandleJasonJumpInSophia();
+				break;
+			case DIK_W:
+				
+					if (isLeftDirection) {
+						SetState(SMALL_JASON_STATE_JUMPING_LEFT);
+					}
+					else {
+						SetState(SMALL_JASON_STATE_JUMPING_RIGHT);
+					}
+
 				break;
 			}
 		}
