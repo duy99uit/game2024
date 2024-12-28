@@ -38,6 +38,9 @@ void Bullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CPlatformWalker*>(e->obj)) {
 		OnCollisionWithPlatformWalker(e);
 	}
+	if (dynamic_cast<CGunWalker*>(e->obj)) {
+		OnCollisionWithGunWalker(e);
+	}
 
 }
 void Bullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
@@ -115,6 +118,18 @@ void Bullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
 
 	}
 }
+void Bullet::OnCollisionWithGunWalker(LPCOLLISIONEVENT e)
+{
+	CGunWalker* gunWalker = dynamic_cast<CGunWalker*>(e->obj);
+
+	if (gunWalker->GetState() != GUNWALKER_STATE_DIE)
+	{
+		gunWalker->SetState(GUNWALKER_STATE_DIE);
+		SetState(BULLET_EXPLODE);
+
+	}
+}
+
 
 void Bullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
