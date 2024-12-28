@@ -22,6 +22,7 @@
 #include "CheckPoint.h"
 #include "Ladder.h"
 #include "WaterSurface.h"
+#include "RotatingBullet.h"
 
 
 class CPlayScene : public CScene
@@ -37,6 +38,7 @@ protected:
 	LPGAMEOBJECT jason;  // Jason object
 
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> tree_objects;
 	Quadtree* quadtree;
 
 	void _ParseSection_SPRITES(string line);

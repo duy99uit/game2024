@@ -30,12 +30,53 @@ void CRotatingGun::GetBoundingBox(float& left, float& top, float& right, float& 
 
 void CRotatingGun::OnNoCollision(DWORD dt)
 {
+	CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	CGameObject* player = currentScene->GetPlayer();
+	float player_x, player_y;
+	player->GetPosition(player_x, player_y);
+	// && (GetTickCount64() - shoot_start > ROTATINGGUN_RELOAD_BULLET_TIME
+	if (state == ROTATINGGUN_STATE_SHOOT && (GetTickCount64() - shoot_start > ROTATINGGUN_RELOAD_BULLET_TIME)) {
+		if (abs(player_x - x) <= ROTATINGGUN_DISTANCE_SHOOT_NEAR)
+		{
+			if (player_x <= x)
+			{
+				RotatingBullet* bullet = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_NEAR_X, - ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+				currentScene->AddObject(bullet);
+				DebugOut(L"CRotatingGun ban gan ben trai");
+			}
+			else
+			{
+				RotatingBullet* bullet = new RotatingBullet(x, y, ROTATINGGUN_SPEED_SHOOT_NEAR_X, -ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+				currentScene->AddObject(bullet);
+				DebugOut(L"CRotatingGun ban gan ben phai");
+			}
+			
+		}
+		else
+		{
+			if (player_x <= x)
+			{
+				RotatingBullet* bullet = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
+				currentScene->AddObject(bullet);
+				DebugOut(L"CRotatingGun ban xa ben trai");
+			}
+			else
+			{
+				RotatingBullet* bullet = new RotatingBullet(x, y, ROTATINGGUN_SPEED_SHOOT_FAR_X, -ROTATINGGUN_SPEED_SHOOT_FAR_Y);
+				currentScene->AddObject(bullet);
+				DebugOut(L"CRotatingGun ban xa ben phai");
+			}
+		}
+		
+		shoot_start = GetTickCount64();
+	}
+
 };
 
 void CRotatingGun::OnCollisionWith(LPCOLLISIONEVENT e)
 
 {
-	DebugOut(L"CRotatingGun::OnCollisionWith 22222");
+	//DebugOut(L"CRotatingGun::OnCollisionWith 22222");
 	if (dynamic_cast<CSophia*>(e->obj)) {
 		OnCollisionWithSophia(e);
 	}
@@ -50,7 +91,10 @@ void CRotatingGun::OnCollisionWithSophia(LPCOLLISIONEVENT e)
 		if (sophia->GetState() != SOPHIA_STATE_DIE && state != ROTATINGGUN_STATE_SHOOT)
 		{
 			SetState(ROTATINGGUN_STATE_SHOOT);
-
+			CPlayScene* currentScene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+			CGameObject* player = currentScene->GetPlayer();
+			RotatingBullet* bullet1 = new RotatingBullet(x, y, -ROTATINGGUN_SPEED_SHOOT_NEAR_X, -ROTATINGGUN_SPEED_SHOOT_NEAR_Y);
+			currentScene->AddObject(bullet1);
 		}
 	
 
@@ -91,6 +135,7 @@ void CRotatingGun::SetState(int state)
 		die_start = GetTickCount64();
 		break;
 	case ROTATINGGUN_STATE_IDLE:
+		shoot_start = GetTickCount64();
 		aniId = ID_ANI_ROTATINGGUN_IDLE;
 		break;
 	case ROTATINGGUN_STATE_SHOOT:

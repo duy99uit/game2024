@@ -101,7 +101,7 @@ void Quadtree::_ParseSection_OBJECTS_QT(string line)
 
         break;
     }
-    break;
+   
 
     case OBJECT_TYPE_BACKGROUD:
 
@@ -163,4 +163,53 @@ bool Quadtree::inBoundary(double x, double y)
         x <= this->size.x + this->size.width &&
         y >= this->size.y &&
         y <= this->size.y + this->size.width);
+}
+
+vector<CGameObject*> Quadtree::GetObjectsInCamera(float camX, float camY, float camWidth, float camHeight) {
+    vector<CGameObject*> objectsInCamera;
+   // return object;
+   // DebugOut(L"cam ne %f %f\n", camX, camWidth);
+      //return objectsInCamera;
+
+   // if (isIntersecting(camX, camY, camWidth, camHeight, this->size.x, this->size.y, this->size.width, this->size.width)) {
+        for (auto obj : object) {
+         //   DebugOut(L"cam ne %f %f\n", camX, obj->x);
+              //if (obj->x >= camX && obj->x <= camX + camWidth*2)
+            //if (obj->x >= camX - camWidth && obj->y > camY - camHeight)
+            float obj_l, obj_t, obj_r, obj_b;
+            obj->GetBoundingBox(obj_l, obj_t, obj_r, obj_b);
+            if (obj->x + obj_r - obj_l >= camX - camWidth/2 && obj-> x <= camX + camWidth)
+
+            {
+                objectsInCamera.push_back(obj);
+            }
+            //            objectsInCamera.push_back(obj);
+        }
+
+        // Đệ quy kiểm tra các node con nếu có
+        if (topLeftTree) {
+            auto subObjects = topLeftTree->GetObjectsInCamera(camX, camY, camWidth, camHeight);
+            objectsInCamera.insert(objectsInCamera.end(), subObjects.begin(), subObjects.end());
+        }
+        if (topRightTree) {
+            auto subObjects = topRightTree->GetObjectsInCamera(camX, camY, camWidth, camHeight);
+            objectsInCamera.insert(objectsInCamera.end(), subObjects.begin(), subObjects.end());
+        }
+        if (botLeftTree) {
+            auto subObjects = botLeftTree->GetObjectsInCamera(camX, camY, camWidth, camHeight);
+            objectsInCamera.insert(objectsInCamera.end(), subObjects.begin(), subObjects.end());
+        }
+        if (botRightTree) {
+            auto subObjects = botRightTree->GetObjectsInCamera(camX, camY, camWidth, camHeight);
+            objectsInCamera.insert(objectsInCamera.end(), subObjects.begin(), subObjects.end());
+        }
+        return objectsInCamera;
+       
+    }
+   // return objectsInCamera;
+//}
+
+
+bool Quadtree::isIntersecting(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
+    return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2+ h1 < y1);
 }

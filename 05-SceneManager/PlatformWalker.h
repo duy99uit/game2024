@@ -1,8 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "PlayScene.h"
 
 #define PLATFORMWALKER_GRAVITY 0.002f
-#define PLATFORMWALKER_WALKING_SPEED 0.05f
+#define PLATFORMWALKER_WALKING_SPEED 0.01f
 #define PLATFORMWALKER_WALKING_ACCELERATION 0.05f
 
 
@@ -24,15 +25,15 @@
 
 #define PLATFORMWALKER_STATE_DIE 200
 
-#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_UP 7031
-#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_RIGHT 7032
-#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_DOWN 7033
-#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_LEFT 7034
+#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_UP 7034
+#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_RIGHT 7031
+#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_DOWN 7032
+#define ID_ANI_R_PLATFORMWALKER_STATE_WALKING_LEFT 7033
 
-#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_UP 7041
-#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_RIGHT 7042
-#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_DOWN 7043
-#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_LEFT 7044
+#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_UP 7042
+#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_RIGHT 7043
+#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_DOWN 7044
+#define ID_ANI_L_PLATFORMWALKER_STATE_WALKING_LEFT 7041
 
 
 
@@ -41,6 +42,8 @@ class CPlatformWalker : public CGameObject
 protected:
 	float ax;
 	float ay;
+	boolean onplatform = true;
+	LPGAMEOBJECT current_platform;
 
 	ULONGLONG die_start;
 
@@ -52,9 +55,10 @@ protected:
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
+	virtual void OnCollisionWithPlatform(LPCOLLISIONEVENT e);
 
 
 public:
-	CPlatformWalker(float x, float y);
+	CPlatformWalker(float x, float y, int init_state, float px, float py, float cell_width, float cell_height, int length, int sprite_begin, int sprite_middle, int sprite_end);
 	virtual void SetState(int state);
 };

@@ -13,8 +13,8 @@ sophia.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 #background
-9999	1024	1024
-9999	3072	1024
+#9999	1024	1024
+#9999	3072	1024
 
 #Platform
 #lastbottom
@@ -64,7 +64,7 @@ sophia.txt
 #hang co 14
 5	1544	1113	16	16	2	20001	20001	20001
 #hang co 15
-5	1623	1132	16	16	4	20001	20001	20001
+5	1620	1132	16	16	4	20001	20001	20001
 #hang co 16
 5	1702	1113	16	16	2	20001	20001	20001
 #hang co 17
