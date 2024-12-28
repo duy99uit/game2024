@@ -95,7 +95,7 @@ quadtree.txt
 16	2168	954
 
 #Gun Walker
-25	2460	590
+25	2400	590
 #BeeHead
 17	2640	740
 #Jelly Fish
