@@ -12,7 +12,8 @@ CGameObject::CGameObject()
 {
 	x = y = 0;
 	vx = vy = 0;
-	nx = 1;	
+	nx = 1;
+	ny = 1;
 	state = -1;
 	isDeleted = false;
 }
@@ -36,9 +37,7 @@ void CGameObject::RenderBoundingBox()
 	CGame::GetInstance()->GetCamPos(cx, cy);
 
 	// TODO:position
-	DebugOut(L"[WARNING] cam_x  %f already exists\n", cx);
-	DebugOut(L"[WARNING] cam_y  %f already exists\n", cy);
-
+	
 
 
 

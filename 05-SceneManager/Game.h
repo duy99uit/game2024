@@ -18,6 +18,8 @@ using namespace std;
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
+#define WORLD_WIDTH 4096
+#define WORLD_HEIGHT 2048
 
 
 

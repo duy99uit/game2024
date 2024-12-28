@@ -16,8 +16,14 @@ void Camera::Update(float player_x, float player_y)
 
 
 	CGame* game = CGame::GetInstance();
-	cam_x = player_x - width / 2;
-	cam_y = player_y + height / 2;
+	if (player_x > width / 2 and player_x < WORLD_WIDTH - width/2) {
+		cam_x = player_x - width / 2;
+	}
+	if (player_y > height / 2 and player_y < WORLD_HEIGHT - height/2) {
+		cam_y= player_y + height / 2;
+	}
+	//cam_x = player_x - width / 2;
+	//cam_y = player_y + height / 2;
 	//if (player_x > width / 2 and player_x < width + 100 ) {
 	//	cam_x = player_x - width / 2;
 	//}

@@ -18,7 +18,7 @@ void Bullet::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (e->obj->IsBlocking())
 	{
-		DebugOut(L"CSophia::OnCollisionWith 1111");
+		//DebugOut(L"CSophia::OnCollisionWith 1111");
 		vx = 0;
 		vy = 0;
 		SetState(BULLET_EXPLODE);

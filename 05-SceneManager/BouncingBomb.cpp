@@ -25,16 +25,16 @@ void CBouncingBomb::OnNoCollision(DWORD dt)
 	x += vx * dt;
 	y += vy * dt;
 	/*isOnPlatform = false;*/
-	DebugOut(L"CBouncingBomb::OnNoCollision >>>>> %d\n", x, vx);
+	//DebugOut(L"CBouncingBomb::OnNoCollision >>>>> %d\n", x, vx);
 };
 void CBouncingBomb::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	DebugOut(L"CSophia::OnCollisionWith 11111");
+	//DebugOut(L"CSophia::OnCollisionWith 11111");
 
 
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
-		DebugOut(L"CSophia::OnCollisionWith 1111");
+		///DebugOut(L"CSophia::OnCollisionWith 1111");
 		vy = 0;
 		vx = 0;
 		isOnPlatform = true;

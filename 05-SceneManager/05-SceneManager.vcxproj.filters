@@ -89,6 +89,8 @@
     </ClCompile>
     <ClCompile Include="WaterSurface.cpp">
       <Filter>Obstacle</Filter>
+    <ClCompile Include="RotatingBullet.cpp">
+      <Filter>Enermies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +191,8 @@
     </ClInclude>
     <ClInclude Include="WaterSurface.h">
       <Filter>Obstacle</Filter>
+    <ClInclude Include="RotatingBullet.h">
+      <Filter>Enermies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +207,7 @@
     <Text Include="jason.txt" />
     <Text Include="quadtree.txt" />
     <Text Include="scene0005.txt" />
+    <Text Include="enemies.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">

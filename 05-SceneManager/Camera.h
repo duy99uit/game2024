@@ -10,4 +10,5 @@ public:
 	void SetCamPos(float x, float y);
 	void Update(float player_x, float player_y);
 	void TransPosition(float& x, float& y);
+	void GetCamInfo(float& cam_x, float& cam_y, float& width, float& height) { cam_x = this->cam_x; cam_y = this->cam_y; width = this->width, height = this->height; }
 };

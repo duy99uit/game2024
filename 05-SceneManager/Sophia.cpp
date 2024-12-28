@@ -59,12 +59,12 @@ void CSophia::OnNoCollision(DWORD dt)
 
 void CSophia::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	DebugOut(L"CSophia::OnCollisionWith 11111");
+	//DebugOut(L"CSophia::OnCollisionWith 11111");
 	
 	
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
-		DebugOut(L"CSophia::OnCollisionWith 1111");
+	//	DebugOut(L"CSophia::OnCollisionWith 1111");
 		vy = 0;
 		isOnPlatform = true;
 	}

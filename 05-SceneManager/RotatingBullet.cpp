@@ -1,19 +1,20 @@
-#include "SophiaBullet.h"
+#include "RotatingBullet.h"
 #include "Sophia.h"
 #include "PlayScene.h"
 
 
-SophiaBullet::SophiaBullet(float x, float y, float vx, float vy) :CGameObject(x, y, vx, vy)
+RotatingBullet::RotatingBullet(float x, float y, float vx, float vy) :CGameObject(x, y, vx, vy)
 {
 	/*SetState(BLACKWALKER_STATE_WALKING_LEFT);*/
 	aniId = BULLET_MOVING_ANI;
 	/*vx = BULLET_SPEED_X;*/
 	/*vy = 0.09f;*/
+	ay = -0.00005f;
 	vx = vx;
 	vy = vy;
 }
 
-void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 
 {
 	if (e->obj->IsBlocking())
@@ -32,15 +33,13 @@ void SophiaBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CFlyingBomb*>(e->obj)) {
 		OnCollisionWithFlyingBomb(e);
 	}
-	if (dynamic_cast<CRotatingGun*>(e->obj)) {
-		OnCollisionWithRotatingGun(e);
-	}
+
 	if (dynamic_cast<CPlatformWalker*>(e->obj)) {
 		OnCollisionWithPlatformWalker(e);
 	}
 
 }
-void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 {
 	CBlackWalker* blackWalker = dynamic_cast<CBlackWalker*>(e->obj);
 	if (e->nx != 0 || e->ny != 0)
@@ -52,9 +51,9 @@ void SophiaBullet::OnCollisionWithBlackWalker(LPCOLLISIONEVENT e)
 
 		}
 	}
-	
+
 }
-void SophiaBullet::OnCollisionWithBeetleHead(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWithBeetleHead(LPCOLLISIONEVENT e)
 {
 	CBeetleHead* beettleHead = dynamic_cast<CBeetleHead*>(e->obj);
 	if (e->nx != 0 || e->ny != 0)
@@ -68,7 +67,7 @@ void SophiaBullet::OnCollisionWithBeetleHead(LPCOLLISIONEVENT e)
 	}
 
 }
-void SophiaBullet::OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e)
 {
 	CFlyingBomb* flyingBomb = dynamic_cast<CFlyingBomb*>(e->obj);
 	if (e->nx != 0 || e->ny != 0)
@@ -82,9 +81,9 @@ void SophiaBullet::OnCollisionWithFlyingBomb(LPCOLLISIONEVENT e)
 	}
 
 }
-void SophiaBullet::OnCollisionWithWall(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWithWall(LPCOLLISIONEVENT e)
 {
-	
+
 	if (e->nx != 0 || e->ny != 0)
 	{
 		SetState(BULLET_EXPLODE);
@@ -92,19 +91,9 @@ void SophiaBullet::OnCollisionWithWall(LPCOLLISIONEVENT e)
 
 }
 
-void SophiaBullet::OnCollisionWithRotatingGun(LPCOLLISIONEVENT e)
-{
-	CRotatingGun* rotatingGun = dynamic_cast<CRotatingGun*>(e->obj);
-	
-		if (rotatingGun->GetState() != ROTATINGGUN_STATE_DIE)
-		{
-			rotatingGun->SetState(ROTATINGGUN_STATE_DIE);
-			SetState(BULLET_EXPLODE);
 
-		}
-}
 
-void SophiaBullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
+void RotatingBullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
 {
 	CPlatformWalker* platformWalker = dynamic_cast<CPlatformWalker*>(e->obj);
 
@@ -116,9 +105,10 @@ void SophiaBullet::OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e)
 	}
 }
 
-void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
+void RotatingBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt);
+	vy += ay * dt;
 
 	x += vx * dt;
 	y += vy * dt;
@@ -129,24 +119,25 @@ void SophiaBullet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		return;
 	}
 
+
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
-void SophiaBullet::Render()
+void RotatingBullet::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	animations->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
-void SophiaBullet::GetBoundingBox(float& l, float& t, float& r, float& b)
+void RotatingBullet::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = x;
 	t = y;
 	r = x + BULLET_BBOX_WIDTH;
 	b = y + BULLET_BBOX_HEIGHT;
 }
-void SophiaBullet::SetState(int state)
+void RotatingBullet::SetState(int state)
 {
 	CGameObject::SetState(state);
 	switch (state)
