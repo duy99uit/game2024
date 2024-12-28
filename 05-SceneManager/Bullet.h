@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#define BULLET_BBOX_WIDTH	9
-#define BULLET_BBOX_HEIGHT	9
+#define BULLET_BBOX_WIDTH	12
+#define BULLET_BBOX_HEIGHT	12
 
 #define BULLET_EXTRA_RANGE  5
 
@@ -26,6 +26,7 @@ class Bullet :
     void OnCollisionWithWall(LPCOLLISIONEVENT e);
     void OnCollisionWithRotatingGun(LPCOLLISIONEVENT e);
     void OnCollisionWithPlatformWalker(LPCOLLISIONEVENT e);
+    void OnCollisionWithGunWalker(LPCOLLISIONEVENT e);
     ULONGLONG die_start;
 public:
     Bullet();

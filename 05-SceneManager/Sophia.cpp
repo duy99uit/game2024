@@ -172,7 +172,7 @@ void CSophia::SetState(int state)
 		aniId = ID_ANI_SOPHIA_JUMP_RIGHT;
 		ay = -0.0025f;
 		vy = -0.001f;
-		vx = SOPHIA_WALKING_SPEED;
+		/*vx = SOPHIA_WALKING_SPEED;*/
 		ax = SOPHIA_WALKING_ACCELERATION;
 		nx = 1;
 		break;
